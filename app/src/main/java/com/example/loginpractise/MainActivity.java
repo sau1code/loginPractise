@@ -8,43 +8,41 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button buttonRegister, buttonLogin;
+    private Button buttonLogin;
     private EditText editTextAccount, editTextPassword;
-    public static SQLiteDatabase sqLiteDatabase;
+    private TextView textViewRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sqliteInit();
 
-        /*
-            findViewById (予馨)
-        */
+        getSupportActionBar().hide();
+        buttonLogin = (Button)findViewById(R.id.button_login);
+        textViewRegister = (TextView)findViewById(R.id.textView_register);
+        editTextAccount = (EditText)findViewById(R.id.EditText_account);
+        editTextPassword = (EditText)findViewById(R.id.EditText_password);
 
-        // 註冊 (予馨)
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        // 登入 (予馨)
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                String acco = editTextAccount.getText().toString();
+                Toast.makeText(MainActivity.this, acco, Toast.LENGTH_SHORT).show();
             }
         });
 
-    }
-
-    // 初始化SQLite (翔雲)
-    protected void sqliteInit() {
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String pass = editTextPassword.getText().toString();
+                Toast.makeText(MainActivity.this, pass, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
