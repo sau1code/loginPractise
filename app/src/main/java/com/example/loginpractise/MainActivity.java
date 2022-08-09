@@ -29,8 +29,7 @@ public class MainActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("main", "abc");
-                // 123132
+
             }
         });
 
@@ -38,19 +37,10 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String account = "";
-                getPasswordFromSqlite(account);
 
             }
         });
 
-    }
-
-    // 取出SQLite密碼 (翔雲)
-    protected String getPasswordFromSqlite(String s){
-        String password = "";
-
-        return password;
     }
 
     // 初始化SQLite (祥雲)
