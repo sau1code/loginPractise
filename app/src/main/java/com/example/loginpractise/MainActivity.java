@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,23 +37,17 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String account = "";
-                getPasswordFromSqlite(account);
 
             }
         });
 
     }
 
-    // 取出SQLite密碼 (翔雲)
-    protected String getPasswordFromSqlite(String s){
-        String password = "";
-
-        return password;
-    }
-
-    // 初始化SQLite (祥雲)
+    // 初始化SQLite (翔雲)
     protected void sqliteInit() {
-
+        String test;
+        int a=12;
+        int b = 99;
+        int c = 1;
     }
 }
