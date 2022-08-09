@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         String test;
         int a=12;
         int b = 99;
-        int c = 50;
-        float d = 12.5F;
+        int c = 1;
     }
 }
