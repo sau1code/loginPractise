@@ -45,6 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 初始化SQLite (翔雲)
     protected void sqliteInit() {
-
+        String test;
     }
 }
