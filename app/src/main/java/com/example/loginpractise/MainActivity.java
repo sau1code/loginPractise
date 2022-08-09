@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     // 初始化SQLite (翔雲)
     protected void sqliteInit() {
         String test;
-        int a = 99;
+        int a=1;
+        int b = 99;
     }
 }
