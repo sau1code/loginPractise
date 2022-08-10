@@ -57,24 +57,27 @@ public class MainActivity extends AppCompatActivity {
                 if (account.length() * password.length() == 0) {
                     Toast.makeText(MainActivity.this, "請輸入完整帳號密碼", Toast.LENGTH_SHORT).show();
                 } else if (adminMap.get(account) != null && adminMap.get(account).equals(password)) {
-                    Intent i = new Intent(MainActivity.this, adminActivity.class);
-                    startActivity(i);
                     Toast.makeText(MainActivity.this, "管理員登入", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, adminActivity.class);
+                    intent.putExtra("name", account);
+                    startActivity(intent);
                 } else if (memberMap.get(account) != null && memberMap.get(account).equals(password)) {
-                    Intent i = new Intent(MainActivity.this, memberActivity.class);
-                    startActivity(i);
                     Toast.makeText(MainActivity.this, "使用者登入", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, memberActivity.class);
+                    intent.putExtra("name", account);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, registerActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(MainActivity.this, registerActivity.class);
+                startActivity(intent);
             }
         });
 
