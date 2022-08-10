@@ -14,8 +14,8 @@ public class adminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+        getSupportActionBar().hide();
 
-        // 以下 "可"隨意刪除
         setTitle("activity_admin");
         Intent intent = getIntent();
         textViewAdminTempshow = (TextView)findViewById(R.id.textView_admin_tempshow);

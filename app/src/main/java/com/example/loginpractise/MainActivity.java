@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,15 +27,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();                   // 隱藏ActionBar
+        getWindow().setStatusBarColor(0xffffffff);      // 最上面StatusBar白色底
+        getWindow().setNavigationBarColor(0xaaffffff);  // 最下面NavigationBar白色底
+        getWindow().getDecorView()                      // 上面字設黑 | 下面虛擬按鈕深色
+                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
 
-        getSupportActionBar().hide();
         buttonLogin = (Button)findViewById(R.id.button_login);
         textViewRegister = (TextView)findViewById(R.id.textView_register);
         editTextAccount = (EditText)findViewById(R.id.EditText_account);
         editTextPassword = (EditText)findViewById(R.id.EditText_password);
         ((TextView)findViewById(R.id.textView_temp))
                 .setText("暫時-管理者帳號: admin1~3\n暫時-使用者帳號: member1~99\n\n(密碼同帳號)");
-
 
         // 暫時-管理者帳密 Map<帳號, 密碼>
         adminMap = new HashMap<>();
