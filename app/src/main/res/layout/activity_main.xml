@@ -58,7 +58,8 @@
                 android:paddingStart="12dp"
                 android:paddingTop="6dp"
                 android:textSize="24dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:singleLine="true"/>
         </RelativeLayout>
 
         <View
@@ -91,7 +92,8 @@
                 android:hint="密碼"
                 android:paddingStart="12dp"
                 android:textSize="24dp"
-                tools:ignore="TouchTargetSizeCheck" />
+                tools:ignore="TouchTargetSizeCheck"
+                android:singleLine="true" />
         </RelativeLayout>
 
         <View

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             memberMap.put("member" + i, "member" + i);
         }
 
+        // 登入
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // 註冊
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -81,5 +83,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    // 再按一次退出程序
+    long exitTime;
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - exitTime) > 2000) {
+            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            exitTime = System.currentTimeMillis();
+        } else finish();
     }
 }
