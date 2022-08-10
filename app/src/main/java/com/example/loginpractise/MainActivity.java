@@ -53,11 +53,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String account = editTextAccount.getText().toString();
                 String password = editTextPassword.getText().toString();
-                Log.d("main", "password = " + password);
-                Log.d("main", "Map = " + adminMap.get(account));
-                if (adminMap.get(account).equals(password)) {
-                    Toast.makeText(MainActivity.this, "login", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(MainActivity.this, "false", Toast.LENGTH_SHORT).show();
+
+                if (account.length() * password.length() == 0) {
+                    Toast.makeText(MainActivity.this, "請輸入完整帳號密碼", Toast.LENGTH_SHORT).show();
+                } else if (adminMap.get(account) != null && adminMap.get(account).equals(password)) {
+                    Intent i = new Intent(MainActivity.this, adminActivity.class);
+                    startActivity(i);
+                    Toast.makeText(MainActivity.this, "管理員登入", Toast.LENGTH_SHORT).show();
+                } else if (memberMap.get(account) != null && memberMap.get(account).equals(password)) {
+                    Intent i = new Intent(MainActivity.this, memberActivity.class);
+                    startActivity(i);
+                    Toast.makeText(MainActivity.this, "使用者登入", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
