@@ -58,7 +58,7 @@ public final class mySQLiteContract {
                     mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT," +
                     mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT," +
                     mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT)" ;
+                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT);" ;
 
 
     public static class mySQLiteDbHelper extends SQLiteOpenHelper {
