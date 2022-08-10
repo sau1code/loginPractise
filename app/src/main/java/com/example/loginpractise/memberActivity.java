@@ -5,13 +5,16 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
+import com.example.loginpractise.mySQLiteContract;
 
 public class memberActivity extends AppCompatActivity {
 
     private TextView textViewMemberTempshow;
+    private mySQLiteContract.mySQLiteDbHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,10 @@ public class memberActivity extends AppCompatActivity {
 
         ActionBar actBar = getSupportActionBar();
         actBar.setDisplayHomeAsUpEnabled(true);
+//      create table
+        dbHelper = new mySQLiteContract.mySQLiteDbHelper(getBaseContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
         // 以下 "可"隨意刪除
         setTitle("activity_member");
         Intent intent = getIntent();
@@ -33,5 +40,11 @@ public class memberActivity extends AppCompatActivity {
                 finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
     }
 }
