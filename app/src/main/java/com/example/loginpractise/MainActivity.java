@@ -2,6 +2,7 @@ package com.example.loginpractise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,11 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonLogin;
     private EditText editTextAccount, editTextPassword;
     private TextView textViewRegister;
+    private Map<String, String> adminMap, memberMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +32,40 @@ public class MainActivity extends AppCompatActivity {
         textViewRegister = (TextView)findViewById(R.id.textView_register);
         editTextAccount = (EditText)findViewById(R.id.EditText_account);
         editTextPassword = (EditText)findViewById(R.id.EditText_password);
+        ((TextView)findViewById(R.id.textView_temp))
+                .setText("暫時-管理者帳號: admin1~3\n暫時-使用者帳號: member1~99\n\n(密碼同帳號)");
+
+
+        // 暫時-管理者帳密 Map<帳號, 密碼>
+        adminMap = new HashMap<>();
+        adminMap.put("admin1", "admin1");
+        adminMap.put("admin2", "admin2");
+        adminMap.put("admin3", "admin3");
+
+        // 暫時-使用者帳密 Map<帳號, 密碼>
+        memberMap = new HashMap<>();
+        for (int i = 1; i < 100; i++) {
+            memberMap.put("member" + i, "member" + i);
+        }
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String acco = editTextAccount.getText().toString();
-                Toast.makeText(MainActivity.this, acco, Toast.LENGTH_SHORT).show();
+                String account = editTextAccount.getText().toString();
+                String password = editTextPassword.getText().toString();
+                Log.d("main", "password = " + password);
+                Log.d("main", "Map = " + adminMap.get(account));
+                if (adminMap.get(account).equals(password)) {
+                    Toast.makeText(MainActivity.this, "login", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(MainActivity.this, "false", Toast.LENGTH_SHORT).show();
             }
         });
 
         textViewRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String pass = editTextPassword.getText().toString();
-                Toast.makeText(MainActivity.this, pass, Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, registerActivity.class);
+                startActivity(i);
             }
         });
 
