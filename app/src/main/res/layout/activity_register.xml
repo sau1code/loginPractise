@@ -11,9 +11,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
         android:background="#DFC3B1"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,14 +38,15 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_Name"
+                android:id="@+id/editText_register_Name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="8"
                 android:inputType="textPersonName"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,14 +67,15 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_userName"
+                android:id="@+id/editText_register_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="7"
                 android:inputType="textPersonName"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
         </LinearLayout>
 
@@ -95,12 +97,14 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_Password"
+                android:id="@+id/editText_register_Password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="7"
-                android:inputType="textPassword" />
+                android:hint="請輸入6-12位密碼"
+                android:inputType="textPassword"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -121,12 +125,14 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_checkPassword"
+                android:id="@+id/editText_register_CheckPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="7"
-                android:inputType="textPassword" />
+                android:hint="請再次輸入密碼"
+                android:inputType="textPassword"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -147,9 +153,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView_birthday"
+                android:id="@+id/textView_register_birthday"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -159,7 +166,7 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#DA5018"
+                android:backgroundTint="#C34D1D"
                 android:text="選擇日期"
                 android:textSize="16sp" />
 
@@ -182,12 +189,13 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_Phone"
+                android:id="@+id/editText_register_Phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="7"
-                android:inputType="phone" />
+                android:inputType="phone"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,20 +216,22 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/spinner4"
+                android:id="@+id/spinner_city"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:entries="@array/taiwan_city"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <Spinner
-                android:id="@+id/spinner"
+                android:id="@+id/spinner_area"
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:entries="@array/taipei" />
+                android:entries="@array/taipei"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck" />
 
         </LinearLayout>
 
@@ -232,10 +242,16 @@
             android:layout_marginRight="10dp"
             android:orientation="horizontal">
 
-            <MultiAutoCompleteTextView
-                android:id="@+id/multiAutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/editText_register_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="7"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -257,24 +273,25 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText_Email"
+                android:id="@+id/editText_register_Email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:ems="8"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_registerOK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:backgroundTint="#A63614"
+        android:backgroundTint="#BA4926"
         android:text="ok"
         android:textSize="20sp"
         android:textStyle="bold"
