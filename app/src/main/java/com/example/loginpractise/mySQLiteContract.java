@@ -47,8 +47,8 @@ public final class mySQLiteContract {
 //    cellphone varchar(10) not null,
 //    useremail varchar(45) not null,
 //    useraddress varchar(50) not null ,primary key(userid));
-//    private static final String SQL_DELETE_ENTRIES =
-//        "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES =
+        "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
                     mySQLiteEntry.COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
@@ -77,12 +77,12 @@ public final class mySQLiteContract {
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
             // This database is only a cache for online data, so its upgrade policy is
             // to simply to discard the data and start over
-//            db.execSQL(SQL_DELETE_ENTRIES);
+            db.execSQL(SQL_DELETE_ENTRIES);
             onCreate(db);
         }
-//        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-//            onUpgrade(db, oldVersion, newVersion);
-//        }
+        public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            onUpgrade(db, oldVersion, newVersion);
+        }
     }
 }
 
