@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import com.example.loginpractise.mySQLiteContract;
 
 public class memberActivity extends AppCompatActivity {
@@ -22,37 +23,61 @@ public class memberActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member);
-
+//      create ActionBar to return to front page
         ActionBar actBar = getSupportActionBar();
         actBar.setDisplayHomeAsUpEnabled(true);
-//      create table
+
+//      class mySQLiteContract.mySQLiteDbHelper :
+//      create database "Demo.db" and table "customers"
         dbHelper = new mySQLiteContract.mySQLiteDbHelper(memberActivity.this);
+
+//      set database to writable mode and
+//      return SQLiteDatabase object "db" to execute SQL command
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String table=mySQLiteContract.mySQLiteEntry.TABLE_NAME;
-//        dbHelper.onCreate(db);
-        // 以下 "可"隨意刪除
+
+//      Note: define the name of table and column as attributes in  class mySQLiteContract.mySQLiteEntry
+//      get table name : "customers"
+        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+
         setTitle("activity_member");
+
+//      receive intent: contain the data of user name and password
         Intent intent = getIntent();
-        String username=intent.getStringExtra("name");
-        Cursor output = db.rawQuery("select * from "+table+";", null);
+//      get the user name data as String variable "username"
+        String username = intent.getStringExtra("name");
+
+//      -----------auto create user id start with "A00" --------------
+//     get the number of total rows of records in table customers and return a integer variable
+//      1. SQLiteDatabase.rawQuery function can exacute SQL command and return output as Cursor object
+//        1.1 The SQL command parameter in db.rawQuery function : select all of data in table "customers"
+        Cursor output = db.rawQuery("select * from " + table + ";", null);
+//      2. Cursor.getCount function  can return the number of total rows of records in Cursor object as integer variable
         int outputStr = output.getCount();
-        Log.d("main","select output="+outputStr);
+//      3. check the output of Cursor.getCount function
+        Log.d("main", "select output=" + outputStr);
+//      4. create new userid which start with "A00"
+//      and combine a number which is the number of total rows of records plus one
         String userid = "A00".concat(String.valueOf(outputStr + 1));
-        db.execSQL("insert into "+table+" values ('"+userid+"','"+username+"','123456','apple','1986/3/28','0958499577','test@gmail.com','桃園市');");
+
+//      5. SQLiteDatabase.execSQL function can exacute SQL commands which don't return data .
+//        5.1 The SQL command parameter in db.execSQL function : insert new user data to table "customers"
+        db.execSQL("insert into " + table + " values ('" + userid + "','" + username + "','123456','apple','1986/3/28','0958499577','test@gmail.com','桃園市');");
 
 
-        textViewMemberTempshow = (TextView)findViewById(R.id.textView_member_tempshow);
+        textViewMemberTempshow = (TextView) findViewById(R.id.textView_member_tempshow);
         textViewMemberTempshow.setText("使用者帳號 : " + intent.getStringExtra("name"));
     }
 
+
+//  set ActionBar function : return to front page
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==android.R.id.home){
-                finish();
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }
-
+//    stop
     @Override
     protected void onDestroy() {
         dbHelper.close();
