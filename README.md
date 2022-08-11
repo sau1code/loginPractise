@@ -31,3 +31,23 @@ INSERT INTO t1 VALUES(4,'abc','abc ','ABC',  'abc');
 SELECT x FROM t1 WHERE a = b ORDER BY x;
 --result 1 2 3
 ```
+## Cursor 取出資料的方法
+> 當執行 select 搜尋資料後，從 rawQuery return 的 Cursor 取出資料的方法
+> 資料來源 : https://stackoverflow.com/questions/7387455/android-sqlite-how-to-retrieve-specific-data-from-particular-column
+```
+dbHelper = new DBHelper(getApplicationContext());
+SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+Cursor cursor = db.rawQuery("select * from centuaryTbl where email='"+email+"'",null);
+if (cursor.moveToFirst())
+{
+    do
+    {
+        String s1 = cursor.getString(cursor.getColumnIndex("s1"));
+        String s2 = cursor.getString(cursor.getColumnIndex("s2"));
+        String s3 = cursor.getString(cursor.getColumnIndex("s3"));
+
+
+    }while (cursor.moveToNext());
+}
+```
