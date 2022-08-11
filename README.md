@@ -9,3 +9,25 @@
 >`Android`方法
 + `日期Dialog`
 >[Dialog 日期選單](https://ithelp.ithome.com.tw/articles/10251105)
+
+## SQLite的SQL語法
+> 參考資料 : https://www.sqlite.org/datatype3.html
+
+```
+CREATE TABLE t1(
+    x INTEGER PRIMARY KEY,
+    a,                 /* collating sequence BINARY */
+    b COLLATE BINARY,  /* collating sequence BINARY */
+    c COLLATE RTRIM,   /* collating sequence RTRIM  */
+    d COLLATE NOCASE   /* collating sequence NOCASE */
+);
+                   /* x   a     b     c       d */
+INSERT INTO t1 VALUES(1,'abc','abc', 'abc  ','abc');
+INSERT INTO t1 VALUES(2,'abc','abc', 'abc',  'ABC');
+INSERT INTO t1 VALUES(3,'abc','abc', 'abc ', 'Abc');
+INSERT INTO t1 VALUES(4,'abc','abc ','ABC',  'abc');
+ 
+/* Text comparison a=b is performed using the BINARY collating sequence. */
+SELECT x FROM t1 WHERE a = b ORDER BY x;
+--result 1 2 3
+```

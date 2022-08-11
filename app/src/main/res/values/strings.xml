@@ -158,436 +158,436 @@
         </string-array>
 
     <string-array name="taipei">
-        <item>中正區  100</item>
-        <item>大同區  103</item>
-        <item>中山區  104</item>
-        <item>松山區  105</item>
-        <item>大安區  106</item>
-        <item>萬華區  108</item>
-        <item>信義區  110</item>
-        <item>士林區  111</item>
-        <item>北投區  112</item>
-        <item>內湖區  114</item>
-        <item>南港區  115</item>
-        <item>文山區  116</item>
+        <item>中正區</item>
+        <item>大同區</item>
+        <item>中山區</item>
+        <item>松山區</item>
+        <item>大安區</item>
+        <item>萬華區</item>
+        <item>信義區</item>
+        <item>士林區</item>
+        <item>北投區</item>
+        <item>內湖區</item>
+        <item>南港區</item>
+        <item>文山區</item>
     </string-array>
 
     <string-array name="keelung">
-        <item>仁愛區  200</item>
-        <item>信義區  201</item>
-        <item>中正區  202</item>
-        <item>中山區  203</item>
-        <item>安樂區  204</item>
-        <item>暖暖區  205</item>
-        <item>七堵區  206</item>
+        <item>仁愛區</item>
+        <item>信義區</item>
+        <item>中正區</item>
+        <item>中山區</item>
+        <item>安樂區</item>
+        <item>暖暖區</item>
+        <item>七堵區</item>
     </string-array>
 
     <string-array name="newtaipei">
-        <item>萬里區  207</item>
-        <item>金山區  208</item>
-        <item>板橋區  220</item>
-        <item>汐止區  221</item>
-        <item>深坑區  222</item>
-        <item>石碇區  223</item>
-        <item>瑞芳區  224</item>
-        <item>平溪區  226</item>
-        <item>雙溪區  227</item>
-        <item>貢寮區  228</item>
-        <item>新店區  231</item>
-        <item>坪林區  232</item>
-        <item>烏來區  233</item>
-        <item>永和區  234</item>
-        <item>中和區  235</item>
-        <item>土城區  236</item>
-        <item>三峽區  237</item>
-        <item>樹林區  238</item>
-        <item>鶯歌區  239</item>
-        <item>三重區  241</item>
-        <item>新莊區  242</item>
-        <item>泰山區  243</item>
-        <item>林口區  244</item>
-        <item>蘆洲區  247</item>
-        <item>五股區  248</item>
-        <item>八里區  249</item>
-        <item>淡水區  251</item>
-        <item>三芝區  252</item>
-        <item>石門區  253</item>
+        <item>萬里區</item>
+        <item>金山區</item>
+        <item>板橋區</item>
+        <item>汐止區</item>
+        <item>深坑區</item>
+        <item>石碇區</item>
+        <item>瑞芳區</item>
+        <item>平溪區</item>
+        <item>雙溪區</item>
+        <item>貢寮區</item>
+        <item>新店區</item>
+        <item>坪林區</item>
+        <item>烏來區</item>
+        <item>永和區</item>
+        <item>中和區</item>
+        <item>土城區</item>
+        <item>三峽區</item>
+        <item>樹林區</item>
+        <item>鶯歌區</item>
+        <item>三重區</item>
+        <item>新莊區</item>
+        <item>泰山區</item>
+        <item>林口區</item>
+        <item>蘆洲區</item>
+        <item>五股區</item>
+        <item>八里區</item>
+        <item>淡水區</item>
+        <item>三芝區</item>
+        <item>石門區</item>
     </string-array>
 
     <string-array name="yilan">
-        <item>宜蘭市  260</item>
-        <item>頭城鎮  261</item>
-        <item>礁溪鄉  262</item>
-        <item>壯圍鄉  263</item>
-        <item>員山鄉  264</item>
-        <item>羅東鎮  265</item>
-        <item>三星鄉  266</item>
-        <item>大同鄉  267</item>
-        <item>五結鄉  268</item>
-        <item>冬山鄉  269</item>
-        <item>蘇澳鎮  270</item>
-        <item>南澳鄉  272</item>
+        <item>宜蘭市</item>
+        <item>頭城鎮</item>
+        <item>礁溪鄉</item>
+        <item>壯圍鄉</item>
+        <item>員山鄉</item>
+        <item>羅東鎮</item>
+        <item>三星鄉</item>
+        <item>大同鄉</item>
+        <item>五結鄉</item>
+        <item>冬山鄉</item>
+        <item>蘇澳鎮</item>
+        <item>南澳鄉</item>
     </string-array>
 
     <string-array name="lienchiang">
-        <item>南竿鄉  209</item>
-        <item>北竿鄉  210</item>
-        <item>莒光鄉  211</item>
-        <item>東引鄉  212</item>
+        <item>南竿鄉</item>
+        <item>北竿鄉</item>
+        <item>莒光鄉</item>
+        <item>東引鄉</item>
     </string-array>
 
     <string-array name="hsinchu_city">
-        <item>東　區  300</item>
-        <item>北　區  300</item>
-        <item>香山區  300</item>
+        <item>東　區</item>
+        <item>北　區</item>
+        <item>香山區</item>
     </string-array>
 
     <string-array name="hsinchu">
-        <item>竹北市  302</item>
-        <item>湖口鄉  303</item>
-        <item>新豐鄉  304</item>
-        <item>新埔鎮  305</item>
-        <item>關西鎮  306</item>
-        <item>芎林鄉  307</item>
-        <item>寶山鄉  308</item>
-        <item>竹東鎮  310</item>
-        <item>五峰鄉  311</item>
-        <item>橫山鄉  312</item>
-        <item>尖石鄉  313</item>
-        <item>北埔鄉  314</item>
-        <item>峨眉鄉  315</item>
+        <item>竹北市</item>
+        <item>湖口鄉</item>
+        <item>新豐鄉</item>
+        <item>新埔鎮</item>
+        <item>關西鎮</item>
+        <item>芎林鄉</item>
+        <item>寶山鄉</item>
+        <item>竹東鎮</item>
+        <item>五峰鄉</item>
+        <item>橫山鄉</item>
+        <item>尖石鄉</item>
+        <item>北埔鄉</item>
+        <item>峨眉鄉</item>
     </string-array>
 
     <string-array name="taoyuan">
-        <item>中壢區  320</item>
-        <item>平鎮區  324</item>
-        <item>龍潭區  325</item>
-        <item>楊梅區  326</item>
-        <item>新屋區  327</item>
-        <item>觀音區  328</item>
-        <item>桃園區  330</item>
-        <item>龜山區  333</item>
-        <item>八德區  334</item>
-        <item>大溪區  335</item>
-        <item>復興區  336</item>
-        <item>大園區  337</item>
-        <item>蘆竹區  338</item>
+        <item>中壢區</item>
+        <item>平鎮區</item>
+        <item>龍潭區</item>
+        <item>楊梅區</item>
+        <item>新屋區</item>
+        <item>觀音區</item>
+        <item>桃園區</item>
+        <item>龜山區</item>
+        <item>八德區</item>
+        <item>大溪區</item>
+        <item>復興區</item>
+        <item>大園區</item>
+        <item>蘆竹區</item>
     </string-array>
 
     <string-array name="miaoli">
-        <item>竹南鎮  350</item>
-        <item>頭份市  351</item>
-        <item>三灣鄉  352</item>
-        <item>南庄鄉  353</item>
-        <item>獅潭鄉  354</item>
-        <item>後龍鎮  356</item>
-        <item>通霄鎮  357</item>
-        <item>苑裡鎮  358</item>
-        <item>苗栗市  360</item>
-        <item>造橋鄉  361</item>
-        <item>頭屋鄉  362</item>
-        <item>公館鄉  363</item>
-        <item>大湖鄉  364</item>
-        <item>泰安鄉  365</item>
-        <item>銅鑼鄉  366</item>
-        <item>三義鄉  367</item>
-        <item>西湖鄉  368</item>
-        <item>卓蘭鎮  369</item>
+        <item>竹南鎮</item>
+        <item>頭份市</item>
+        <item>三灣鄉</item>
+        <item>南庄鄉</item>
+        <item>獅潭鄉</item>
+        <item>後龍鎮</item>
+        <item>通霄鎮</item>
+        <item>苑裡鎮</item>
+        <item>苗栗市</item>
+        <item>造橋鄉</item>
+        <item>頭屋鄉</item>
+        <item>公館鄉</item>
+        <item>大湖鄉</item>
+        <item>泰安鄉</item>
+        <item>銅鑼鄉</item>
+        <item>三義鄉</item>
+        <item>西湖鄉</item>
+        <item>卓蘭鎮</item>
     </string-array>
 
     <string-array name="taichung">
-        <item>中　區  400</item>
-        <item>東　區  401</item>
-        <item>南　區  402</item>
-        <item>西　區  403</item>
-        <item>北　區  404</item>
-        <item>北屯區  406</item>
-        <item>西屯區  407</item>
-        <item>南屯區  408</item>
-        <item>太平區  411</item>
-        <item>大里區  412</item>
-        <item>霧峰區  413</item>
-        <item>烏日區  414</item>
-        <item>豐原區  420</item>
-        <item>后里區  421</item>
-        <item>石岡區  422</item>
-        <item>東勢區  423</item>
-        <item>和平區  424</item>
-        <item>新社區  426</item>
-        <item>潭子區  427</item>
-        <item>大雅區  428</item>
-        <item>神岡區  429</item>
-        <item>大肚區  432</item>
-        <item>沙鹿區  433</item>
-        <item>龍井區  434</item>
-        <item>梧棲區  435</item>
-        <item>清水區  436</item>
-        <item>大甲區  437</item>
-        <item>外埔區  438</item>
-        <item>大安區  439</item>
+        <item>中　區</item>
+        <item>東　區</item>
+        <item>南　區</item>
+        <item>西　區</item>
+        <item>北　區</item>
+        <item>北屯區</item>
+        <item>西屯區</item>
+        <item>南屯區</item>
+        <item>太平區</item>
+        <item>大里區</item>
+        <item>霧峰區</item>
+        <item>烏日區</item>
+        <item>豐原區</item>
+        <item>后里區</item>
+        <item>石岡區</item>
+        <item>東勢區</item>
+        <item>和平區</item>
+        <item>新社區</item>
+        <item>潭子區</item>
+        <item>大雅區</item>
+        <item>神岡區</item>
+        <item>大肚區</item>
+        <item>沙鹿區</item>
+        <item>龍井區</item>
+        <item>梧棲區</item>
+        <item>清水區</item>
+        <item>大甲區</item>
+        <item>外埔區</item>
+        <item>大安區</item>
     </string-array>
 
     <string-array name="changhua">
-        <item>彰化市  500</item>
-        <item>芬園鄉  502</item>
-        <item>花壇鄉  503</item>
-        <item>秀水鄉  504</item>
-        <item>鹿港鎮  505</item>
-        <item>福興鄉  506</item>
-        <item>線西鄉  507</item>
-        <item>和美鎮  508</item>
-        <item>伸港鄉  509</item>
-        <item>員林鎮  510</item>
-        <item>社頭鄉  511</item>
-        <item>永靖鄉  512</item>
-        <item>埔心鄉  513</item>
-        <item>溪湖鎮  514</item>
-        <item>大村鄉  515</item>
-        <item>埔鹽鄉  516</item>
-        <item>田中鎮  520</item>
-        <item>北斗鎮  521</item>
-        <item>田尾鄉  522</item>
-        <item>埤頭鄉  523</item>
-        <item>溪州鄉  524</item>
-        <item>竹塘鄉  525</item>
-        <item>二林鎮  526</item>
-        <item>大城鄉  527</item>
-        <item>芳苑鄉  528</item>
-        <item>二水鄉  530</item>
+        <item>彰化市</item>
+        <item>芬園鄉</item>
+        <item>花壇鄉</item>
+        <item>秀水鄉</item>
+        <item>鹿港鎮</item>
+        <item>福興鄉</item>
+        <item>線西鄉</item>
+        <item>和美鎮</item>
+        <item>伸港鄉</item>
+        <item>員林鎮</item>
+        <item>社頭鄉</item>
+        <item>永靖鄉</item>
+        <item>埔心鄉</item>
+        <item>溪湖鎮</item>
+        <item>大村鄉</item>
+        <item>埔鹽鄉</item>
+        <item>田中鎮</item>
+        <item>北斗鎮</item>
+        <item>田尾鄉</item>
+        <item>埤頭鄉</item>
+        <item>溪州鄉</item>
+        <item>竹塘鄉</item>
+        <item>二林鎮</item>
+        <item>大城鄉</item>
+        <item>芳苑鄉</item>
+        <item>二水鄉</item>
     </string-array>
 
     <string-array name="nantou">
-        <item>南投市  540</item>
-        <item>中寮鄉  541</item>
-        <item>草屯鎮  542</item>
-        <item>國姓鄉  544</item>
-        <item>埔里鎮  545</item>
-        <item>仁愛鄉  546</item>
-        <item>名間鄉  551</item>
-        <item>集集鎮  552</item>
-        <item>水里鄉  553</item>
-        <item>魚池鄉  555</item>
-        <item>信義鄉  556</item>
-        <item>竹山鎮  557</item>
-        <item>鹿谷鄉  558</item>
+        <item>南投市</item>
+        <item>中寮鄉</item>
+        <item>草屯鎮</item>
+        <item>國姓鄉</item>
+        <item>埔里鎮</item>
+        <item>仁愛鄉</item>
+        <item>名間鄉</item>
+        <item>集集鎮</item>
+        <item>水里鄉</item>
+        <item>魚池鄉</item>
+        <item>信義鄉</item>
+        <item>竹山鎮</item>
+        <item>鹿谷鄉</item>
     </string-array>
 
     <string-array name="chiayi_city">
-        <item>東　區  600</item>
-        <item>西　區  600</item>
+        <item>東　區</item>
+        <item>西　區</item>
     </string-array>
 
     <string-array name="chiayi">
-        <item>番路鄉  602</item>
-        <item>梅山鄉  603</item>
-        <item>竹崎鄉  604</item>
-        <item>阿里山  605</item>
-        <item>中埔鄉  606</item>
-        <item>大埔鄉  607</item>
-        <item>水上鄉  608</item>
-        <item>鹿草鄉  611</item>
-        <item>太保市  612</item>
-        <item>朴子市  613</item>
-        <item>東石鄉  614</item>
-        <item>六腳鄉  615</item>
-        <item>新港鄉  616</item>
-        <item>民雄鄉  621</item>
-        <item>大林鎮  622</item>
-        <item>溪口鄉  623</item>
-        <item>義竹鄉  624</item>
-        <item>布袋鎮  625</item>
+        <item>番路鄉</item>
+        <item>梅山鄉</item>
+        <item>竹崎鄉</item>
+        <item>阿里山</item>
+        <item>中埔鄉</item>
+        <item>大埔鄉</item>
+        <item>水上鄉</item>
+        <item>鹿草鄉</item>
+        <item>太保市</item>
+        <item>朴子市</item>
+        <item>東石鄉</item>
+        <item>六腳鄉</item>
+        <item>新港鄉</item>
+        <item>民雄鄉</item>
+        <item>大林鎮</item>
+        <item>溪口鄉</item>
+        <item>義竹鄉</item>
+        <item>布袋鎮</item>
     </string-array>
 
     <string-array name="yunlin">
-        <item>斗南鎮  630</item>
-        <item>大埤鄉  631</item>
-        <item>虎尾鎮  632</item>
-        <item>土庫鎮  633</item>
-        <item>褒忠鄉  634</item>
-        <item>東勢鄉  635</item>
-        <item>臺西鄉  636</item>
-        <item>崙背鄉  637</item>
-        <item>麥寮鄉  638</item>
-        <item>斗六市  640</item>
-        <item>林內鄉  643</item>
-        <item>古坑鄉  646</item>
-        <item>莿桐鄉  647</item>
-        <item>西螺鎮  648</item>
-        <item>二崙鄉  649</item>
-        <item>北港鎮  651</item>
-        <item>水林鄉  652</item>
-        <item>口湖鄉  653</item>
-        <item>四湖鄉  654</item>
-        <item>元長鄉  655</item>
+        <item>斗南鎮</item>
+        <item>大埤鄉</item>
+        <item>虎尾鎮</item>
+        <item>土庫鎮</item>
+        <item>褒忠鄉</item>
+        <item>東勢鄉</item>
+        <item>臺西鄉</item>
+        <item>崙背鄉</item>
+        <item>麥寮鄉</item>
+        <item>斗六市</item>
+        <item>林內鄉</item>
+        <item>古坑鄉</item>
+        <item>莿桐鄉</item>
+        <item>西螺鎮</item>
+        <item>二崙鄉</item>
+        <item>北港鎮</item>
+        <item>水林鄉</item>
+        <item>口湖鄉</item>
+        <item>四湖鄉</item>
+        <item>元長鄉</item>
     </string-array>
 
     <string-array name="tainan">
-        <item>中西區  700</item>
-        <item>東　區  701</item>
-        <item>南　區  702</item>
-        <item>北　區  704</item>
-        <item>安平區  708</item>
-        <item>安南區  709</item>
-        <item>永康區  710</item>
-        <item>歸仁區  711</item>
-        <item>新化區  712</item>
-        <item>左鎮區  713</item>
-        <item>玉井區  714</item>
-        <item>楠西區  715</item>
-        <item>南化區  716</item>
-        <item>仁德區  717</item>
-        <item>關廟區  718</item>
-        <item>龍崎區  719</item>
-        <item>官田區  720</item>
-        <item>麻豆區  721</item>
-        <item>佳里區  722</item>
-        <item>西港區  723</item>
-        <item>七股區  724</item>
-        <item>將軍區  725</item>
-        <item>學甲區  726</item>
-        <item>北門區  727</item>
-        <item>新營區  730</item>
-        <item>後壁區  731</item>
-        <item>白河區  732</item>
-        <item>東山區  733</item>
-        <item>六甲區  734</item>
-        <item>下營區  735</item>
-        <item>柳營區  736</item>
-        <item>鹽水區  737</item>
-        <item>善化區  741</item>
-        <item>大內區  742</item>
-        <item>山上區  743</item>
-        <item>新市區  744</item>
-        <item>安定區  745</item>
+        <item>中西區</item>
+        <item>東　區</item>
+        <item>南　區</item>
+        <item>北　區</item>
+        <item>安平區</item>
+        <item>安南區</item>
+        <item>永康區</item>
+        <item>歸仁區</item>
+        <item>新化區</item>
+        <item>左鎮區</item>
+        <item>玉井區</item>
+        <item>楠西區</item>
+        <item>南化區</item>
+        <item>仁德區</item>
+        <item>關廟區</item>
+        <item>龍崎區</item>
+        <item>官田區</item>
+        <item>麻豆區</item>
+        <item>佳里區</item>
+        <item>西港區</item>
+        <item>七股區</item>
+        <item>將軍區</item>
+        <item>學甲區</item>
+        <item>北門區</item>
+        <item>新營區</item>
+        <item>後壁區</item>
+        <item>白河區</item>
+        <item>東山區</item>
+        <item>六甲區</item>
+        <item>下營區</item>
+        <item>柳營區</item>
+        <item>鹽水區</item>
+        <item>善化區</item>
+        <item>大內區</item>
+        <item>山上區</item>
+        <item>新市區</item>
+        <item>安定區</item>
     </string-array>
 
     <string-array name="kaohsiung">
-        <item>新興區  800</item>
-        <item>前金區  801</item>
-        <item>苓雅區  802</item>
-        <item>鹽埕區  803</item>
-        <item>鼓山區  804</item>
-        <item>旗津區  805</item>
-        <item>前鎮區  806</item>
-        <item>三民區  807</item>
-        <item>楠梓區  811</item>
-        <item>小港區  812</item>
-        <item>左營區  813</item>
-        <item>仁武區  814</item>
-        <item>大社區  815</item>
-        <item>岡山區  820</item>
-        <item>路竹區  821</item>
-        <item>阿蓮區  822</item>
-        <item>田寮區  823</item>
-        <item>燕巢區  824</item>
-        <item>橋頭區  825</item>
-        <item>梓官區  826</item>
-        <item>彌陀區  827</item>
-        <item>永安區  828</item>
-        <item>湖內區  829</item>
-        <item>鳳山區  830</item>
-        <item>大寮區  831</item>
-        <item>林園區  832</item>
-        <item>鳥松區  833</item>
-        <item>大樹區  840</item>
-        <item>旗山區  842</item>
-        <item>美濃區  843</item>
-        <item>六龜區  844</item>
-        <item>內門區  845</item>
-        <item>杉林區  846</item>
-        <item>甲仙區  847</item>
-        <item>桃源區  848</item>
-        <item>那瑪夏  849</item>
-        <item>茂林區  851</item>
-        <item>茄萣區  852</item>
+        <item>新興區</item>
+        <item>前金區</item>
+        <item>苓雅區</item>
+        <item>鹽埕區</item>
+        <item>鼓山區</item>
+        <item>旗津區</item>
+        <item>前鎮區</item>
+        <item>三民區</item>
+        <item>楠梓區</item>
+        <item>小港區</item>
+        <item>左營區</item>
+        <item>仁武區</item>
+        <item>大社區</item>
+        <item>岡山區</item>
+        <item>路竹區</item>
+        <item>阿蓮區</item>
+        <item>田寮區</item>
+        <item>燕巢區</item>
+        <item>橋頭區</item>
+        <item>梓官區</item>
+        <item>彌陀區</item>
+        <item>永安區</item>
+        <item>湖內區</item>
+        <item>鳳山區</item>
+        <item>大寮區</item>
+        <item>林園區</item>
+        <item>鳥松區</item>
+        <item>大樹區</item>
+        <item>旗山區</item>
+        <item>美濃區</item>
+        <item>六龜區</item>
+        <item>內門區</item>
+        <item>杉林區</item>
+        <item>甲仙區</item>
+        <item>桃源區</item>
+        <item>那瑪夏</item>
+        <item>茂林區</item>
+        <item>茄萣區</item>
     </string-array>
 
     <string-array name="pingtung">
-        <item>屏東市  900</item>
-        <item>三地門  901</item>
-        <item>霧臺鄉  902</item>
-        <item>瑪家鄉  903</item>
-        <item>九如鄉  904</item>
-        <item>里港鄉  905</item>
-        <item>高樹鄉  906</item>
-        <item>鹽埔鄉  907</item>
-        <item>長治鄉  908</item>
-        <item>麟洛鄉  909</item>
-        <item>竹田鄉  911</item>
-        <item>內埔鄉  912</item>
-        <item>萬丹鄉  913</item>
-        <item>潮州鎮  920</item>
-        <item>泰武鄉  921</item>
-        <item>來義鄉  922</item>
-        <item>萬巒鄉  923</item>
-        <item>崁頂鄉  924</item>
-        <item>新埤鄉  925</item>
-        <item>南州鄉  926</item>
-        <item>林邊鄉  927</item>
-        <item>東港鎮  928</item>
-        <item>琉球鄉  929</item>
-        <item>佳冬鄉  931</item>
-        <item>新園鄉  932</item>
-        <item>枋寮鄉  940</item>
-        <item>枋山鄉  941</item>
-        <item>春日鄉  942</item>
-        <item>獅子鄉  943</item>
-        <item>車城鄉  944</item>
-        <item>牡丹鄉  945</item>
-        <item>恆春鎮  946</item>
-        <item>滿州鄉  947</item>
+        <item>屏東市</item>
+        <item>三地門</item>
+        <item>霧臺鄉</item>
+        <item>瑪家鄉</item>
+        <item>九如鄉</item>
+        <item>里港鄉</item>
+        <item>高樹鄉</item>
+        <item>鹽埔鄉</item>
+        <item>長治鄉</item>
+        <item>麟洛鄉</item>
+        <item>竹田鄉</item>
+        <item>內埔鄉</item>
+        <item>萬丹鄉</item>
+        <item>潮州鎮</item>
+        <item>泰武鄉</item>
+        <item>來義鄉</item>
+        <item>萬巒鄉</item>
+        <item>崁頂鄉</item>
+        <item>新埤鄉</item>
+        <item>南州鄉</item>
+        <item>林邊鄉</item>
+        <item>東港鎮</item>
+        <item>琉球鄉</item>
+        <item>佳冬鄉</item>
+        <item>新園鄉</item>
+        <item>枋寮鄉</item>
+        <item>枋山鄉</item>
+        <item>春日鄉</item>
+        <item>獅子鄉</item>
+        <item>車城鄉</item>
+        <item>牡丹鄉</item>
+        <item>恆春鎮</item>
+        <item>滿州鄉</item>
     </string-array>
 
     <string-array name="penghu">
-        <item>馬公市  880</item>
-        <item>西嶼鄉  881</item>
-        <item>望安鄉  882</item>
-        <item>七美鄉  883</item>
-        <item>白沙鄉  884</item>
-        <item>湖西鄉  885</item>
+        <item>馬公市</item>
+        <item>西嶼鄉</item>
+        <item>望安鄉</item>
+        <item>七美鄉</item>
+        <item>白沙鄉</item>
+        <item>湖西鄉</item>
     </string-array>
 
     <string-array name="kinmen">
-        <item>金沙鎮  890</item>
-        <item>金湖鎮  891</item>
-        <item>金寧鄉  892</item>
-        <item>金城鎮  893</item>
-        <item>烈嶼鄉  894</item>
-        <item>烏坵鄉  896</item>
+        <item>金沙鎮</item>
+        <item>金湖鎮</item>
+        <item>金寧鄉</item>
+        <item>金城鎮</item>
+        <item>烈嶼鄉</item>
+        <item>烏坵鄉</item>
     </string-array>
 
     <string-array name="taitung">
-        <item>臺東市  950</item>
-        <item>綠島鄉  951</item>
-        <item>蘭嶼鄉  952</item>
-        <item>延平鄉  953</item>
-        <item>卑南鄉  954</item>
-        <item>鹿野鄉  955</item>
-        <item>關山鎮  956</item>
-        <item>海端鄉  957</item>
-        <item>池上鄉  958</item>
-        <item>東河鄉  959</item>
-        <item>成功鎮  961</item>
-        <item>長濱鄉  962</item>
-        <item>太麻里  963</item>
-        <item>金峰鄉  964</item>
-        <item>大武鄉  965</item>
-        <item>達仁鄉  966</item>
+        <item>臺東市</item>
+        <item>綠島鄉</item>
+        <item>蘭嶼鄉</item>
+        <item>延平鄉</item>
+        <item>卑南鄉</item>
+        <item>鹿野鄉</item>
+        <item>關山鎮</item>
+        <item>海端鄉</item>
+        <item>池上鄉</item>
+        <item>東河鄉</item>
+        <item>成功鎮</item>
+        <item>長濱鄉</item>
+        <item>太麻里</item>
+        <item>金峰鄉</item>
+        <item>大武鄉</item>
+        <item>達仁鄉</item>
     </string-array>
 
     <string-array name="hualien">
-        <item>花蓮市  970</item>
-        <item>新城鄉  971</item>
-        <item>秀林鄉  972</item>
-        <item>吉安鄉  973</item>
-        <item>壽豐鄉  974</item>
-        <item>鳳林鎮  975</item>
-        <item>光復鄉  976</item>
-        <item>豐濱鄉  977</item>
-        <item>瑞穗鄉  978</item>
-        <item>萬榮鄉  979</item>
-        <item>玉里鎮  981</item>
-        <item>卓溪鄉  982</item>
-        <item>富里鄉  983</item>
+        <item>花蓮市</item>
+        <item>新城鄉</item>
+        <item>秀林鄉</item>
+        <item>吉安鄉</item>
+        <item>壽豐鄉</item>
+        <item>鳳林鎮</item>
+        <item>光復鄉</item>
+        <item>豐濱鄉</item>
+        <item>瑞穗鄉</item>
+        <item>萬榮鄉</item>
+        <item>玉里鎮</item>
+        <item>卓溪鄉</item>
+        <item>富里鄉</item>
     </string-array>
 </resources>
