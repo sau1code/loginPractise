@@ -76,11 +76,11 @@
 
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="32dp"
+                android:layout_width="40dp"
                 android:layout_height="32dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginStart="55dp"
-                app:srcCompat="@android:drawable/ic_secure" />
+                android:layout_marginStart="52dp"
+                app:srcCompat="@drawable/lockicon" />
 
             <EditText
                 android:id="@+id/EditText_password"
@@ -91,9 +91,9 @@
                 android:background="#0000"
                 android:hint="密碼"
                 android:paddingStart="12dp"
+                android:singleLine="true"
                 android:textSize="24dp"
-                tools:ignore="TouchTargetSizeCheck"
-                android:singleLine="true" />
+                tools:ignore="TouchTargetSizeCheck" />
         </RelativeLayout>
 
         <View
