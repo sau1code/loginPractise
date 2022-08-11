@@ -34,10 +34,12 @@ public class memberActivity extends AppCompatActivity {
         setTitle("activity_member");
         Intent intent = getIntent();
         String username=intent.getStringExtra("name");
-        db.execSQL("insert into "+table+" values ('A004','"+username+"','123456','apple','1986/3/28','0958499577','test@gmail.com','桃園市');");
         Cursor output = db.rawQuery("select * from "+table+";", null);
         int outputStr = output.getCount();
         Log.d("main","select output="+outputStr);
+        String userid = "A00".concat(String.valueOf(outputStr + 1));
+        db.execSQL("insert into "+table+" values ('"+userid+"','"+username+"','123456','apple','1986/3/28','0958499577','test@gmail.com','桃園市');");
+
 
         textViewMemberTempshow = (TextView)findViewById(R.id.textView_member_tempshow);
         textViewMemberTempshow.setText("使用者帳號 : " + intent.getStringExtra("name"));
