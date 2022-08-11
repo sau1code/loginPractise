@@ -62,7 +62,7 @@ public class memberActivity extends AppCompatActivity {
 //      5. SQLiteDatabase.execSQL function can exacute SQL commands which don't return data .
 //        5.1 The SQL command parameter in db.execSQL function : insert new user data to table "customers"
         db.execSQL("insert into " + table + " values ('" + userid + "','" + username + "','123456','apple','1986/3/28','0958499577','test@gmail.com','桃園市');");
-
+        db.close();
 
         textViewMemberTempshow = (TextView) findViewById(R.id.textView_member_tempshow);
         textViewMemberTempshow.setText("使用者帳號 : " + intent.getStringExtra("name"));

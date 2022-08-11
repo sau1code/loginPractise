@@ -10,7 +10,6 @@ public final class mySQLiteContract {
 //  [reference : https://developer.android.com/training/data-storage/sqlite]
     private mySQLiteContract() {
     }
-
     //    資料庫名稱 : Demo
 //
 //    資料表名稱 : customers
@@ -51,14 +50,14 @@ public final class mySQLiteContract {
         "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
-                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
-                    mySQLiteEntry.COLUMN_NAME_USER + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_PWD + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT," +
-                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT);" ;
+                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+                    mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT NOT NULL );" ;
 
 
     public static class mySQLiteDbHelper extends SQLiteOpenHelper {
