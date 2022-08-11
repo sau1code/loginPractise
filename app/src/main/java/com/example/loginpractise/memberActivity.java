@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.Picture;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.loginpractise.mySQLiteContract;
@@ -18,6 +21,8 @@ public class memberActivity extends AppCompatActivity {
 
     private TextView textViewMemberTempshow;
     private mySQLiteContract.mySQLiteDbHelper dbHelper;
+    private EditText editTextPassword,editTextPassword2,editTextName,editTextBirth;
+    private EditText editTextPhone,editTextAddress,editTextEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,24 @@ public class memberActivity extends AppCompatActivity {
 //      create ActionBar to return to front page
         ActionBar actBar = getSupportActionBar();
         actBar.setDisplayHomeAsUpEnabled(true);
+        actBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.night_sky,null));
+
+//      disable all EditText widgets
+        editTextPassword = (EditText) findViewById(R.id.editText_member_password);
+        editTextPassword.setEnabled(false);
+        editTextPassword2 = (EditText) findViewById(R.id.editText_member_password2);
+        editTextPassword2.setEnabled(false);
+        editTextName=(EditText) findViewById(R.id.editText_member_name);
+        editTextName.setEnabled(false);
+        editTextBirth = (EditText) findViewById(R.id.editText_member_birth);
+        editTextBirth.setEnabled(false);
+        editTextPhone = (EditText) findViewById(R.id.editText_member_phone);
+        editTextPhone.setEnabled(false);
+        editTextAddress=(EditText) findViewById(R.id.editText_member_address);
+        editTextAddress.setEnabled(false);
+        editTextEmail=(EditText) findViewById(R.id.editText_member_email);
+        editTextEmail.setEnabled(false);
+
 
 //      class mySQLiteContract.mySQLiteDbHelper :
 //      create database "Demo.db" and table "customers"
@@ -41,6 +64,7 @@ public class memberActivity extends AppCompatActivity {
 
         setTitle("activity_member");
 
+
 //      receive intent: contain the data of user name and password
         Intent intent = getIntent();
 //      get the user name data as String variable "username"
@@ -53,6 +77,8 @@ public class memberActivity extends AppCompatActivity {
         Cursor output = db.rawQuery("select * from " + table + ";", null);
 //      2. Cursor.getCount function  can return the number of total rows of records in Cursor object as integer variable
         int outputStr = output.getCount();
+//      close Cursor
+        output.close();
 //      3. check the output of Cursor.getCount function
         Log.d("main", "select output=" + outputStr);
 //      4. create new userid which start with "A00"
