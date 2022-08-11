@@ -1,10 +1,15 @@
 package com.example.loginpractise;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +21,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.example.loginpractise.mySQLiteContract;
 
 public class registerActivity extends AppCompatActivity {
 
@@ -41,6 +46,7 @@ public class registerActivity extends AppCompatActivity {
     private ArrayAdapter<CharSequence> spinnerAdapterArea;
     private Dialog registerDialog;
     private String cityArea;
+    private mySQLiteContract.mySQLiteDbHelper dbHelper;
 
 
 
@@ -48,7 +54,8 @@ public class registerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        setTitle("註冊帳號");
+        //---------------以下是日期Dialog選單----------------------------------------
         textViewBirthday = (TextView)findViewById(R.id.textView_register_birthday);
         buttonBirthday = (Button)findViewById(R.id.button_birthday);
 
@@ -77,7 +84,13 @@ public class registerActivity extends AppCompatActivity {
             }
         });
         
-        //////////////////////////////////////////////////////////////////////////
+        //------------------------以上是日期Dialog選單--------------------------------------------------------//
+
+        //-----------------------------------以下是actionbar-----------------------------//
+        ActionBar actBar = getSupportActionBar();
+        actBar.setBackgroundDrawable(new ColorDrawable(0xFFF44336));
+
+        //-----------------------------------以上是actionbar-----------------------------//
         
         button_registerOK = (Button)findViewById(R.id.button_registerOK) ;
         editText_registerName = (EditText)findViewById(R.id.editText_register_Name);
@@ -90,6 +103,7 @@ public class registerActivity extends AppCompatActivity {
 
         textView_registerBirthday = (TextView)findViewById(R.id.textView_register_birthday);
 
+        //----------------------------------以下是地址spinner的監聽-----------------------//
         spinnerCity = (Spinner)findViewById(R.id.spinner_city);
         spinnerArea = (Spinner)findViewById(R.id.spinner_area);
 
@@ -249,12 +263,15 @@ public class registerActivity extends AppCompatActivity {
 
             }
         });
+        //--------------------以上是地址spinner的監聽-----------------------------------------------------------------//
 
+        //------------------以下是手機號碼、Email的規定格式-------------------------------------------//
         String str = new String();
         String phoneformat = "^(09)(\\d{2})(-)?(\\d{3})(-)?(\\d{3})";
         String emailformat = "(.+)(@){1}(\\w+)(\\.){1}(.*)";
+        //-------------------以上是手機號碼、Email的規定格式------------------------------------------//
 
-
+        //-----------------------------以下是OK按鍵的監聽--------------------------------------//
         button_registerOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -292,6 +309,7 @@ public class registerActivity extends AppCompatActivity {
                     Toast.makeText(registerActivity.this,"Email格式錯誤",Toast.LENGTH_SHORT).show();
                 }
                 else{
+                    //-------------------------------這裡是建立按下OK後的Dialog--------------------------------------//
                     registerDialog = new Dialog(registerActivity.this);
                     registerDialog.setContentView(R.layout.register_ok_dialog);
                     registerDialog.setCancelable(false);
@@ -306,12 +324,43 @@ public class registerActivity extends AppCompatActivity {
                     textViewRegisterDialog.append("通訊地址 :\n"+cityName+cityArea+"\n"+editText_registerAddress.getText().toString()+"\n");
                     textViewRegisterDialog.append("Email :"+editText_registerEmail.getText().toString()+"\n");
 
+                    //------------------------------以下是監聽Dialog中的Button-------------------------------------------//
                     Button registerDialogOK = (Button) registerDialog.findViewById(R.id.button_registerDialog_ok);
                     Button registerDialogCancel = (Button) registerDialog.findViewById(R.id.button_registerDialog_cancel);
 
                     registerDialogOK.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            //----------------------------------以下是把資料傳進資料庫--------------------------------//
+                            dbHelper = new mySQLiteContract.mySQLiteDbHelper(registerActivity.this);
+                            SQLiteDatabase db = dbHelper.getWritableDatabase();
+                            String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+                            Intent intent = getIntent();
+                            String username = intent.getStringExtra("name");
+                            Cursor output = db.rawQuery("select * from " + table + ";", null);
+                            int outputStr = output.getCount();
+                            Log.d("main", "select output=" + outputStr);
+
+                            String userid = "A00".concat(String.valueOf(outputStr + 1));
+
+                            db.execSQL("insert into " + table + " values ('" + userid + "','" +editText_registerName.getText().toString()+ "','"+
+                                    editText_registerPassword.getText().toString()+"','"+editText_registerAccount.getText().toString()+"','"+
+                                    textViewBirthday.getText().toString()+"','"+editText_registerPhone.getText().toString()+"','"+cityName+cityArea+
+                                    editText_registerEmail.getText().toString()+"','"+cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+
+                            Log.d("main","insert ="+"insert into " + table + " values ('" + userid + "','" +
+                                    editText_registerName.getText().toString()+ "','"+
+                                    editText_registerPassword.getText().toString()+ "','"+
+                                    editText_registerAccount.getText().toString()+"','"+
+                                    textViewBirthday.getText().toString()+"','"+
+                                    editText_registerPhone.getText().toString()+"','"+
+                                    editText_registerEmail.getText().toString()+"','"+
+                                    cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+                            db.close();
+                            dbHelper.close();
+                            //----------------------------以上是把資料傳進資料庫---------------------------------------------------//
+                            registerDialog.dismiss();
+                            Toast.makeText(registerActivity.this,"註冊成功",Toast.LENGTH_SHORT).show();
                             finish();
                         }
                     });
@@ -322,9 +371,14 @@ public class registerActivity extends AppCompatActivity {
                             registerDialog.dismiss();
                         }
                     });
+                    //---------------------以上是監聽Dialog中的Button----------------------------------------------------------//
                     registerDialog.show();
                 }
+
             }
         });
+        //-------------------------------------以上是OK按鍵的監聽----------------------------------------------------------------------------//
+
+
     }
 }
