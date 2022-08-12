@@ -265,18 +265,18 @@ public class registerActivity extends AppCompatActivity {
                             //----------------------------------以下是把資料傳進資料庫--------------------------------//
 
                             db.execSQL("insert into " + table + " values ('" + userid + "','" +
-                                    editText_registerName.getText().toString()+ "','"+
+                                    editText_registerAccount.getText().toString()+ "','"+
                                     editText_registerPassword.getText().toString()+"','"+
-                                    editText_registerAccount.getText().toString()+"','"+
+                                    editText_registerName.getText().toString()+"','"+
                                     textViewBirthday.getText().toString()+"','"+
                                     editText_registerPhone.getText().toString()+"','"+
                                     editText_registerEmail.getText().toString()+"','"+
                                     cityName+cityArea+editText_registerAddress.getText().toString()+"');");
 
                             Log.d("main","insert ="+"insert into " + table + " values ('" + userid + "','" +
-                                    editText_registerName.getText().toString()+ "','"+
+                                    editText_registerAccount.getText().toString()+ "','"+
                                     editText_registerPassword.getText().toString()+ "','"+
-                                    editText_registerAccount.getText().toString()+"','"+
+                                    editText_registerName.getText().toString()+"','"+
                                     textViewBirthday.getText().toString()+"','"+
                                     editText_registerPhone.getText().toString()+"','"+
                                     editText_registerEmail.getText().toString()+"','"+
