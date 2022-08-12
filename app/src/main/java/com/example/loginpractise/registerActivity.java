@@ -23,8 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import com.example.loginpractise.mySQLiteContract;
 
@@ -47,6 +51,10 @@ public class registerActivity extends AppCompatActivity {
     private Dialog registerDialog;
     private String cityArea;
     private mySQLiteContract.mySQLiteDbHelper dbHelper;
+    private String account,phone,email;
+    List<String> accountList = new ArrayList<>();
+    List<String> phoneList = new ArrayList<>();
+    List<String> emailList = new ArrayList<>();
 
 
 
@@ -269,8 +277,40 @@ public class registerActivity extends AppCompatActivity {
         String str = new String();
         String phoneformat = "^(09)(\\d{2})(-)?(\\d{3})(-)?(\\d{3})";
         String emailformat = "(.+)(@){1}(\\w+)(\\.){1}(.*)";
+
         //-------------------以上是手機號碼、Email的規定格式------------------------------------------//
 
+        //--------------------以下是隱藏密碼-------------------------------------------------------//
+
+        String password = editText_registerPassword.getText().toString();
+        int password_length = editText_registerPassword.getText().toString().length();
+        String hide =
+        String hide_password =password.substring(0,3)+hide;
+        //---------------------以上是隱藏密碼-----------------------------------------------------//
+
+        dbHelper = new mySQLiteContract.mySQLiteDbHelper(registerActivity.this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("name");
+        Cursor output = db.rawQuery("select * from " + table + ";", null);
+        if (output.getCount()>0){    // 若有資料
+            output.moveToFirst();    // 移到第 1 筆資料
+            do{        // 逐筆讀出資料
+               account = output.getString(3);
+               phone = output.getString(5);
+               email = output.getString(6);
+               accountList.add(account);
+               phoneList.add(phone);
+               emailList.add(email);
+               Log.d("main","cursor = "+account+phone+email);
+            } while(output.moveToNext());    // 有一下筆就繼續迴圈
+
+        }
+        output.close();
+        int outputStr = output.getCount();
+
+        String userid = "A00".concat(String.valueOf(outputStr + 1));
         //-----------------------------以下是OK按鍵的監聽--------------------------------------//
         button_registerOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -307,6 +347,16 @@ public class registerActivity extends AppCompatActivity {
 
                 }else if(editText_registerEmail.getText().toString().matches(emailformat)==false){
                     Toast.makeText(registerActivity.this,"Email格式錯誤",Toast.LENGTH_SHORT).show();
+
+                } else if(accountList.contains(editText_registerAccount.getText().toString())){
+                    Toast.makeText(registerActivity.this,"此帳號已被使用",Toast.LENGTH_SHORT).show();
+
+                }else if(phoneList.contains(editText_registerPhone.getText().toString())){
+                    Toast.makeText(registerActivity.this,"此手機號碼已註冊過",Toast.LENGTH_SHORT).show();
+
+                }else if(emailList.contains(editText_registerEmail.getText().toString())){
+                    Toast.makeText(registerActivity.this,"此Email已註冊過",Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     //-------------------------------這裡是建立按下OK後的Dialog--------------------------------------//
@@ -316,13 +366,13 @@ public class registerActivity extends AppCompatActivity {
 
                     TextView textViewRegisterDialog = (TextView) registerDialog.findViewById(R.id.textView_registerDialog);
                     textViewRegisterDialog.setText("");
-                    textViewRegisterDialog.append("姓名 :"+editText_registerName.getText().toString()+"\n");
-                    textViewRegisterDialog.append("帳號 :"+editText_registerAccount.getText().toString()+"\n");
-                    textViewRegisterDialog.append("密碼 :"+editText_registerPassword.getText().toString()+"\n");
-                    textViewRegisterDialog.append("生日 :"+textView_registerBirthday.getText().toString()+"\n");
-                    textViewRegisterDialog.append("行動電話 :"+editText_registerPhone.getText().toString()+"\n");
+                    textViewRegisterDialog.append("姓名 : "+editText_registerName.getText().toString()+"\n");
+                    textViewRegisterDialog.append("帳號 : "+editText_registerAccount.getText().toString()+"\n");
+                    textViewRegisterDialog.append("密碼 : "+editText_registerPassword.getText().toString()+"\n");
+                    textViewRegisterDialog.append("生日 : "+textView_registerBirthday.getText().toString()+"\n");
+                    textViewRegisterDialog.append("行動電話 : "+editText_registerPhone.getText().toString()+"\n");
                     textViewRegisterDialog.append("通訊地址 :\n"+cityName+cityArea+"\n"+editText_registerAddress.getText().toString()+"\n");
-                    textViewRegisterDialog.append("Email :"+editText_registerEmail.getText().toString()+"\n");
+                    textViewRegisterDialog.append("Email : "+editText_registerEmail.getText().toString()+"\n");
 
                     //------------------------------以下是監聽Dialog中的Button-------------------------------------------//
                     Button registerDialogOK = (Button) registerDialog.findViewById(R.id.button_registerDialog_ok);
@@ -332,21 +382,15 @@ public class registerActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             //----------------------------------以下是把資料傳進資料庫--------------------------------//
-                            dbHelper = new mySQLiteContract.mySQLiteDbHelper(registerActivity.this);
-                            SQLiteDatabase db = dbHelper.getWritableDatabase();
-                            String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
-                            Intent intent = getIntent();
-                            String username = intent.getStringExtra("name");
-                            Cursor output = db.rawQuery("select * from " + table + ";", null);
-                            int outputStr = output.getCount();
-                            Log.d("main", "select output=" + outputStr);
 
-                            String userid = "A00".concat(String.valueOf(outputStr + 1));
-
-                            db.execSQL("insert into " + table + " values ('" + userid + "','" +editText_registerName.getText().toString()+ "','"+
-                                    editText_registerPassword.getText().toString()+"','"+editText_registerAccount.getText().toString()+"','"+
-                                    textViewBirthday.getText().toString()+"','"+editText_registerPhone.getText().toString()+"','"+cityName+cityArea+
-                                    editText_registerEmail.getText().toString()+"','"+cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+                            db.execSQL("insert into " + table + " values ('" + userid + "','" +
+                                    editText_registerName.getText().toString()+ "','"+
+                                    editText_registerPassword.getText().toString()+"','"+
+                                    editText_registerAccount.getText().toString()+"','"+
+                                    textViewBirthday.getText().toString()+"','"+
+                                    editText_registerPhone.getText().toString()+"','"+
+                                    editText_registerEmail.getText().toString()+"','"+
+                                    cityName+cityArea+editText_registerAddress.getText().toString()+"');");
 
                             Log.d("main","insert ="+"insert into " + table + " values ('" + userid + "','" +
                                     editText_registerName.getText().toString()+ "','"+
@@ -356,6 +400,8 @@ public class registerActivity extends AppCompatActivity {
                                     editText_registerPhone.getText().toString()+"','"+
                                     editText_registerEmail.getText().toString()+"','"+
                                     cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+
+
                             db.close();
                             dbHelper.close();
                             //----------------------------以上是把資料傳進資料庫---------------------------------------------------//
