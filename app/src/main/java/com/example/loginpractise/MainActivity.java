@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -116,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
         String password = "";
         mySQLiteContract.mySQLiteDbHelper SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
         SQLiteDatabase SQLiteDb = SQLiteHelper.getWritableDatabase();
-        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+        String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
         String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
         String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
-        Cursor cursorPassword = SQLiteDb.rawQuery("SELECT "+pwdSQL+" FROM "+table+" WHERE "+userSQL+" = '"+account+"' ;", null);
+        Cursor cursorPassword = SQLiteDb.rawQuery("SELECT "+pwdSQL+" FROM "+tableSQL+" WHERE "+userSQL+" = '"+account+"' ;", null);
         if (cursorPassword.getCount() > 0){
             cursorPassword.moveToFirst();
             password = cursorPassword.getString(0);
