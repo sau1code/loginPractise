@@ -3,12 +3,11 @@ package com.example.loginpractise;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         textViewRegister = (TextView)findViewById(R.id.textView_register);
         editTextAccount = (EditText)findViewById(R.id.EditText_account);
         editTextPassword = (EditText)findViewById(R.id.EditText_password);
-        ((TextView)findViewById(R.id.textView_temp))
+        ((TextView)findViewById(R.id.textView__main_show2))
                 .setText("暫時-管理者帳號: admin1~3\n暫時-使用者帳號: member1~99\n\n(密碼同帳號)");
 
         // 暫時-管理者帳密 Map<帳號, 密碼>
@@ -68,7 +67,12 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("name", account);
                     startActivity(intent);
                 } else if (memberMap.get(account) != null && memberMap.get(account).equals(password)) {
-                    Toast.makeText(MainActivity.this, "使用者登入", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "假-使用者登入", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, memberActivity.class);
+                    intent.putExtra("name", account);
+                    startActivity(intent);
+                } else if (password.equals(getPasswordFromSQLite(account))) {
+                    Toast.makeText(MainActivity.this, "真-使用者登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
                     intent.putExtra("name", account);
                     startActivity(intent);
@@ -99,4 +103,75 @@ public class MainActivity extends AppCompatActivity {
             exitTime = System.currentTimeMillis();
         } else finish();
     }
+
+    // 回主畫面呼叫showAllAccountAndPasswordfromSQLite()更新ALL SQLite帳密
+    @Override
+    protected void onStart() {
+        super.onStart();
+        showAllAccountAndPasswordfromSQLite();
+    }
+
+    // 用editText輸入的帳號至SQLite "撈密碼"
+    public String getPasswordFromSQLite(String account) {
+        String password = "";
+        mySQLiteContract.mySQLiteDbHelper SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
+        SQLiteDatabase SQLiteDb = SQLiteHelper.getWritableDatabase();
+        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+        String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
+        String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
+        Cursor cursorPassword = SQLiteDb.rawQuery("SELECT "+pwdSQL+" FROM "+table+" WHERE "+userSQL+" = '"+account+"' ;", null);
+        if (cursorPassword.getCount() > 0){
+            cursorPassword.moveToFirst();
+            password = cursorPassword.getString(0);
+        }
+        cursorPassword.close();
+        return password;
+    }
+
+    // 登入畫面提示全部SQLite帳密
+    public void showAllAccountAndPasswordfromSQLite(){
+        mySQLiteContract.mySQLiteDbHelper SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
+        SQLiteDatabase SQLiteDb = SQLiteHelper.getWritableDatabase();
+        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+        Cursor AllTable = SQLiteDb.rawQuery("select * from " + table + ";", null);
+        StringBuilder sb = new StringBuilder();
+        AllTable.moveToFirst();
+        do{
+            sb.append("帳/密 : " + AllTable.getString(1) + " / " + AllTable.getString(2) + "\n");
+        } while(AllTable.moveToNext());
+        AllTable.close();
+        ((TextView)findViewById(R.id.textView__main_show1)).setText(sb);
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+//    [refer to https://www.sqlite.org/datatype3.html]
+//    SQL 語法 : create table
+//    create table customers (
+// 0  userid varchar(6) not null,
+// 1  user varchar(6) not null,         // 帳號
+// 2  password varchar(25) not null ,   // 密碼
+// 3  username varchar(12) not null,
+// 4  userbirth date not null,
+// 5  cellphone varchar(10) not null,
+// 6  useremail varchar(45) not null,
+// 7  useraddress varchar(50) not null ,primary key(userid));
+
+//    public static final String TABLE_NAME = "customers";
+//    public static final String COLUMN_NAME_ID = "userid";
+//    public static final String COLUMN_NAME_USER = "user";         // 帳號
+//    public static final String COLUMN_NAME_PWD = "password";      // 密碼
+//    public static final String COLUMN_NAME_USERNAME = "username";
+//    public static final String COLUMN_NAME_BIRTH = "userbirth";
+//    public static final String COLUMN_NAME_PHONE = "cellphone";
+//    public static final String COLUMN_NAME_EMAIL = "useremail";
+//    public static final String COLUMN_NAME_ADDRESS = "useraddress";
