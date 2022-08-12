@@ -280,13 +280,7 @@ public class registerActivity extends AppCompatActivity {
 
         //-------------------以上是手機號碼、Email的規定格式------------------------------------------//
 
-        //--------------------以下是隱藏密碼-------------------------------------------------------//
 
-        String password = editText_registerPassword.getText().toString();
-        int password_length = editText_registerPassword.getText().toString().length();
-        String hide =
-        String hide_password =password.substring(0,3)+hide;
-        //---------------------以上是隱藏密碼-----------------------------------------------------//
 
         dbHelper = new mySQLiteContract.mySQLiteDbHelper(registerActivity.this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -364,11 +358,20 @@ public class registerActivity extends AppCompatActivity {
                     registerDialog.setContentView(R.layout.register_ok_dialog);
                     registerDialog.setCancelable(false);
 
+                    //--------------------以下是隱藏密碼-------------------------------------------------------//
+                    String password = editText_registerPassword.getText().toString();
+                    int password_length =password.length();
+                    String hide_password =password.substring(0,3);
+                    for(int i=0;i<(password_length-3);i++){
+                        hide_password +="*" ;
+                    }
+                    //---------------------以上是隱藏密碼-----------------------------------------------------//
+
                     TextView textViewRegisterDialog = (TextView) registerDialog.findViewById(R.id.textView_registerDialog);
                     textViewRegisterDialog.setText("");
                     textViewRegisterDialog.append("姓名 : "+editText_registerName.getText().toString()+"\n");
                     textViewRegisterDialog.append("帳號 : "+editText_registerAccount.getText().toString()+"\n");
-                    textViewRegisterDialog.append("密碼 : "+editText_registerPassword.getText().toString()+"\n");
+                    textViewRegisterDialog.append("密碼 : "+hide_password+"\n");
                     textViewRegisterDialog.append("生日 : "+textView_registerBirthday.getText().toString()+"\n");
                     textViewRegisterDialog.append("行動電話 : "+editText_registerPhone.getText().toString()+"\n");
                     textViewRegisterDialog.append("通訊地址 :\n"+cityName+cityArea+"\n"+editText_registerAddress.getText().toString()+"\n");

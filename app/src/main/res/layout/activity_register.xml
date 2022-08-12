@@ -205,7 +205,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="5dp"
             android:orientation="horizontal">
 
             <TextView
@@ -219,7 +218,7 @@
 
             <Spinner
                 android:id="@+id/spinner_city"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:entries="@array/taiwan_city"
@@ -229,7 +228,7 @@
 
             <Spinner
                 android:id="@+id/spinner_area"
-                android:layout_width="100dp"
+                android:layout_width="95dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:entries="@array/taipei"
