@@ -14,6 +14,9 @@
         android:theme="@style/Theme.LoginPractise"
         tools:targetApi="31">
         <activity
+            android:name=".CustomDialog"
+            android:exported="false" />
+        <activity
             android:name=".memberActivity"
             android:exported="false" />
         <activity

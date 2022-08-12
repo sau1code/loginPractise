@@ -422,6 +422,7 @@ public class registerActivity extends AppCompatActivity {
                     });
                     //---------------------以上是監聽Dialog中的Button----------------------------------------------------------//
                     registerDialog.show();
+                    registerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 }
 
             }
