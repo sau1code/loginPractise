@@ -1,17 +1,20 @@
 package com.example.loginpractise;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.Notification;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,6 +66,8 @@ public class registerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setTitle("註冊帳號");
+
+
         //---------------以下是日期Dialog選單----------------------------------------
         textViewBirthday = (TextView)findViewById(R.id.textView_register_birthday);
         buttonBirthday = (Button)findViewById(R.id.button_birthday);
@@ -91,13 +96,12 @@ public class registerActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        
         //------------------------以上是日期Dialog選單--------------------------------------------------------//
 
         //-----------------------------------以下是actionbar-----------------------------//
         ActionBar actBar = getSupportActionBar();
         actBar.setBackgroundDrawable(new ColorDrawable(0xFFF44336));
-
+        actBar.setDisplayHomeAsUpEnabled(true);
         //-----------------------------------以上是actionbar-----------------------------//
         
         button_registerOK = (Button)findViewById(R.id.button_registerOK) ;
@@ -404,7 +408,6 @@ public class registerActivity extends AppCompatActivity {
                                     editText_registerEmail.getText().toString()+"','"+
                                     cityName+cityArea+editText_registerAddress.getText().toString()+"');");
 
-
                             db.close();
                             dbHelper.close();
                             //----------------------------以上是把資料傳進資料庫---------------------------------------------------//
@@ -428,7 +431,15 @@ public class registerActivity extends AppCompatActivity {
             }
         });
         //-------------------------------------以上是OK按鍵的監聽----------------------------------------------------------------------------//
+    }
 
-
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
