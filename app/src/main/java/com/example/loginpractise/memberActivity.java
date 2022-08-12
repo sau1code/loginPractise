@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Picture;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,7 +32,8 @@ public class memberActivity extends AppCompatActivity {
 //      create ActionBar to return to front page
         ActionBar actBar = getSupportActionBar();
         actBar.setDisplayHomeAsUpEnabled(true);
-        actBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.night_sky,null));
+        Drawable imageBackground = getResources().getDrawable(R.drawable.night_sky, null);
+        actBar.setBackgroundDrawable(imageBackground);
 
 //      disable all EditText widgets
         editTextPassword = (EditText) findViewById(R.id.editText_member_password);
