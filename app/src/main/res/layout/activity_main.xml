@@ -133,12 +133,48 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textView_temp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="90dp"
-            android:text="TextView" />
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="SQLite : " />
+
+                <TextView
+                    android:id="@+id/textView__main_show1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="90dp"
+                    android:paddingVertical="10dp"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:text="編輯用 :" />
+
+                <TextView
+                    android:id="@+id/textView__main_show2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="90dp"
+                    android:paddingVertical="10dp"
+                    android:text="TextView" />
+            </LinearLayout>
+        </ScrollView>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
