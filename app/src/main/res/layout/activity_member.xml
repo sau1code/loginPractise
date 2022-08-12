@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <Button
-            android:id="@+id/button_delete"
+            android:id="@+id/button_member_delete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -49,7 +49,7 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/button_modify"
+            android:id="@+id/button_member_modify"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
@@ -93,6 +93,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -117,6 +118,7 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:minHeight="48dp"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -141,6 +143,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:minHeight="48dp"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -164,6 +167,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="date"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -187,6 +191,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="phone"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
         </LinearLayout>
 
@@ -212,6 +217,7 @@
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
                 android:minHeight="48dp"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -236,6 +242,7 @@
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:minHeight="48dp"
+                android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
     </LinearLayout>
