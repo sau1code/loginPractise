@@ -6,9 +6,12 @@
  + `rawQuery` : 能執行所有SQL語法
  > [class SQLiteDatabase - rawQuery 方法 原始文件參考](https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase#rawQuery(java.lang.String,%20java.lang.String[]))
 
->`Android`方法
-+ `日期Dialog`
+## Android方法
++ `日期Dialog`:
 >[Dialog 日期選單](https://ithelp.ithome.com.tw/articles/10251105)
+
++ `Dialog製作圓角`:
+> [Dialog 製作圓角](https://www.cfanz.cn/resource/detail/yoGogNzrrryKA)
 
 ## SQLite的SQL語法
 > 參考資料 : https://www.sqlite.org/datatype3.html
