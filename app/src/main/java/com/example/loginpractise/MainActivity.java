@@ -134,43 +134,16 @@ public class MainActivity extends AppCompatActivity {
         String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
         Cursor AllTable = SQLiteDb.rawQuery("select * from " + table + ";", null);
         StringBuilder sb = new StringBuilder();
-        AllTable.moveToFirst();
-        do{
-            sb.append("帳/密 : " + AllTable.getString(1) + " / " + AllTable.getString(2) + "\n");
-        } while(AllTable.moveToNext());
+        if (AllTable.getCount() > 0) {
+            AllTable.moveToFirst();
+            do {
+
+                sb.append("帳/密 : " + AllTable.getString(1) + " / " + AllTable.getString(2) + "\n");
+            } while (AllTable.moveToNext());
+        }
         AllTable.close();
         ((TextView)findViewById(R.id.textView__main_show1)).setText(sb);
     }
 
 }
 
-
-
-
-
-
-
-
-
-
-//    [refer to https://www.sqlite.org/datatype3.html]
-//    SQL 語法 : create table
-//    create table customers (
-// 0  userid varchar(6) not null,
-// 1  user varchar(6) not null,         // 帳號
-// 2  password varchar(25) not null ,   // 密碼
-// 3  username varchar(12) not null,
-// 4  userbirth date not null,
-// 5  cellphone varchar(10) not null,
-// 6  useremail varchar(45) not null,
-// 7  useraddress varchar(50) not null ,primary key(userid));
-
-//    public static final String TABLE_NAME = "customers";
-//    public static final String COLUMN_NAME_ID = "userid";
-//    public static final String COLUMN_NAME_USER = "user";         // 帳號
-//    public static final String COLUMN_NAME_PWD = "password";      // 密碼
-//    public static final String COLUMN_NAME_USERNAME = "username";
-//    public static final String COLUMN_NAME_BIRTH = "userbirth";
-//    public static final String COLUMN_NAME_PHONE = "cellphone";
-//    public static final String COLUMN_NAME_EMAIL = "useremail";
-//    public static final String COLUMN_NAME_ADDRESS = "useraddress";
