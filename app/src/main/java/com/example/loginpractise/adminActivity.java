@@ -173,7 +173,7 @@ public class adminActivity extends AppCompatActivity {
             }
             if (calendarBirthday.length() > 0) {
                 SQLSyntax.append((hasPrev)?" AND ":"");
-                SQLSyntax.append(birthSQL+" > '"+calendarBirthday+"'");
+                SQLSyntax.append(birthSQL+" < '"+calendarBirthday+"'");
                 hasPrev = true;
             }
             if (searchInput.length() > 0) {

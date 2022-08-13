@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +20,14 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonLogin;
     private EditText editTextAccount, editTextPassword;
-    private TextView textViewRegister;
+    private TextView textViewRegister, textViewMainSqlite, textViewMainShow2;
     private Map<String, String> adminMap, memberMap;
+    private ImageView imageViewAicon;
+    private mySQLiteContract.mySQLiteDbHelper SQLiteHelper;
+    private SQLiteDatabase SQLiteDb;;
+    private final String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+    private final String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
+    private final String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
         buttonLogin = (Button)findViewById(R.id.button_login);
         textViewRegister = (TextView)findViewById(R.id.textView_register);
+        textViewMainSqlite = (TextView)findViewById(R.id.textView_main_sqlite);
+        textViewMainShow2 = (TextView)findViewById(R.id.textView__main_show2);
+        textViewMainSqlite = (TextView)findViewById(R.id.textView_main_sqlite);
         editTextAccount = (EditText)findViewById(R.id.EditText_account);
         editTextPassword = (EditText)findViewById(R.id.EditText_password);
-        ((TextView)findViewById(R.id.textView__main_show2))
-                .setText("暫時-管理者帳號: admin1~3\n暫時-使用者帳號: member1~99\n\n(密碼同帳號)");
+        imageViewAicon = (ImageView)findViewById(R.id.imageView_xicon);
+        SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
+        SQLiteDb = SQLiteHelper.getWritableDatabase();;
+
+        textViewMainShow2.setText("暫時-管理者帳號: admin1~3\n暫時-使用者帳號: member1~99\n\n(密碼同帳號)");
+        textViewMainSqlite.append("     [ -連點這清空SQLite!- ]");
 
         // 暫時-管理者帳密 Map<帳號, 密碼>
         adminMap = new HashMap<>();
@@ -55,25 +69,24 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String account = editTextAccount.getText().toString();
-                String password = editTextPassword.getText().toString();
-
-                if (account.length() * password.length() == 0) {
+                String inputAccount = editTextAccount.getText().toString();
+                String inputPassword = editTextPassword.getText().toString();
+                if (inputAccount.length() * inputPassword.length() == 0) {
                     Toast.makeText(MainActivity.this, "請輸入完整帳號密碼", Toast.LENGTH_SHORT).show();
-                } else if (adminMap.get(account) != null && adminMap.get(account).equals(password)) {
+                } else if (adminMap.get(inputAccount) != null && adminMap.get(inputAccount).equals(inputPassword)) {
                     Toast.makeText(MainActivity.this, "管理員登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, adminActivity.class);
-                    intent.putExtra("name", account);
+                    intent.putExtra("name", inputAccount);
                     startActivity(intent);
-                } else if (memberMap.get(account) != null && memberMap.get(account).equals(password)) {
+                } else if (memberMap.get(inputAccount) != null && memberMap.get(inputAccount).equals(inputPassword)) {
                     Toast.makeText(MainActivity.this, "假-使用者登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
-                    intent.putExtra("name", account);
+                    intent.putExtra("name", inputAccount);
                     startActivity(intent);
-                } else if (password.equals(getPasswordFromSQLite(account))) {
+                } else if (inputPassword.equals(getPasswordFromSQLite(inputAccount))) {
                     Toast.makeText(MainActivity.this, "真-使用者登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
-                    intent.putExtra("name", account);
+                    intent.putExtra("name", inputAccount);
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "帳號或密碼錯誤", Toast.LENGTH_SHORT).show();
@@ -90,6 +103,28 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        textViewMainSqlite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ((System.currentTimeMillis() - exitTime) > 500) {
+                    exitTime = System.currentTimeMillis();
+                } else {
+                    int version = mySQLiteContract.mySQLiteDbHelper.DATABASE_VERSION;
+                    SQLiteHelper.onUpgrade(SQLiteDb, version,version);
+                    showAllAccountAndPasswordfromSQLite();
+                    Toast.makeText(MainActivity.this, "清空SQLite", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        imageViewAicon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
 
     }
 
@@ -113,11 +148,6 @@ public class MainActivity extends AppCompatActivity {
     // 用editText輸入的帳號至SQLite "撈密碼"
     public String getPasswordFromSQLite(String account) {
         String password = "";
-        mySQLiteContract.mySQLiteDbHelper SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
-        SQLiteDatabase SQLiteDb = SQLiteHelper.getWritableDatabase();
-        String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
-        String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
-        String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
         Cursor cursorPassword = SQLiteDb.rawQuery("SELECT "+pwdSQL+" FROM "+tableSQL+" WHERE "+userSQL+" = '"+account+"' ;", null);
         if (cursorPassword.getCount() > 0){
             cursorPassword.moveToFirst();
@@ -128,11 +158,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 登入畫面提示全部SQLite帳密
-    public void showAllAccountAndPasswordfromSQLite(){
-        mySQLiteContract.mySQLiteDbHelper SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(MainActivity.this);
-        SQLiteDatabase SQLiteDb = SQLiteHelper.getWritableDatabase();
-        String table = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
-        Cursor AllTable = SQLiteDb.rawQuery("select * from " + table + ";", null);
+    public void showAllAccountAndPasswordfromSQLite(){;
+        Cursor AllTable = SQLiteDb.rawQuery("select * from " + tableSQL + ";", null);
         StringBuilder sb = new StringBuilder();
         if (AllTable.getCount() > 0) {
             AllTable.moveToFirst();
