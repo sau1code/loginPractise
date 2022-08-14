@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         // 清空SQL字 監聽
         //--------------------------- (以下為外函式) --
         // 再按一次退出程序
-        // 回主畫面呼叫showAllAccountAndPasswordfromSQLite() 更新show1
+        // 回主畫面呼叫showAllAccountAndPasswordFromSQLite() 更新show1
         // 用editText輸入的帳號至SQLite "撈密碼"
         // 登入畫面提示全部SQLite帳密
         //---------------------------------------------
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
                     intent.putExtra("name", inputAccount);
                     startActivity(intent);
-                // (輸入密碼 等於 用輸入帳號去SQL取對應密碼)
+                // (輸入密碼 == 使用輸入帳號去SQL取區的對應密碼)
                 } else if (inputPassword.equals(getPasswordFromSQLite(inputAccount))) {
                     Toast.makeText(MainActivity.this, "真-使用者登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);

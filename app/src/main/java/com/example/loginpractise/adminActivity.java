@@ -72,7 +72,7 @@ public class adminActivity extends AppCompatActivity {
         // 生日icon 監聽
         //--------------------------- (以下為外函式) --
         // 上一頁鍵
-        // 回頁面呼叫adminSQLite();
+        // 回頁面呼叫madeShowFromSQL()
         // 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
         //---------------------------------------------
 
@@ -183,7 +183,7 @@ public class adminActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // 回頁面呼叫adminSQLite();
+    // 回頁面呼叫madeShowFromSQL();
     @Override
     protected void onStart() {
         super.onStart();
@@ -201,13 +201,13 @@ public class adminActivity extends AppCompatActivity {
             SQLSyntax.append(" WHERE ");
             // (如果有城市篩選 語法+ LIKE cityInput)
             if (checkBoxFlag & cityInput.length() > 0) {
-                SQLSyntax.append(addrSQL+" LIKE '"+ cityInput +"%'");
+                SQLSyntax.append(addrSQL+" LIKE '"+cityInput+"%'");
                 hasPrev = true;
             }
             // (如果有生日篩選 語法+ < 'birthdayInput')
             if (birthdayInput.length() > 0) {
                 SQLSyntax.append((hasPrev)?" AND ":"");
-                SQLSyntax.append(birthSQL+" < '"+ birthdayInput +"'");
+                SQLSyntax.append(birthSQL+" < '"+birthdayInput+"'");
                 hasPrev = true;
             }
             // (如果有搜尋篩選 語法+ LIKE '%searchInput%')
