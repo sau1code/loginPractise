@@ -89,6 +89,7 @@ public class adminActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F44336")));
         setTitle("管理員 : " + getIntent().getStringExtra("name"));
+        getWindow().setStatusBarColor(0xFFF44336);      // 最上面StatusBar橘底
         SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(adminActivity.this);
         SQLiteDb = SQLiteHelper.getWritableDatabase();
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));

@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
                     intent.putExtra("name", inputAccount);
                     startActivity(intent);
-                // (輸入密碼 == 使用輸入帳號去SQL取區的對應密碼)
+                // (輸入密碼 == 用輸入帳號去SQL取出對應的密碼)
                 } else if (inputPassword.equals(getPasswordFromSQLite(inputAccount))) {
                     Toast.makeText(MainActivity.this, "真-使用者登入", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(MainActivity.this, memberActivity.class);
