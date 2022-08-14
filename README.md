@@ -31,26 +31,26 @@
 > 以不同主要功能分項說明 : 建立何種元件與如何處理使用者與元件互動的結果
 
 + 會員註冊 :
- - layout_register.xml :
- - register_ok_dialog.xml :
- - registerActivity.java :
+  - layout_register.xml :
+  - register_ok_dialog.xml :
+  - registerActivity.java :
  
 + 會員登入 :
- - layout_main.xml :
- - MainActivity.java :
+  - layout_main.xml :
+  - MainActivity.java :
 
 + 會員資料檢視修改 : 
- - layout_member.xml : 
- - memberActivity.java : 
+  - layout_member.xml : 
+  - memberActivity.java : 
 
 + 管理者登入 : 
- - layout_admin.xml : 
- - adminActivity.java :
- - admin_card.xml :
- - RecyclerViewAdapter.java :
+  - layout_admin.xml : 
+  - adminActivity.java :
+  - admin_card.xml :
+  - RecyclerViewAdapter.java :
  
 + 初始化資料庫類別頁面 :
- - mySQLiteContract.java : 
+  - mySQLiteContract.java : 
 
 ## 結果
 
