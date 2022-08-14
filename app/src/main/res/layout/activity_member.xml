@@ -25,37 +25,51 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <Button
-            android:id="@+id/button_member_delete"
+            android:id="@+id/button_member_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="#C3756E"
-            android:text="刪除帳號"
-            android:textColor="#FFFCFC"
-            android:textSize="24sp" />
+            android:backgroundTint="#478A93"
+            android:text="送出修改"
+            android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/button_member_modify"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.5"
-            android:backgroundTint="#5F69A1"
-            android:text="修改"
-            android:textSize="24sp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_member_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:backgroundTint="#C3756E"
+                android:text="刪除帳號"
+                android:textColor="#FFFCFC"
+                android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/button_member_modify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#5F69A1"
+                android:text="修改資料"
+                android:textSize="24sp" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -156,9 +170,20 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.9"
+                android:layout_weight="0.2"
                 android:text="生日:"
                 android:textSize="20sp" />
+
+            <ImageButton
+                android:id="@+id/imageButton_member_birthday"
+                android:layout_width="50dp"
+                android:layout_height="55dp"
+                android:layout_weight="0.3"
+                android:backgroundTint="@color/white"
+                android:cropToPadding="false"
+                android:scaleType="centerInside"
+                app:srcCompat="@drawable/birsdayicon"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 
             <EditText
                 android:id="@+id/editText_member_birth"
@@ -169,6 +194,7 @@
                 android:inputType="date"
                 android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -245,5 +271,6 @@
                 android:textAlignment="center"
                 tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
