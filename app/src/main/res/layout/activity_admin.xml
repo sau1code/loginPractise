@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView_admin_ItemCount"
+            android:id="@+id/textView_admin_sum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -34,34 +34,46 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <CheckBox
-                android:id="@+id/checkBox_admin"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="24dp"
+                android:id="@+id/checkBox_admin_city"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="14dp"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <Spinner
                 android:id="@+id/spinner_admin_city"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="40dp"
                 android:entries="@array/taiwan_city"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textView_admin_birthday"
-                android:layout_width="160dp"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:gravity="center"
                 android:textSize="24dp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="4dp"
+                android:text="前"
+                android:textSize="12dp" />
+
             <ImageView
                 android:id="@+id/imageView_admin_birthday"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginBottom="3dp"
                 app:srcCompat="@drawable/birsdayicon" />
         </LinearLayout>
 

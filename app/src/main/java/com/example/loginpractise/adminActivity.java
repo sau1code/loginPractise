@@ -12,11 +12,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
@@ -34,105 +32,149 @@ import java.util.Map;
 
 public class adminActivity extends AppCompatActivity {
 
-    private String spinnerCityName = "", calendarBirthday = "", searchInput = "";
-    private TextView textViewAdminItemCount, textViewAdminBirthday;
-    private ImageView imageViewAdminBirthday;
-    private EditText editTextAdminSearch;
-    private CheckBox checkBoxAdmin;
-    private Boolean checkBoxflag = false;
+    private final String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+    private final String idSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ID;
+    private final String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
+    private final String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
+    private final String nameSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USERNAME;
+    private final String birthSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_BIRTH;
+    private final String phoneSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PHONE;
+    private final String emailSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL;
+    private final String addrSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ADDRESS;
+    private TextView textViewSum, textViewBirthday;
+    private ImageView imageViewBirthday;
+    private EditText editTextSearch;
+    private CheckBox checkBoxCity;
+    private Spinner spinnerCity;
+    private RecyclerView recyclerView;
+    private String cityInput, birthdayInput, searchInput;
+    private Boolean checkBoxFlag;
+    private mySQLiteContract.mySQLiteDbHelper SQLiteHelper;
     private SQLiteDatabase SQLiteDb;
     private RecyclerViewAdapter adapter;
-    private Map<String, String> memberMap;
     private List<Map<String, String>> mapList;
-    private mySQLiteContract.mySQLiteDbHelper SQLiteHelper;
-
+    private Map<String, String> memberMap;
+    private Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        // set ActionBar
+        //---------------------------------------------
+        // findView
+        // init set
+        //---------------------------------------------
+        // 搜尋輸入 監聽
+        // checkBoxCity選取 監聽 (仿spinner的致能旗標)
+        // spinnerCity選擇 監聽
+        // 日期Dialog 監聽
+        // 生日icon 監聽
+        //--------------------------- (以下為外函式) --
+        // 上一頁鍵
+        // 回頁面呼叫adminSQLite();
+        // 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
+        //---------------------------------------------
+
+        // findView
+        textViewSum = (TextView)findViewById(R.id.textView_admin_sum);
+        editTextSearch = (EditText)findViewById(R.id.editText_admin_search);
+        textViewBirthday = (TextView)findViewById(R.id.textView_admin_birthday);
+        imageViewBirthday = (ImageView)findViewById(R.id.imageView_admin_birthday);
+        spinnerCity = (Spinner)findViewById(R.id.spinner_admin_city);
+        checkBoxCity = (CheckBox)findViewById(R.id.checkBox_admin_city);
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerView_admin_show);
+
+        // init set
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F44336")));
         setTitle("管理員 : " + getIntent().getStringExtra("name"));
+        SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(adminActivity.this);
+        SQLiteDb = SQLiteHelper.getWritableDatabase();
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        calendar = Calendar.getInstance();   //日期的格式
+        cityInput = "";
+        birthdayInput = "";
+        searchInput = "";
+        checkBoxFlag = false;
 
-        // findViewById
-        textViewAdminBirthday = (TextView)findViewById(R.id.textView_admin_birthday);
-        textViewAdminItemCount = (TextView)findViewById(R.id.textView_admin_ItemCount);
-        imageViewAdminBirthday = (ImageView)findViewById(R.id.imageView_admin_birthday);
-        editTextAdminSearch = (EditText)findViewById(R.id.editText_admin_search);
-        checkBoxAdmin = (CheckBox)findViewById(R.id.checkBox_admin);
-
-        // 搜尋監聽
-        editTextAdminSearch.addTextChangedListener(new TextWatcher() {
+        // 搜尋輸入 監聽
+        editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                searchInput = editTextAdminSearch.getText().toString();
-                adminSQLite();
+                searchInput = editTextSearch.getText().toString();
+                madeShowFromSQL();
             }
             @Override
             public void afterTextChanged(Editable editable) {
             }
         });
 
-        checkBoxAdmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        // checkBoxCity選取 監聽 (仿spinner的致能旗標)
+        checkBoxCity.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                checkBoxflag = b;
-                adminSQLite();
+                checkBoxFlag = b;
+                madeShowFromSQL();
             }
         });
 
-        // City Spinner
-        Spinner spinner = (Spinner)findViewById(R.id.spinner_admin_city);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // spinnerCity選擇 監聽
+        spinnerCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                spinnerCityName = parent.getItemAtPosition(position).toString();
-                adminSQLite();
-                Log.d("sql", spinnerCityName);
+                cityInput = parent.getItemAtPosition(position).toString();
+                madeShowFromSQL();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
 
-        //------------------------ 以下是日期Dialog選單 ------------------------//
-        Calendar calendar = Calendar.getInstance(); //日期的格式
+        // 日期Dialog 監聽
         DatePickerDialog.OnDateSetListener datePicker = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,month);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.TAIWAN);
-                calendarBirthday = simpleDateFormat.format(calendar.getTime());
-                textViewAdminBirthday.setText(calendarBirthday);
-                adminSQLite();
-                Log.d("sql", calendarBirthday);
+                birthdayInput = simpleDateFormat.format(calendar.getTime());
+                textViewBirthday.setText(birthdayInput);
+                imageViewBirthday.setImageDrawable(getDrawable(R.drawable.xicon));
+                madeShowFromSQL();
             }
         };
 
-        imageViewAdminBirthday.setOnClickListener(new View.OnClickListener() {
+        // 生日icon 監聽
+        imageViewBirthday.setOnClickListener(new View.OnClickListener() {
+            Boolean flag = true;    // 每次點擊切換功能
             @Override
             public void onClick(View v) {
-                DatePickerDialog dialog = new DatePickerDialog(adminActivity.this,
-                        datePicker,calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH)
-                );
-                dialog.show();
+                if (flag) {
+                    DatePickerDialog dialog = new DatePickerDialog(adminActivity.this,
+                            datePicker, calendar.get(Calendar.YEAR),
+                            calendar.get(Calendar.MONTH),
+                            calendar.get(Calendar.DAY_OF_MONTH)
+                    );
+                    dialog.show();
+                    flag = false;
+                } else {
+                    textViewBirthday.setText("");
+                    imageViewBirthday.setImageDrawable(getDrawable(R.drawable.birsdayicon));
+                    birthdayInput = "";
+                    madeShowFromSQL();
+                    flag = true;
+                }
             }
         });
-        //------------------------ 以上是日期Dialog選單 ------------------------//
 
     }
 
-    // 上一頁箭頭的監聽
+    // 上一頁鍵
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -141,41 +183,34 @@ public class adminActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // 每次進頁面呼叫 adminSQLite();
+    // 回頁面呼叫adminSQLite();
     @Override
     protected void onStart() {
         super.onStart();
-        adminSQLite();
+        madeShowFromSQL();
     }
 
-    // 取SQLite中值製作List傳進Adapter
-    public void adminSQLite() {
-        String[] mapKey = new String[] { "userid", "user", "password", "username", "userbirth", "cellphone", "useremail", "useraddress" };
-        SQLiteHelper = new mySQLiteContract.mySQLiteDbHelper(adminActivity.this);
-        SQLiteDb = SQLiteHelper.getWritableDatabase();
-        String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
-        String idSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ID;
-        String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
-        String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;
-        String nameSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USERNAME;
-        String birthSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_BIRTH;
-        String phoneSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PHONE;
-        String emailSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL;
-        String addrSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ADDRESS;
+    // 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
+    public void madeShowFromSQL() {
+        // 正常情況下的SQL語法
         StringBuilder SQLSyntax = new StringBuilder("SELECT * FROM "+tableSQL);
         Boolean hasPrev = false;
 
-        if (calendarBirthday.length() + searchInput.length() > 0 | (checkBoxflag & spinnerCityName.length() > 0)) {
+        // (當有任意篩選條件時 語法+ WHERE)
+        if (birthdayInput.length() + searchInput.length() > 0 | checkBoxFlag) {
             SQLSyntax.append(" WHERE ");
-            if (checkBoxflag & spinnerCityName.length() > 0) {
-                SQLSyntax.append(addrSQL+" LIKE '"+spinnerCityName+"%'");
+            // (如果有城市篩選 語法+ LIKE cityInput)
+            if (checkBoxFlag & cityInput.length() > 0) {
+                SQLSyntax.append(addrSQL+" LIKE '"+ cityInput +"%'");
                 hasPrev = true;
             }
-            if (calendarBirthday.length() > 0) {
+            // (如果有生日篩選 語法+ < 'birthdayInput')
+            if (birthdayInput.length() > 0) {
                 SQLSyntax.append((hasPrev)?" AND ":"");
-                SQLSyntax.append(birthSQL+" < '"+calendarBirthday+"'");
+                SQLSyntax.append(birthSQL+" < '"+ birthdayInput +"'");
                 hasPrev = true;
             }
+            // (如果有搜尋篩選 語法+ LIKE '%searchInput%')
             if (searchInput.length() > 0) {
                 SQLSyntax.append((hasPrev)?" AND ":"");
                 SQLSyntax.append("("+idSQL+" LIKE '%"+searchInput+"%' OR "+userSQL+" LIKE '%"+searchInput+"%' OR "+pwdSQL+" LIKE '%"+searchInput+"%' OR "+nameSQL+" LIKE '%"+searchInput+"%' OR "+birthSQL+" LIKE '%"+searchInput+"%' OR "+phoneSQL+" LIKE '%"+searchInput+"%' OR "+emailSQL+" LIKE '%"+searchInput+"%' OR "+addrSQL+" LIKE '%"+searchInput+"%')");
@@ -184,9 +219,11 @@ public class adminActivity extends AppCompatActivity {
         SQLSyntax.append(";");
         Cursor cursorTable = SQLiteDb.rawQuery(SQLSyntax.toString(), null);
 
+        // 依上面篩選所生成的Cursor 來製作新的List
         mapList = new ArrayList<>();
         if (cursorTable.getCount() > 0) {
             cursorTable.moveToFirst();
+            String[] mapKey = new String[] { "userid", "user", "password", "username", "userbirth", "cellphone", "useremail", "useraddress" };
             do {
                 memberMap = new HashMap<>();
                 for (int i = 0; i < cursorTable.getColumnCount(); i++) {
@@ -197,11 +234,10 @@ public class adminActivity extends AppCompatActivity {
         }
         cursorTable.close();
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_admin_show);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        // 將做好的List放進Adapter傳進recyclerView
         adapter = new RecyclerViewAdapter(mapList);
         recyclerView.setAdapter(adapter);
-        textViewAdminItemCount.setText("共:" + adapter.getItemCount() + "筆");
+        textViewSum.setText("共:" + adapter.getItemCount() + "筆");
     }
 
 }

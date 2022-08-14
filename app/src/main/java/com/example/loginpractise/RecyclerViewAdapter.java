@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,14 +16,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // Adapter建構式傳進來的資料用List接
     private List<Map<String, String>> mapList;
 
-    // 用Holder類別 包住自製View (implements Listener 就有監聽方法可以用)
+    // 用Holder類別 包住自製View (實作Listener 就有監聽方法可以用)
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView textViewCardName, textViewCardInfo;
+        public TextView textViewHead, textViewInfo;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewCardName = (TextView)itemView.findViewById(R.id.textView_card_name);
-            textViewCardInfo = (TextView)itemView.findViewById(R.id.textView_card_info);
-            itemView.setOnClickListener(this);  // ?
+            textViewHead = (TextView)itemView.findViewById(R.id.textView_card_head);
+            textViewInfo = (TextView)itemView.findViewById(R.id.textView_card_info);
+            itemView.setOnClickListener(this);
         }
         // 卡片監聽
         @Override
@@ -41,7 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.mapList = mapList;
     }
 
-    // Adapter類的super()會叫這方法return new ViewHolder(v); 引數(v)的內容要自己設定
+    // Adapter類的super()會叫這方法來new ViewHolder(v); 引數(v)的內容要自己設定
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return viewHolder;
     }
 
-    // 有點像LOOP 將每張Card執行一次 可在這將List內容附給每張Card上的View
+    // 有點像LOOP 每張Card執行一次 可在這將List內容附給每張Card上的元件
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String[] mapKey = new String[] { "userid", "user", "password", "username", "userbirth", "cellphone", "useremail", "useraddress" };
@@ -60,8 +58,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         for (int i = 0; i < mapKey.length; i++) {
             stringBuilder.append(mapKeyChinese[i] + memberMap.get(mapKey[i]) + "\n");
         }
-        holder.textViewCardName.setText(memberMap.get("user"));
-        holder.textViewCardInfo.setText(stringBuilder.toString());
+        holder.textViewHead.setText(memberMap.get("user"));
+        holder.textViewInfo.setText(stringBuilder.toString());
     }
 
     // 返回Card數量
