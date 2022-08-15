@@ -172,3 +172,26 @@ editTextAccount.addTextChangedListener(new TextWatcher() {
     public void afterTextChanged(Editable editable) {}
 });
 ```
++ `setOnTouchListener`:<br>
+> 可監聽元件上按下、放開、滑動變化<br>
+> 利用按下與放開做出按住的效果 (例: 登入畫面的顯示密碼)<br>
+> 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
+```
+// 顯示密碼圖 監聽
+imageViewEyes.setOnTouchListener(new View.OnTouchListener() {
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                imageViewEyes.setSelected(true);
+                editTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                break;
+            case MotionEvent.ACTION_UP:
+                imageViewEyes.setSelected(false);
+                editTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                break;
+        }
+        return true;
+    }
+});
+```
