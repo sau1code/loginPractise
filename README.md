@@ -82,7 +82,14 @@
 
 + 會員資料檢視修改 : 
   - layout_member.xml : 
-  - memberActivity.java : 
+    - textview-sum: 顯示有幾筆搜尋結果
+    - edittext-search: 關鍵字搜尋
+    - spinner-city: 選擇城市篩選
+    - checkbox-city: 是否啟用城市篩選
+    - imageview-birthday: 生日範圍篩選
+    - recyclerview-show: 列出所有搜尋結果
+  - memberActivity.java :
+    - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
 
 + 管理者登入 : 
   - layout_admin.xml : 
