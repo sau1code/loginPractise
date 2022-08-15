@@ -32,25 +32,41 @@
 
 + 會員註冊 :
   - layout_register.xml :
-      - 建立Linear Layout並幫Layout製作圓角
-      - `帳號`
-        建立editText-Name
-      - `密碼`
-        建立editText-Password
-      - `重新輸入密碼`
-        建立editText-Password
-      - `姓名`
-        建立editText-Name
-      - `生日`
-        建立一個TextView並在registerActivity使用日期Dialog回傳字串(格式為xxxx/xx/xx)
-      - `手機號碼`
-        建立editText-Phone
-      - `通訊地址`
-        建立editText-Multiple
-      - `Email`
-        建立editText-Email
+      - 建立`Linear Layout`並幫Layout製作圓角<br>
+      - 帳號<br>
+        建立`editText-Name`
+      - 密碼<br>
+        建立`editText-Password`
+      - 重新輸入密碼<br>
+        建立`editText-Password`
+      - 姓名<br>
+        建立`editText-Name`
+      - 生日<br>
+        建立一個`TextView`並在`registerActivity`使用日期Dialog回傳字串(格式為xxxx/xx/xx)
+      - 手機號碼<br>
+        建立`editText-Phone`
+      - 通訊地址<br>
+        建立`spinner`讓使用者選擇居住縣市、區域<br>
+        建立`editText-Multiple`讓使用者輸入地址<br>
+      - Email<br>
+        建立`editText-Email`
+      - OK Button <br>
+        建立`OK Button`，按下之後判斷:<br>
+        1. 是否所有資料均輸入完畢<br>
+        2. 密碼是否為6-12位<br>
+        3. 密碼和重新輸入密碼是相同的<br> 
+        4. 手機號碼的格式是否為09開頭並且為10碼數字<br>
+        5. Email格式是否為至少一位英文數字或符號 + '@' + 至少一位英文 + '.' + 至少一位英文<br>
+        6. 使用者帳號、手機、Email是否已經註冊過<br>
   - register_ok_dialog.xml :
+    - `TextView`
+      用來顯示使用者輸入的所有資料
+    - `OK Button`
+      按下OK Button送出資料至`SQLite`，註冊成功<br>
+    - `Cancel Button`
+      讓`register_ok_dialog`消失<br>
   - registerActivity.java :
+    -監聽所有元件
  
 + 會員登入 :
   - layout_main.xml :
