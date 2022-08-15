@@ -70,11 +70,16 @@
  
 + 會員登入 :
   - layout_main.xml :
-    - edittext-帳號
-    - edittext-密碼
-    - button-登入
-    - button-註冊
+    - edittext-account
+    - edittext-password
+    - button-login
+      - 根據不同帳號通往(member / admin)
+    - button-register
   - MainActivity.java :
+    - `getPasswordFromSQLite`:
+      - 用輸入帳號當引數去SQL取出對應的密碼並return
+    
+      
 
 + 會員資料檢視修改 : 
   - layout_member.xml : 
