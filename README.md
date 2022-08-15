@@ -77,10 +77,10 @@
     | button-login | 根據不同帳號通往 member / admin 頁面|
     | button-register | 通往register頁面 |
   - MainActivity.java :
-  - | 元件 | 功能 |
-    | - | - |
-    | getPasswordFromSQLite | 用輸入帳號當引數去SQL取出對應的密碼並return |
-    | madeShowFromSQL | Show出所有會員帳/密給測試人員參考|
+    - | 元件 | 功能 |
+    - | - | - |
+    - | getPasswordFromSQLite | 用輸入帳號當引數去SQL取出對應的密碼並return |
+    - | madeShowFromSQL | Show出所有會員帳/密給測試人員參考|
     
       
 
