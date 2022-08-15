@@ -150,6 +150,7 @@ if (cursor.moveToFirst())
 
 ### 幾種不同的監聽方法
 <details>
+<code>
 + `addTextChangedListener`: <br>
 > 可監聽Edittext的輸入前、中、後不同時期的即時變化<br>
 > 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
@@ -173,6 +174,7 @@ editTextAccount.addTextChangedListener(new TextWatcher() {
     public void afterTextChanged(Editable editable) {}
 });
 ```
+</code>
 </details>
 + `<summary>setOnTouchListener`:<summary><br>
 > 可監聽元件上按下、放開、滑動變化<br>
