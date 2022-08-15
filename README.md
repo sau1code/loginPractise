@@ -32,7 +32,7 @@
 
 + 會員註冊 :
   - layout_register.xml :
-      - 建立Linear Layout ， 將Layout的背景改成圓角
+      - 建立Linear Layout並幫Layout製作圓角
       - `帳號`
         建立editText-Name
       - `密碼`
@@ -42,7 +42,7 @@
       - `姓名`
         建立editText-Name
       - `生日`
-        建立一個TextView，並在主程式使用日期Dialog回傳字串(格式為xxxx/xx/xx)
+        建立一個TextView並在registerActivity使用日期Dialog回傳字串(格式為xxxx/xx/xx)
       - `手機號碼`
         建立editText-Phone
       - `通訊地址`
