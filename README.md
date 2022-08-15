@@ -32,6 +32,22 @@
 
 + 會員註冊 :
   - layout_register.xml :
+      - `帳號`
+        建立editText-Name
+      - `密碼`
+        建立editText-Password
+      - `重新輸入密碼`
+        建立editText-Password
+      - `姓名`
+        建立editText-Name
+      - `生日`
+        建立一個TextView，並在主程式使用日期Dialog回傳字串(格式為xxxx/xx/xx)
+      - `手機號碼`
+        建立editText-Phone
+      - `通訊地址`
+        建立editText-Multiple
+      - `Email`
+        建立editText-Email
   - register_ok_dialog.xml :
   - registerActivity.java :
  
