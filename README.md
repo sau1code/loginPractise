@@ -78,22 +78,21 @@
     - `getPasswordFromSQLite`: 用輸入帳號當引數去SQL取出對應的密碼
     - `madeShowFromSQL`: Show出所有會員帳/密給測試人員參考
     
-      
-
 + 會員資料檢視修改 : 
   - layout_member.xml : 
+  - memberActivity.java :
+   
++ 管理者登入 : 
+  - layout_admin.xml : 
     - textview-sum: 顯示有幾筆搜尋結果
     - edittext-search: 關鍵字搜尋
     - spinner-city: 選擇城市篩選
     - checkbox-city: 是否啟用城市篩選
     - imageview-birthday: 生日範圍篩選
     - recyclerview-show: 列出所有搜尋結果
-  - memberActivity.java :
+  - adminActivity.java :
     - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
 
-+ 管理者登入 : 
-  - layout_admin.xml : 
-  - adminActivity.java :
   - admin_card.xml :
   - RecyclerViewAdapter.java :
  
