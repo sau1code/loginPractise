@@ -194,6 +194,3 @@ imageViewEyes.setOnTouchListener(new View.OnTouchListener() {
     }
 });
 ```
-+ `setOnTouchListener`:<br>
-> 可監聽元件上按下、放開、滑動變化<br>
-> 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
