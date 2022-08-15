@@ -149,7 +149,8 @@ if (cursor.moveToFirst())
 ```
 
 ### 幾種不同的監聽方法
-+ `addTextChangedListener`:<br>
+<details>
+<summary>+ `addTextChangedListener`:</summary>
 > 可監聽Edittext的輸入前、中、後不同時期的即時變化<br>
 > 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
 ```
@@ -172,9 +173,9 @@ editTextAccount.addTextChangedListener(new TextWatcher() {
     public void afterTextChanged(Editable editable) {}
 });
 ```
+</details>
 + `setOnTouchListener`:<br>
 > 可監聽元件上按下、放開、滑動變化<br>
-> <font size="3">利用按下與放開做出按住的效果 (例: 登入畫面的顯示密碼)</font><br>
 > 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
 ```
 // 顯示密碼圖 監聽
