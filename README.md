@@ -11,9 +11,9 @@
 
 ## 背景
 
-由於專題想用 Android 做購物商城App，一定會用到會員註冊，管理者登入和資料庫連線儲存資料的功能，因為App資料怎麼存到SQLite還是個謎團，很怕期末最後開天窗，所以提前先測試會員資料如何儲存至資料庫，以及如何根據App需求對資料庫進行更新刪除插入資料等功能。
+由於專題想用 Android 做購物商城App，一定會用到會員註冊，管理者登入和資料庫連線儲存資料的功能，因為App資料怎麼存到SQLite還是個謎團，很怕期末最後開天窗，所以提前先測試會員資料如何儲存至資料庫，以及如何根據App需求，針對資料庫進行更新刪除插入資料等功能。
 
-專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題，故需要寫一個小專案測試合作寫程式會出現什麼問題。
+專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題，故需要寫一個小專案，先測試合作寫程式會出現什麼狀況。
 
 ## 目的 
 1. 建立會員註冊，登入和修改會員資料的功能。
@@ -81,8 +81,81 @@
     
 + 會員資料檢視修改 : 
   - layout_member.xml : 
+    - `textView-member-tempshow` : 顯示會員帳號名稱
+    - `LinearLayout` : 會員資料顯示/輸入框進行排版。
+      + `textView` : 顯示資料名稱。
+      + `editText` : 提供會員資料顯示/輸入框。
+    - `LinearLayout` : 刪除帳號，修改會員資料和送出修改資料的`button`進行排版。
   - memberActivity.java :
-   
+    * 設定 memberActivity 的 `Action Bar` :
+      + `onCreate`
+       > * `setTitle`: 設定Activity標頭為會員資料檢視頁面。
+       > * `actBar.setDisplayHomeAsUpEnabled` : 顯示返回前一頁的`menu`元件。
+       > * `actBar.setBackgroundDrawable` : 設定Action Bar的背景圖片。
+      
+      + `onOptionsItemSelected`
+       >監聽`menu`元件，當使用者按下返回前一頁的`menu`元件的時候，回到前一個 Activity。
+         
+     * 接收從 `MainActivity` 傳來的`Intent`:
+       > 從`Intent`取出會員帳號字串，利用`setText`讓`textView`元件顯示登入的會員帳號名稱。
+         
+     * 設定/接收`editText`元件文字 & 連接`SQLite`資料庫，以取得/修改會員資料:
+       >  * `editText.setEnabled(false)` : 設定editText為使用者不可編輯，只顯示文字的狀態。
+       >  * 資料庫連線:<br>
+       >  1. `mySQLiteContract.mySQLiteDbHelper`類別<br>
+       >  -連接SQLite資料庫，無建立資料庫就會自動建立資料庫和資料表，如已存在資料庫，就會直接使用已存在的資料庫:<br>
+       >    `mySQLiteContract.mySQLiteDbHelper dbHelper`<br>
+       >    `= new mySQLiteContract.mySQLiteDbHelper(memberActivity.this);`<br>
+       >    
+       >  2. `mySQLiteContract.mySQLiteEntry`類別 <br>
+       >  -定義資料表名稱和欄位名稱避免打錯欄位或資料表名稱而產生的SQL語法錯誤:
+       >  
+       >      例如 : 
+       >      `mySQLiteContract.mySQLiteEntry.TABLE_NAME` 為資料表名稱
+       >      `mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL` 為會員email資料欄位名稱      
+       >  
+       >  3. 資料庫設定為可寫入資料的狀態  
+       >    `SQLiteDatabase db = dbHelper.getWritableDatabase();`
+       >  4. `SQLiteDatabase`類別即提供可直接執行SQL語法的方法:
+       >     * `execSQL(String SQL_command)` : 執行無傳回值的`SQL`語法(`CREATE`, `INSERT`, `UPDATE`, `DELETE`語法)。
+       >     * `rawQuery(String SQL_command,null)` : 執行有傳回值的`SQL`語法(`SELECT`語法)，傳回`Cursor`物件。
+       >     
+       >  5. `Cursor`類別提供取出搜尋結果資料的方法 :
+       >     * `getCount()` : return int，傳回有幾列搜尋結果。
+       >     * `getColumnCount()` : return int，傳回搜尋結果有幾個欄位。
+       >     
+       >     (1) 控制 cursor 指向列數 <br>
+       >     * `moveToFirst()` : return boolean，true 代表將cursor移到第一個搜尋結果，false代表沒有搜尋結果。
+       >     * `moveToNext()` :  return boolean，true 代表將cursor移到下一個搜尋結果，false代表沒有下一個搜尋結果。
+       >     
+       >     (2) 取出此列的指定欄位資料 <br>
+       >     * `getColumnIndex(String columnName)` : return int，傳回搜尋結果欄位對應到哪個index。
+       >     * `getColumnName(int columnIndex)` : return String，傳回index對應到哪個搜尋結果欄位。
+       >     * `getString(int columnIndex)` : return String，傳回指定index欄位的字串資料。
+       >     
+       >  6. `close()`結束資料庫連線:<br>
+       >  注意!! `mySQLiteContract.mySQLiteDbHelper`, `SQLiteDatabase`和 `Cursor`物件都需要`close()`
+       >  以避免佔用太多資源。
+       >  
+       > 會員資料顯示:
+       > 
+       >  * `rawQuery(String SELECT_SQL_command,null)` 資料庫搜尋取得會員資料 <br>
+       >     (SELECT SQL語法設定where條件為user='使用者帳號')
+       >  
+       >     &rarr; `EdiText.setText` 設定`editText`元件文字
+       >     
+       >  當使用者按下會員帳號刪除Button :
+       >     
+       >  * `execSQL(String DELETE_SQL_command)` : 刪除會員帳號。<br>
+       >  (DELETE SQL語法設定where條件為user='使用者帳號')
+       >  <br>
+       >  當使用者按下修改會員資料Button :
+       >  
+       >  * `EditText.getText()`取得使用者輸入到`editText`元件的文字 
+       >  
+       >     &rarr; `execSQL(String UPDATE_SQL_command)` 修改會員資料<br>
+       >     (UPDATE SQL語法設定where條件為user='使用者帳號')
+
 + 管理者登入 : 
   - layout_admin.xml : 
     - textview-sum: 顯示有幾筆搜尋結果
