@@ -32,6 +32,7 @@
 
 + 會員註冊 :
   - layout_register.xml :
+      - 建立Linear Layout ， 將Layout的背景改成圓角
       - `帳號`
         建立editText-Name
       - `密碼`
