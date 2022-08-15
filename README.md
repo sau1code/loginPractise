@@ -71,11 +71,11 @@
 + 會員登入 :
   - layout_main.xml :
     | 元件 | 功能 |
-    | --- | --- |
-    | - edittext-account| |
-    | - edittext-password | |
-    | - button-login | 根據不同帳號通往(member / admin) |
-    | - button-register | |
+    | - | - |
+    | edittext-account| |
+    | edittext-password | |
+    | button-login | 根據不同帳號通往(member / admin) |
+    | button-register | |
   - MainActivity.java :
     - `getPasswordFromSQLite`:
       用輸入帳號當引數去SQL取出對應的密碼並return
