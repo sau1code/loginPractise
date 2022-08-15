@@ -147,3 +147,27 @@ if (cursor.moveToFirst())
     }while (cursor.moveToNext());
 }
 ```
+
+### 幾種不同的監聽
+> ###### addTextChangedListener 可監聽Edittext的輸入前、中、後不同時期的即時變化<br>
+> 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
+```
+// 帳號輸入 監聽 (當改變時)
+editTextAccount.addTextChangedListener(new TextWatcher() {
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        inputAccount = editTextAccount.getText().toString();
+        if (inputAccount.length() * inputPassword.length() == 0) {
+            buttonLogin.setBackgroundColor(0xFFEEEEEE);
+            buttonLogin.setTextColor(0xFFAAAAAA);
+        } else {
+            buttonLogin.setBackgroundColor(0xFFF44336);
+            buttonLogin.setTextColor(0xFFFFFFFF);
+        }
+    }
+    @Override
+    public void afterTextChanged(Editable editable) {}
+});
+```
