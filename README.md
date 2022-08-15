@@ -1,13 +1,13 @@
 # Project loginPractise 說明
 
 >說明大綱 :
->1. [背景](https://github.com/sau1code/loginPractise/edit/master/README.md#%E8%83%8C%E6%99%AF)
->2. [目的](https://github.com/sau1code/loginPractise/edit/master/README.md#%E7%9B%AE%E7%9A%84)
->3. [材料](https://github.com/sau1code/loginPractise/edit/master/README.md#%E6%9D%90%E6%96%99)
->4. [方法](https://github.com/sau1code/loginPractise/edit/master/README.md#%E6%96%B9%E6%B3%95)
->5. [結果](https://github.com/sau1code/loginPractise/edit/master/README.md#%E7%B5%90%E6%9E%9C)
->6. [討論](https://github.com/sau1code/loginPractise/edit/master/README.md#%E8%A8%8E%E8%AB%96)
->7. [補充資料](https://github.com/sau1code/loginPractise/edit/master/README.md#%E8%A3%9C%E5%85%85%E8%B3%87%E6%96%99)
+>1. [背景](https://github.com/sau1code/loginPractise#%E8%83%8C%E6%99%AF)
+>2. [目的](https://github.com/sau1code/loginPractise#%E7%9B%AE%E7%9A%84)
+>3. [材料](https://github.com/sau1code/loginPractise#%E6%9D%90%E6%96%99)
+>4. [方法](https://github.com/sau1code/loginPractise#%E6%96%B9%E6%B3%95)
+>5. [結果](https://github.com/sau1code/loginPractise#%E7%B5%90%E6%9E%9C)
+>6. [討論](https://github.com/sau1code/loginPractise#%E8%A8%8E%E8%AB%96)
+>7. [補充資料](https://github.com/sau1code/loginPractise#%E8%A3%9C%E5%85%85%E8%B3%87%E6%96%99)
 
 ## 背景
 
