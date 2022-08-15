@@ -24,8 +24,9 @@
 ## 材料
 
 + 平台 : Android 
+  - Minimum SDK : API 26 Android 8.0
 + 程式語言 : Java
-+ 資料庫 : SQLite
++ 資料庫 : SQLite 3.18.2
 
 ## 方法 
 > 以不同主要功能分項說明 : 建立何種元件與如何處理使用者與元件互動的結果
