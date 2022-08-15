@@ -174,7 +174,7 @@ editTextAccount.addTextChangedListener(new TextWatcher() {
 ```
 + `setOnTouchListener`:<br>
 > 可監聽元件上按下、放開、滑動變化<br>
-> <small>利用按下與放開做出按住的效果 (例: 登入畫面的顯示密碼)<small><br>
+> <front size="3">利用按下與放開做出按住的效果 (例: 登入畫面的顯示密碼)<front><br>
 > 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
 ```
 // 顯示密碼圖 監聽
