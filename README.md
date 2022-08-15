@@ -70,6 +70,10 @@
  
 + 會員登入 :
   - layout_main.xml :
+    - edittext-帳號
+    - edittext-密碼
+    - button-登入
+    - button-註冊
   - MainActivity.java :
 
 + 會員資料檢視修改 : 
