@@ -149,7 +149,7 @@ if (cursor.moveToFirst())
 ```
 
 ### 幾種不同的監聽方法
-+ addTextChangedListener<br>
++ `addTextChangedListener`:<br>
 > 可監聽Edittext的輸入前、中、後不同時期的即時變化<br>
 > 參考資料 : https://www.runoob.com/w3cnote/android-tutorial-listener-edittext-change.html
 ```
