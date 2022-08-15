@@ -71,7 +71,7 @@
 + 會員登入 :
   - layout_main.xml :
     - edittext-accoun: 輸入帳號
-    - dittext-password: 輸入密碼
+    - edittext-password: 輸入密碼
     - button-login: 根據不同帳號通往 member/admin 頁面
     - button-register: 通往register頁面
   - MainActivity.java :
