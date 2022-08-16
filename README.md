@@ -137,22 +137,49 @@
        >  注意!! `mySQLiteContract.mySQLiteDbHelper`, `SQLiteDatabase`和 `Cursor`物件都需要`close()`
        >  以避免佔用太多資源。
        >  
-       > 會員資料顯示:
+       >  `onCreate`Activity進行會員資料顯示:
        > 
        >  * `rawQuery(String SELECT_SQL_command,null)` 資料庫搜尋取得會員資料 <br>
        >     (SELECT SQL語法設定where條件為user='使用者帳號')
        >  
        >     &rarr; `EdiText.setText` 設定`editText`元件文字
        >     
-       >  當使用者按下會員帳號刪除Button :
+       >  `setOnClickListener`監聽刪除帳號Button :
+       >  當使用者按下刪除帳號Button時
        >     
        >  * `execSQL(String DELETE_SQL_command)` : 刪除會員帳號。<br>
        >  (DELETE SQL語法設定where條件為user='使用者帳號')
        >  <br>
-       >  當使用者按下修改會員資料Button :
+       >  
+       >   `setOnClickListener`監聽修改會員資料Button :
+       >  當使用者按下修改會員資料Button時
        >  
        >  * `EditText.getText()`取得使用者輸入到`editText`元件的文字 
-       >  
+       >
+       >     &rarr;  `isEmpty()` : 確認使用者是否完整輸入所有會員資料
+       >
+       >     &rarr; `matches(passwordformat)` , `matches(phoneformat)` , `matches(emailformat)`:
+       >
+       >     確認使用者是否輸入6-12位數的密碼 , 完整的手機電話(ex: 0912345678, 0912-345-678) , 完整的email(abc@gmail.com)
+       >     ```
+       >        //To check the format of the password , phone number and email,
+       >         //set regular expression to match desirable input
+       >         String passwordformat = "^.{6,12}$";
+       >         String phoneformat = "^09\\d{2}-?\\d{3}-?\\d{3}$";
+       >         String emailformat = "^.+@\\w+\\..*$";
+       >     ```
+       >
+       >     &rarr; `rawQuery(String SELECT_SQL_command,null)` return 資料庫搜尋結果(Cursor 物件)
+       >
+       >     (分別SELECT SQL語法設定where條件為 useremail='會員輸入的email' , cellphone='會員輸入的手機電話')
+       >
+       >     &rarr; `Cursor.moveToFirst()` Cursor 物件指到搜尋結果的第一列資料
+       >
+       >     &rarr; `Cursor.getString(1)` 取出會員帳號名稱放到`userCheck`字串變數
+       >
+       >     &rarr; `cursor.getCount()>0 && userCheck.equals(user)==false` : 有一筆以上的搜尋結果且會員帳號名稱不是本人，
+       >     則無法修改手機電話或email，否則確認行動電話和email與其他會員不重複，而可修改會員本人資料。     
+       >
        >     &rarr; `execSQL(String UPDATE_SQL_command)` 修改會員資料<br>
        >     (UPDATE SQL語法設定where條件為user='使用者帳號')
 
