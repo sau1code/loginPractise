@@ -67,7 +67,20 @@
     - `Cancel Button`
       讓`register_ok_dialog`消失<br>
   - registerActivity.java :
-    -監聽所有元件
+    * 日曆
+      - `new DatePickerDialog.OnDateSetListener`:建立一個日曆Dialog
+      - `Calendar calendar = Calendar.getInstance();` : Calendar.getInstance()方法獲得一個calendar型態
+      - 可以用`Calendar.set(int calndr_field, int new_val)`方法修改其年、月、日、時、分、秒等值，set有兩個參數:<br/>
+         1.calndr_field：這是“日曆”類型，是指要更改的日曆字段。<br/>
+         2.new_val：這是指要替換的新值。<br/>
+         [參考資料](https://vimsky.com/zh-tw/examples/usage/calendar-set-method-in-java-with-examples.html)
+      - `SimpleDateFormat類別` : 定義日期格式、時區   
+         [參考資料](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/485945/)
+         
+    * 監聽`buttonBirthday`
+      - 使用calendar.get()方法取得年/月/日
+         
+        
  
 + 會員登入 :
   - layout_main.xml :
