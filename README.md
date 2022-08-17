@@ -3,7 +3,7 @@
 >說明大綱 :
 >1. [背景](https://github.com/sau1code/loginPractise#%E8%83%8C%E6%99%AF)
 >2. [目的](https://github.com/sau1code/loginPractise#%E7%9B%AE%E7%9A%84)
->3. [材料](https://github.com/sau1code/loginPractise#%E6%9D%90%E6%96%99)
+>3. [平台與工具](https://github.com/sau1code/loginPractise#%E5%B9%B3%E5%8F%B0%E8%88%87%E5%B7%A5%E5%85%B7)
 >4. [方法](https://github.com/sau1code/loginPractise#%E6%96%B9%E6%B3%95)
 >5. [結果](https://github.com/sau1code/loginPractise#%E7%B5%90%E6%9E%9C)
 >6. [討論](https://github.com/sau1code/loginPractise#%E8%A8%8E%E8%AB%96)
@@ -21,7 +21,7 @@
 3. 提供管理者帳號登入，以管理和搜尋目前會員的清單。
 4. 以git和github平台實現多人協作專案。
 
-## 材料
+## 平台與工具
 
 + 平台 : Android 
   - Minimum SDK : API 26 Android 8.0
