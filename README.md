@@ -89,10 +89,14 @@
  
 + 會員登入 :
   - layout_main.xml :
-    - edittext-accoun: 輸入帳號
-    - edittext-password: 輸入密碼
-    - button-login: 根據不同帳號通往 member/admin 頁面
-    - button-register: 通往register頁面
+    - `textview`: 顯示"登入"大標題
+    - `edittext`: 用來讓使用者輸入帳號
+    - `edittext`: 用來讓使用者輸入密碼
+    - `imageview`: 顯示密碼的眼睛icon，按住可顯示密碼輸入框中被隱藏的密碼真實文字
+    - `textview`: 忘記密碼文字，按下顯示提示吐司 (無實質功能)
+    - `button`: 登入按鈕，按下會根據輸入框中不同帳號類型通往所屬頁面 (一般會員/管理者)
+    - `button`: 註冊按鈕，按下通往註冊頁面
+    - `textview`: 顯示目前SQLite內存所有帳號密碼 (練習用途)
   - MainActivity.java :
     - `getPasswordFromSQLite`: 用輸入帳號當引數去SQL取出對應的密碼
     - `madeShowFromSQL`: Show出所有會員帳/密給測試人員參考
@@ -203,12 +207,12 @@
 
 + 管理者登入 : 
   - layout_admin.xml : 
-    - textview-sum: 顯示有幾筆搜尋結果
-    - edittext-search: 關鍵字搜尋
-    - spinner-city: 選擇城市篩選
-    - checkbox-city: 是否啟用城市篩選
-    - imageview-birthday: 生日範圍篩選
-    - recyclerview-show: 列出所有搜尋結果
+    - `textview`: 顯示符合的搜尋結果有幾筆
+    - `edittext`: **關鍵字搜尋**的輸入框
+    - `checkbox`: 勾選表示啟用spinner縣市條件搜尋
+    - `spinner`: 可選擇某一縣市做**條件搜尋**
+    - `imageview`: 按下會跳出日期選擇視窗，選擇日期做**範圍搜尋**
+    - `recyclerview`: 將所有符合條件的結果的用戶資訊製成卡片陳列在這
   - adminActivity.java :
     - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
 
