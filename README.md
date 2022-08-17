@@ -35,30 +35,24 @@
   - layout_register.xml :
       - 建立`Linear Layout`並幫Layout製作圓角<br>
       - 帳號<br>
-        建立`editText-Name`
+        建立`editText_register_account`讓使用者輸入帳號
       - 密碼<br>
-        建立`editText-Password`
+        建立`editText_register_Password`讓使用者輸入密碼
       - 重新輸入密碼<br>
-        建立`editText-Password`
+        建立`editText_register_checkPassword`讓使用者重新輸入密碼
       - 姓名<br>
-        建立`editText-Name`
+        建立`editText_register_Name`讓使用者輸入姓名
       - 生日<br>
         建立一個`TextView`並在`registerActivity`使用日期Dialog回傳字串(格式為xxxx/xx/xx)
       - 手機號碼<br>
-        建立`editText-Phone`
+        建立`editText_register_Phone`讓使用者輸入行動電話
       - 通訊地址<br>
         建立`spinner`讓使用者選擇居住縣市、區域<br>
-        建立`editText-Multiple`讓使用者輸入地址<br>
+        建立`editText_register_address`讓使用者輸入地址<br>
       - Email<br>
-        建立`editText-Email`
+        建立`editText_register_Email`讓使用者輸入Email
       - OK Button <br>
-        建立`OK Button`，按下之後判斷:<br>
-        1. 是否所有資料均輸入完畢<br>
-        2. 密碼是否為6-12位<br>
-        3. 密碼和重新輸入密碼是相同的<br> 
-        4. 手機號碼的格式是否為09開頭並且為10碼數字<br>
-        5. Email格式是否為至少一位英文數字或符號 + '@' + 至少一位英文 + '.' + 至少一位英文<br>
-        6. 使用者帳號、手機、Email是否已經註冊過<br>
+        建立`OK Button`
   - register_ok_dialog.xml :
     - `TextView`
       用來顯示使用者輸入的所有資料
@@ -77,9 +71,28 @@
       - `SimpleDateFormat類別` : 定義日期格式、時區   
          [參考資料](https://codertw.com/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80/485945/)
          
-    * 監聽`buttonBirthday`
-      - 使用calendar.get()方法取得年/月/日
-         
+      - 監聽`buttonBirthday` : 使用calendar.get()方法取得年/月/日
+    * 地址
+       - `SpinnerCity.setOnItemSelectedListener` : 監聽`SpinnerCity`並依照不同的縣市改變`SpinnerArea`選單中的區域   
+       - `SpinnerArea.setOnItemSelectedListener` : 監聽`SpinnerArea`
+       - `editText_Address.getText().toString() : `取得`editText_Address`中的字串  
+    * `OK Button`
+      - `button_registerOK.setOnClickListener` : 監聽OK Button
+        - 按下之後判斷:<br>
+          1. 是否所有資料均輸入完畢<br>
+          2. 密碼是否為6-12位<br>
+          3. 密碼和重新輸入密碼是相同的<br> 
+          4. 手機號碼的格式是否為09開頭並且為10碼數字<br>
+          5. Email格式是否為至少一位英文數字或符號 + '@' + 至少一位英文 + '.' + 至少一位英文<br>
+          6. 使用者帳號、手機、Email是否已經註冊過<br>
+        - 判斷無誤後跳出Dialog
+     * `registerDialog`
+        - `registerDialog.setCancelable()`方法可以設置是否接受返回鍵使用
+        - `顯示使用者基本資料`，只顯示前三位密碼
+        - 監聽`OK Button` : 按下之後註冊成功
+        - 監聽`Cancel Button` : 按下之後registerDialog關閉 
+     * 將註冊資料傳進SQLite
+        
         
  
 + 會員登入 :
