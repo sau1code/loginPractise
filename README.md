@@ -34,25 +34,17 @@
 + 會員註冊 :
   - layout_register.xml :
       - 建立`Linear Layout`並幫Layout製作圓角<br>
-      - 帳號<br>
-        建立`editText_register_account`讓使用者輸入帳號
-      - 密碼<br>
-        建立`editText_register_Password`讓使用者輸入密碼
-      - 重新輸入密碼<br>
-        建立`editText_register_checkPassword`讓使用者重新輸入密碼
-      - 姓名<br>
-        建立`editText_register_Name`讓使用者輸入姓名
-      - 生日<br>
-        建立一個`TextView`並在`registerActivity`使用日期Dialog回傳字串(格式為xxxx/xx/xx)
-      - 手機號碼<br>
-        建立`editText_register_Phone`讓使用者輸入行動電話
-      - 通訊地址<br>
+      - 帳號 : 建立`editText_register_account`讓使用者輸入帳號
+      - 密碼 : 建立`editText_register_Password`讓使用者輸入密碼
+      - 重新輸入密碼 : 建立`editText_register_checkPassword`讓使用者重新輸入密碼
+      - 姓名 : 建立`editText_register_Name`讓使用者輸入姓名
+      - 生日 : 建立一個`TextView`並在`registerActivity`使用日期Dialog回傳字串(格式為xxxx/xx/xx)
+      - 手機號碼 : 建立`editText_register_Phone`讓使用者輸入行動電話
+      - 通訊地址 : <br/>
         建立`spinner`讓使用者選擇居住縣市、區域<br>
         建立`editText_register_address`讓使用者輸入地址<br>
-      - Email<br>
-        建立`editText_register_Email`讓使用者輸入Email
-      - OK Button <br>
-        建立`OK Button`
+      - Email : 建立`editText_register_Email`讓使用者輸入Email
+      - OK Button : 建立`OK Button`
   - register_ok_dialog.xml :
     - `TextView`
       用來顯示使用者輸入的所有資料
