@@ -89,18 +89,43 @@
  
 + 會員登入 :
   - layout_main.xml :
-    - `textview`: 顯示"登入"大標題
-    - `edittext`: 用來讓使用者輸入帳號
-    - `edittext`: 用來讓使用者輸入密碼
-    - `imageview`: 顯示密碼的眼睛icon，按住可顯示密碼輸入框中被隱藏的密碼真實文字
-    - `textview`: 忘記密碼文字，按下顯示提示吐司 (無實質功能)
-    - `button`: 登入按鈕，按下會根據輸入框中不同帳號類型通往所屬頁面 (一般會員/管理者)
-    - `button`: 註冊按鈕，按下通往註冊頁面
-    - `textview`: 顯示目前SQLite內存所有帳號密碼 (練習用途)
+    - `textview`: 顯示"登入"頁的大標題。
+    - `edittext`: 用來讓使用者輸入帳號。
+    - `edittext`: 用來讓使用者輸入密碼。
+    - `imageview`: 顯示密碼的眼睛圖，按住可顯示密碼框中真實文字。
+    - `textview`: 忘記密碼文字，按下顯示提示吐司 (無實質功能)。
+    - `button`: 登入按鈕，按下會根據輸入框中不同帳號類型通往所屬頁面 (一般會員/管理者)。
+    - `button`: 註冊按鈕，按下通往註冊頁面。
+    - `textview`: 顯示目前SQLite內存所有帳號密碼 (練習用途)。
   - MainActivity.java :
-    - `getPasswordFromSQLite`: 用輸入帳號當引數去SQL取出對應的密碼
-    - `madeShowFromSQL`: Show出所有會員帳/密給測試人員參考
+    - 登入功能:<br>
     
+      > 1. 帳號與密碼的輸入框皆為**即時**監聽`addTextChangedListener()`，<br>
+      >    時刻的改變類別中的`inputAccount`、`inputPassword`字串。<br>
+      >    若兩格都有值時，登入按鈕會亮起<br>
+      > 
+      > 2. 按下登入按鈕會經過一系列的if-else判斷，由上到下為:
+      >     - __帳號密碼是否為空__: 成立吐司顯示"請輸入完整帳號密碼"。<br>
+      >     - __是否為管理者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`adminActivity`頁面。<br>
+      >     - __是否為使用者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`memberActivity`頁面。<br>
+      >       這裡判斷`inputPassword.equals(getPasswordFromSQLite(inputAccount)`，<br>
+              意思是用使用者輸入的`inputAccount`去自製方法`getPasswordFromSQLite()`中<br>
+              找出該使用者匹配的密碼，再與`inputPassword`對比是否相同
+      >     - __其他__: 成立吐司顯示"帳號或密碼錯誤"。<br>
+      >
+      >
+    - 顯示密碼:
+      >
+      >
+      >
+      >
+    - 往註冊頁面:
+      > 簡單的使用Intent傳送
+    - 清空SQLite所有帳號:
+      >
+      >
+      >
+      >
 + 會員資料檢視修改 : 
   - layout_member.xml : 
     - `textView-member-tempshow` : 顯示會員帳號名稱
@@ -207,14 +232,14 @@
 
 + 管理者登入 : 
   - layout_admin.xml : 
-    - `textview`: 顯示符合的搜尋結果有幾筆
-    - `edittext`: **關鍵字搜尋**的輸入框
-    - `checkbox`: 勾選表示啟用spinner縣市條件搜尋
-    - `spinner`: 可選擇某一縣市做**條件搜尋**
-    - `imageview`: 按下會跳出日期選擇視窗，選擇日期做**範圍搜尋**
-    - `recyclerview`: 將所有符合條件的結果的用戶資訊製成卡片陳列在這
+    - `textview`: 顯示符合的搜尋結果有幾筆。
+    - `edittext`: **關鍵字搜尋**的輸入框。
+    - `checkbox`: 勾選表示啟用spinner縣市條件搜尋。
+    - `spinner`: 可選擇某一縣市做**條件搜尋**。
+    - `imageview`: 按下會跳出日期選擇視窗，選擇日期做**範圍搜尋**。
+    - `recyclerview`: 將所有符合條件的結果的用戶資訊製成卡片陳列在這。
   - adminActivity.java :
-    - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView
+    - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView。
 
   - admin_card.xml :
   - RecyclerViewAdapter.java :
