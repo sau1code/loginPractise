@@ -296,9 +296,10 @@
     - `textView`: 列出該帳號的所有資訊
     - 可在文字編輯模式設定圓角陰影等參數
     - 創檔步驟: <br>
+  
       > 1. 在layout資料夾新增.xml檔，取名就好奇它不用改<br>
       > 2. 將`androidx.constraintlayout.widget.ConstraintLayout`整個<br>
-      > 換成<br>
+      >    換成<br>
       >    ```
       >    < androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
       >      xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -309,11 +310,42 @@
       >
       >    </androidx.cardview.widget.CardView>
       >    ```
+      >    (androidx為新版的CardView)
+      > 3. 切回Design模式就可以看見卡片
+      > 4. 在卡片內添加想呈現的元件
+      > 5. 元件的ID在`RecyclerViewAdapter.java`中會用到
           
-  - RecyclerViewAdapter.java :
-    - 1. `RecyclerViewAdapter`需要繼承`RecyclerView.Adapter`類別
-    -    
-    -    
+  - RecyclerViewAdapter.java :<br>
+      > 1. 創好RecyclerViewAdapter.java檔後<br>
+      > 2. 手打將 `RecyclerViewAdapter` 繼承 `RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>`<br>
+      >    打完上面繼承，照IDE指示可以生成3個複寫方法<br>
+      >    `RecyclerViewAdapter`類別中還包含`ViewHolder`類別，也是照IDE指示生成<br>
+      >    泛型`<RecyclerViewAdapter.ViewHolder>`指的就是<`RecyclerViewAdapter`類中的`ViewHolder`類><br>
+      >    而`ViewHolder`類別中有自己的建構方法<br>
+      >    `RecyclerViewAdapter`也有自己的建構方法<br>
+      >    以上這些在加上List屬性就是全部的架構<br>
+      >    
+      >    - `RecyclerViewAdapter` 類別<br>
+      >       * `List<Map<String, String>> mapList`: 之前做的List會放進這裡<br>
+      >       * `RecyclerViewAdapter()`: 建構式，功能只為了在外面new的時候可以把List當引數帶進來<br>
+      >       * `onCreateViewHolder()`: Adapter類的super()會呼叫這個方法，<br>
+      >         我們要return new `ViewHolder`給它，Holder的建構式，引數View用來綁定layout<br>
+      >       * `onBindViewHolder()`: 有點像LOOP 每張Card執行一次 可在這將List內容附給每張Card上的元件，
+      >         每張卡片除了position不同，其他就自由發揮<br>
+      >       * `getItemCount()`: 就是get Item Count!<br>
+      >    
+      > (未完待續...)
+      >    
+      >   
+      >   
+      >   
+      >   
+      >   
+      >   
+      >   
+      > 2.
+      >    
+      > 123
  
 + 初始化資料庫類別頁面 :
   - mySQLiteContract.java : 
