@@ -105,7 +105,7 @@
       >    若兩格都有值時，登入按鈕會亮起<br>
       > 
       > 2. 按下登入按鈕會經過一系列的if-else判斷，由上到下為:
-      >     - __帳號密碼是否為空__: 成立吐司顯示"請輸入完整帳號密碼"。<br>
+      >     - __帳號或密碼是否為空__: 成立吐司顯示"請輸入完整帳號密碼"。<br>
       >     - __是否為管理者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`adminActivity`頁面。<br>
       >     - __是否為使用者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`memberActivity`頁面。<br>
       >       這裡判斷式內容為: `inputPassword.equals(getPasswordFromSQLite(inputAccount)`，<br>
@@ -126,7 +126,8 @@
       > 如果 < 0.4秒，則判定為連點成立，重置清空SQLite中table紀錄。<br>
       > 清空使用的是`SQLiteHelper.onUpgrade(SQLiteDb, version, version)`方法。<br>
       > 這方法在`SQLiteHelper`類別中，<br>
-      > 它會先執行`db.execSQL(SQL_DELETE_ENTRIES)`在執行`onCreate(db)`創一個新的table。<br>
+      > 它會先執行`db.execSQL(SQL_DELETE_ENTRIES)`刪除當前table，<br>
+      > 再執行`onCreate(db)`創一個新的table。<br>
 + 會員資料檢視修改 : 
   - layout_member.xml : 
     - `textView-member-tempshow` : 顯示會員帳號名稱
@@ -238,9 +239,53 @@
     - `checkbox`: 勾選表示啟用spinner縣市條件搜尋。
     - `spinner`: 可選擇某一縣市做**條件搜尋**。
     - `imageview`: 按下會跳出日期選擇視窗，選擇日期做**範圍搜尋**。
+    - `textview`: 顯示所選日期
     - `recyclerview`: 將所有符合條件的結果的用戶資訊製成卡片陳列在這。
   - adminActivity.java :
-    - `madeShowFromSQL`: 依篩選條件取SQLite中值製作List放進Adapter傳進recyclerView。
+    - 搜尋:<br>
+      > 讓管理者自訂三種搜尋條件，分別為`edittext`關鍵字、`spinner`縣市、`imageview`日期，<br>
+      > 相對應的以`searchInput`、`cityInput`、`birthdayInput`字串來存值。<br>
+      > 不論改變何種條件都能即時監聽並在每個監聽中呼叫`madeShowFromSQL()`即時改變顯示結果。<br>
+      > 實踐方法如下:<br>
+      > 1. `edittext`關鍵字:<br>
+      >    使用`addTextChangedListener`中的`onTextChanged`方法，<br>
+      >    可即時監測輸入框中的變化來改變`searchInput`字串變數。
+      > 2. `spinner`縣市:<br>
+      >    因`spinner`有預設值，希望可以在不創"請選擇"當`spinner`預設選項的情況下<br>
+      >    (因為此舉會改變同伴的陣列參數，且認為直接顯示如"台北市"字樣可對使用者明示`spinner`存在用途)，<br>
+      >    於是創造了一個`checkBoxCity`，作為`spinner`的致能旗標，當勾選時`checkBoxFlag`布林值為True<br>
+      >    當`spinner`改變時縣市存進`cityInput`字串變數，<br>
+      >    上面兩者改變時都會呼叫`madeShowFromSQL()`，<br>
+      >    由`madeShowFromSQL()`內判斷，當`checkBoxFlag`為True時`cityInput`才會被納入搜尋條件。<br>
+      > 3. `imageview`日期:<br>
+      >    參考同組人員作法之外，將監聽`setOnClickListener`設在`imageViewBirthday`日曆icon上，<br>
+      >    當有選擇日期時，`imageViewBirthday`會變為"X圖"，並在`textview`顯示所選日期，將值存進`birthdayInput`變數中，<br>
+      >    當再次按下`imageViewBirthday`，"X圖"會變回日曆icon，且清空`textview`文字。<br>
+      >    每次進監聽時改變`flag`的兩種狀態，達成輪流執行if或else區塊的兩種效果。
+
+    - 顯示結果:<br>
+      > 1. `madeShowFromSQL()`:<br>
+      >    因每`edittext`關鍵字、`spinner`縣市、`imageview`日期，有或沒有值，<br>
+      >    皆會引響SQLite搜尋語法，若將可能組合全列出來可能有2的3次方種語法組合，<br>
+      >    所以選擇以`if`判斷式加上`StringBuilder`來動態組合語法，<br>
+      >    粗略用白話來形容就是，<br>
+      >    先創一個 **"SELECT * FROM table"** 基本語句，<br>
+      >    如果有任意搜尋條件，就在基本語句後加入 **WHERE**，<br>
+      >    如果有城市條件就再加入 **地址欄位 LIKE 城市**，<br>
+      >    如果有日期條件就再加入 **生日欄位 < 日期**，<br>
+      >    如果有關鍵字條件就再加入 **所有欄位 = %關鍵字%**，<br>
+      >    以上三者，會先判斷自己是不是首個加入WHERE後的條件，如果不是首個，會先加入 **AND**，<br>
+      >    將生成的`StringBuilder`丟進`rawQuery`方法中，以取得`Cursor`，<br>
+      >    用迴圈把`Cursor`的值全部取出做成`Map`放進`List`中，<br>
+      >    這個List是製作`recyclerView`要用的素材之一。<br>
+      > 2. `recyclerView`:<br>
+      >    這邊一樣粗略用白話形容(為個人理解可能有誤，望包容指教)，<br>
+      >    `recyclerView`是類似`listView`般的存在，<br>
+      >    完成`recyclerView`需要先創`admin_card.xml`和`RecyclerViewAdapter.java`兩個檔案，<br>
+      >    兩個檔案分別是定義了卡片的**樣貌**和**內容**，<br>
+      >    當然內容也包含了我們上個階段最後所生成的`List`，<br>
+      >    將兩個檔案和之前做的`List`，三者結合後，製成`Adapter`<br>
+      >    把`Adapter`放入`recyclerView`元件，以顯示最終效果。
 
   - admin_card.xml :
   - RecyclerViewAdapter.java :
