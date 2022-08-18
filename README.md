@@ -279,16 +279,41 @@
       >    用迴圈把`Cursor`的值全部取出做成`Map`放進`List`中，<br>
       >    這個List是製作`recyclerView`要用的素材之一。<br>
       > 2. `recyclerView`:<br>
-      >    這邊一樣粗略用白話形容(為個人理解可能有誤，望包容指教)，<br>
+      >    這邊一樣粗略用白話形容 (為個人理解可能有誤，望包容指教，課本某些載入元件的步驟已被淘汰)，<br>
       >    `recyclerView`是類似`listView`般的存在，<br>
       >    完成`recyclerView`需要先創`admin_card.xml`和`RecyclerViewAdapter.java`兩個檔案，<br>
       >    兩個檔案分別是定義了卡片的**樣貌**和**內容**，<br>
       >    當然內容也包含了我們上個階段最後所生成的`List`，<br>
       >    將兩個檔案和之前做的`List`，三者結合後，製成`Adapter`<br>
-      >    把`Adapter`放入`recyclerView`元件，以顯示最終效果。
+      >    把`Adapter`放入`recyclerView`元件，以顯示最終效果。<br>
+      >    <br>
+      >    (所以學會製作兩個檔案和List，這三樣素材是關鍵，不過不用擔心，<br>
+      >    List上階段教了，`admin_card.xml`就跟平常我們製作layout類似，<br>
+      >    關鍵就是學習`RecyclerViewAdapter.java`的製作) <br>
 
   - admin_card.xml :
+    - `textView`: 顯示符合篩選條件的會員帳號
+    - `textView`: 列出該帳號的所有資訊
+    - 可在文字編輯模式設定圓角陰影等參數
+    - 創檔步驟: <br>
+      > 1. 在layout資料夾新增.xml檔，取名就好奇它不用改<br>
+      > 2. 將`androidx.constraintlayout.widget.ConstraintLayout`整個<br>
+      > 換成<br>
+      >    ```
+      >    < androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+      >      xmlns:app="http://schemas.android.com/apk/res-auto"
+      >      android:layout_width="175dp"
+      >      android:layout_height="200dp"
+      >      app:cardCornerRadius="6dp"
+      >      app:cardElevation="10dp">
+      >
+      >    </androidx.cardview.widget.CardView>
+      >    ```
+          
   - RecyclerViewAdapter.java :
+    - 1. `RecyclerViewAdapter`需要繼承`RecyclerView.Adapter`類別
+    -    
+    -    
  
 + 初始化資料庫類別頁面 :
   - mySQLiteContract.java : 
