@@ -108,7 +108,7 @@
       >     - __帳號密碼是否為空__: 成立吐司顯示"請輸入完整帳號密碼"。<br>
       >     - __是否為管理者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`adminActivity`頁面。<br>
       >     - __是否為使用者且密碼正確__: 成立用`Intnet`夾帶`inputAccount`訊息傳送至`memberActivity`頁面。<br>
-      >       這裡判斷`inputPassword.equals(getPasswordFromSQLite(inputAccount)`，<br>
+      >       這裡判斷式內容為: `inputPassword.equals(getPasswordFromSQLite(inputAccount)`，<br>
               意思是用使用者輸入的`inputAccount`去自製方法`getPasswordFromSQLite()`中<br>
               找出該使用者匹配的密碼，再與`inputPassword`對比是否相同
       >     - __其他__: 成立吐司顯示"帳號或密碼錯誤"。<br>
