@@ -115,17 +115,18 @@
       >
       >
     - 顯示密碼:
-      >
-      >
-      >
+      > 在`imageview`使用`setOnTouchListener`監聽，<br>
+      > 介面內的方法可以分辨使用者"按下"和"放開"不同動作，利用它們來模擬按住不放的情境<br>
       >
     - 往註冊頁面:
-      > 簡單的使用Intent傳送
-    - 清空SQLite所有帳號:
-      >
-      >
-      >
-      >
+      > 簡單的使用`Intent`不帶值傳送。
+    - 點兩下清空SQLite所有帳號:
+      > 用最常見的`setOnClickListener`監聽，創一個`cleanSqlTime`變數記錄當下時間，<br>
+      > 如果(本次紀錄時間 - 上次紀錄時間) > 0.4秒，則將本次時間存進`cleanSqlTime`給下一次比較使用，<br>
+      > 如果 < 0.4秒，則判定為連點成立，重置清空SQLite中table紀錄。<br>
+      > 清空使用的是`SQLiteHelper.onUpgrade(SQLiteDb, version, version)`方法。<br>
+      > 這方法在`SQLiteHelper`類別中，<br>
+      > 它會先執行`db.execSQL(SQL_DELETE_ENTRIES)`在執行`onCreate(db)`創一個新的table。<br>
 + 會員資料檢視修改 : 
   - layout_member.xml : 
     - `textView-member-tempshow` : 顯示會員帳號名稱
