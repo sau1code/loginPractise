@@ -415,22 +415,23 @@
         
         + `onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)` 方法 :
         
-        當資料庫版本更新的時候，把customer資料表砍掉再重新建立。
-        
-            +  db.execSQL(SQL_DELETE_ENTRIES) : 透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `SQL` 語法(DROP TABLE IF EXISTS customer)，把customer資料表砍掉。
+          當資料庫版本更新的時候，把customer資料表砍掉再重新建立。
+          
+           +  `db.execSQL(SQL_DELETE_ENTRIES)` : 透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `SQL` 語法(`DROP TABLE IF EXISTS customer`)，把customer資料表砍掉。
+              
+           + `onCreate(db)` : 建立customer資料表。
             
-            +  `onCreate(db)` : 建立customer資料表。
-        
-        ```
-         private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
+           ```
+            private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
          
-         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            // This database is only a cache for online data, so its upgrade policy is
-            // to simply to discard the data and start over
-            db.execSQL(SQL_DELETE_ENTRIES);
-            onCreate(db);
-          }
-        ```
+            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                // This database is only a cache for online data, so its upgrade policy is
+                // to simply to discard the data and start over
+                db.execSQL(SQL_DELETE_ENTRIES);
+                onCreate(db);
+             }
+          
+            ```
     
 
 ## 結果
