@@ -349,6 +349,89 @@
  
 + 初始化資料庫類別頁面 :
   - mySQLiteContract.java : 
+  
+    目的 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db，並於此資料庫建立 customer 資料表。
+    
+    以下為 customer 會員資料表欄位說明 :
+    
+    
+    |  customers 資料表欄位名稱      | 欄位說明 |
+    | ----------- | ----------- |
+    | userid      | id(主鍵)       |
+    | user   | 會員帳號   |
+    | password | 會員密碼 |
+    | username | 會員姓名 |
+    | userbirth | 會員生日 |
+    | cellphone | 會員手機 |
+    | useremail | 會員Email |
+    | useraddress | 會員住址 |
+    
+    + 宣告public final 類別 `mySQLiteContract`，`mySQLiteContract`類別包括兩個靜態類別屬性 `mySQLiteEntry` 和 `mySQLiteDbHelper`。
+    
+      + 靜態類別`mySQLiteEntry`繼承 `BaseColumns`類別，用來定義資料表與欄位名稱，並將這些名稱宣告為靜態常數屬性，寫SQL語法需要資料表與欄位名稱時，不需要實作為物件，只需呼叫此類別的靜態常數屬性即可，避免SQL語法定義資料表與欄位名稱時發生的名稱輸入錯誤，以及方便管理或替換新的資料表與欄位名稱。
+      
+      ```
+          public static class mySQLiteEntry implements BaseColumns {
+             public static final String TABLE_NAME = "customers";
+              public static final String COLUMN_NAME_ID = "userid";
+              public static final String COLUMN_NAME_USER = "user";
+              public static final String COLUMN_NAME_PWD = "password";
+              public static final String COLUMN_NAME_USERNAME = "username";
+              public static final String COLUMN_NAME_BIRTH = "userbirth";
+              public static final String COLUMN_NAME_PHONE = "cellphone";
+              public static final String COLUMN_NAME_EMAIL = "useremail";
+              public static final String COLUMN_NAME_ADDRESS = "useraddress";
+        }
+      ```
+      
+      + 靜態類別 `mySQLiteDbHelper` 繼承 `SQLiteOpenHelper`類別，此類別功能為初始化資料庫與新增資料表，
+      
+        + `mySQLiteDbHelper(Context context)` 方法 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db ，如資料庫已建立就不再重新建立 Demo.db 資料庫。
+        
+        + `onCreate(SQLiteDatabase db)` 方法 : 新增customer資料表。  
+        
+        透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `CREATE TABLE` `SQL` 語法(`SQL_CREATE_ENTRIES` 
+        靜態常數字串所定義的`CREATE TABLE`語法)，在建立 `CREATE TABLE` `SQL` 語法時，
+        所有資料表名稱和欄位名稱皆直接呼叫靜態類別`mySQLiteEntry`中定義的靜態常數屬性資料表與欄位名稱。
+        
+        
+        ```
+        
+        private static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
+                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+                    mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT NOT NULL );" ;
+        
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(SQL_CREATE_ENTRIES);
+        }
+        ```
+        
+        + `onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)` 方法 :
+        
+        當資料庫版本更新的時候，把customer資料表砍掉再重新建立。
+        
+            +  db.execSQL(SQL_DELETE_ENTRIES) : 透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `SQL` 語法(DROP TABLE IF EXISTS customer)，把customer資料表砍掉。
+            
+            +  `onCreate(db)` : 建立customer資料表。
+        
+        ```
+         private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
+         
+         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            // This database is only a cache for online data, so its upgrade policy is
+            // to simply to discard the data and start over
+            db.execSQL(SQL_DELETE_ENTRIES);
+            onCreate(db);
+          }
+        ```
+    
 
 ## 結果
 
