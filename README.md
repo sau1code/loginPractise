@@ -13,7 +13,7 @@
 
 由於專題想用 Android 做購物商城App，一定會用到會員註冊，管理者登入和資料庫連線儲存資料的功能，因為App資料怎麼存到SQLite還是個謎團，很怕期末最後開天窗，所以提前先測試會員資料如何儲存至資料庫，以及如何根據App需求，針對資料庫進行更新刪除插入資料等功能。
 
-專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題，故需要寫一個小專案，先測試合作寫程式會出現什麼狀況。
+專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題，由人力徵才網站上，發現Android工程師的要求清單上，大部份都是用git實現多人協作，故需要寫一個小專案，先測試利用git合作寫程式會出現什麼狀況，進而熟悉此合作模式。
 
 ## 目的 
 1. 建立會員註冊，登入和修改會員資料的功能。
@@ -30,6 +30,92 @@
 
 ## 方法 
 > 以不同主要功能分項說明 : 建立何種元件與如何處理使用者與元件互動的結果
+
++ 初始化資料庫類別頁面 :
+  - mySQLiteContract.java : 
+  
+    目的 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db，並於此資料庫建立 customer 資料表。
+    
+    以下為 customer 會員資料表欄位說明 :
+    
+    
+    |  customers 資料表欄位名稱     | column type | 欄位說明 |
+    | ----------- | ----------- | ----------- |
+    | userid     | TEXT | id(主鍵)       |
+    | user   | TEXT | 會員帳號   |
+    | password | TEXT | 會員密碼 |
+    | username | TEXT | 會員姓名 |
+    | userbirth | TEXT | 會員生日 |
+    | cellphone | TEXT | 會員手機 |
+    | useremail | TEXT | 會員Email |
+    | useraddress | TEXT | 會員住址 |
+    
+    + 宣告public final 類別 `mySQLiteContract`，`mySQLiteContract`類別包括兩個靜態類別屬性 `mySQLiteEntry` 和 `mySQLiteDbHelper`。
+    
+      + 靜態類別`mySQLiteEntry`繼承 `BaseColumns`類別，用來定義資料表與欄位名稱，並將這些名稱宣告為靜態常數屬性，寫SQL語法需要資料表與欄位名稱時，不需要實作為物件，只需呼叫此類別的靜態常數屬性即可，避免SQL語法定義資料表與欄位名稱時發生的名稱輸入錯誤，以及方便管理或替換新的資料表與欄位名稱。
+      
+      ```
+          public static class mySQLiteEntry implements BaseColumns {
+             public static final String TABLE_NAME = "customers";
+              public static final String COLUMN_NAME_ID = "userid";
+              public static final String COLUMN_NAME_USER = "user";
+              public static final String COLUMN_NAME_PWD = "password";
+              public static final String COLUMN_NAME_USERNAME = "username";
+              public static final String COLUMN_NAME_BIRTH = "userbirth";
+              public static final String COLUMN_NAME_PHONE = "cellphone";
+              public static final String COLUMN_NAME_EMAIL = "useremail";
+              public static final String COLUMN_NAME_ADDRESS = "useraddress";
+        }
+      ```
+      
+      + 靜態類別 `mySQLiteDbHelper` 繼承 `SQLiteOpenHelper`類別，此類別功能為初始化資料庫與新增資料表，
+      
+        + `mySQLiteDbHelper(Context context)` 方法 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db ，如資料庫已建立就不再重新建立 Demo.db 資料庫。
+        
+        + `onCreate(SQLiteDatabase db)` 方法 : 新增customer資料表。  
+        
+        透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `CREATE TABLE` `SQL` 語法(`SQL_CREATE_ENTRIES` 
+        靜態常數字串所定義的`CREATE TABLE`語法)，在建立 `CREATE TABLE` `SQL` 語法時，
+        所有資料表名稱和欄位名稱皆直接呼叫靜態類別`mySQLiteEntry`中定義的靜態常數屬性資料表與欄位名稱。
+        
+        
+        ```
+        
+        private static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
+                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+                    mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT NOT NULL ," +
+                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT NOT NULL );" ;
+        
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(SQL_CREATE_ENTRIES);
+        }
+        ```
+        
+        + `onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)` 方法 :
+        
+          當資料庫版本更新的時候，把customer資料表砍掉再重新建立。
+          
+           +  `db.execSQL(SQL_DELETE_ENTRIES)` : 透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `SQL` 語法(`DROP TABLE IF EXISTS customer`)，把customer資料表砍掉。
+              
+           + `onCreate(db)` : 建立customer資料表。
+            
+           ```
+            private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
+         
+            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+                // This database is only a cache for online data, so its upgrade policy is
+                // to simply to discard the data and start over
+                db.execSQL(SQL_DELETE_ENTRIES);
+                onCreate(db);
+             }
+          
+            ```
 
 + 會員註冊 :
   - layout_register.xml :
@@ -145,92 +231,117 @@
       + `onOptionsItemSelected`
        >監聽`menu`元件，當使用者按下返回前一頁的`menu`元件的時候，回到前一個 Activity。
          
-     * 接收從 `MainActivity` 傳來的`Intent`:
+     * 接收從 `MainActivity` 單向傳來的`Intent`:
        > 從`Intent`取出會員帳號字串，利用`setText`讓`textView`元件顯示登入的會員帳號名稱。
          
      * 設定/接收`editText`元件文字 & 連接`SQLite`資料庫，以取得/修改會員資料:
-       >  * `editText.setEnabled(false)` : 設定editText為使用者不可編輯，只顯示文字的狀態。
-       >  * 資料庫連線:<br>
-       >  1. `mySQLiteContract.mySQLiteDbHelper`類別<br>
-       >  -連接SQLite資料庫，無建立資料庫就會自動建立資料庫和資料表，如已存在資料庫，就會直接使用已存在的資料庫:<br>
-       >    `mySQLiteContract.mySQLiteDbHelper dbHelper`<br>
-       >    `= new mySQLiteContract.mySQLiteDbHelper(memberActivity.this);`<br>
-       >    
-       >  2. `mySQLiteContract.mySQLiteEntry`類別 <br>
-       >  -定義資料表名稱和欄位名稱避免打錯欄位或資料表名稱而產生的SQL語法錯誤:
+       >  * `editText.setEnabled(false)` : 設定editText為使用者不可編輯，只顯示文字的狀態。<br><br>
        >  
-       >      例如 : 
-       >      `mySQLiteContract.mySQLiteEntry.TABLE_NAME` 為資料表名稱
-       >      `mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL` 為會員email資料欄位名稱      
        >  
-       >  3. 資料庫設定為可寫入資料的狀態  
-       >    `SQLiteDatabase db = dbHelper.getWritableDatabase();`
-       >  4. `SQLiteDatabase`類別即提供可直接執行SQL語法的方法:
-       >     * `execSQL(String SQL_command)` : 執行無傳回值的`SQL`語法(`CREATE`, `INSERT`, `UPDATE`, `DELETE`語法)。
-       >     * `rawQuery(String SQL_command,null)` : 執行有傳回值的`SQL`語法(`SELECT`語法)，傳回`Cursor`物件。
-       >     
-       >  5. `Cursor`類別提供取出搜尋結果資料的方法 :
-       >     * `getCount()` : return int，傳回有幾列搜尋結果。
-       >     * `getColumnCount()` : return int，傳回搜尋結果有幾個欄位。
-       >     
-       >     (1) 控制 cursor 指向列數 <br>
-       >     * `moveToFirst()` : return boolean，true 代表將cursor移到第一個搜尋結果，false代表沒有搜尋結果。
-       >     * `moveToNext()` :  return boolean，true 代表將cursor移到下一個搜尋結果，false代表沒有下一個搜尋結果。
-       >     
-       >     (2) 取出此列的指定欄位資料 <br>
-       >     * `getColumnIndex(String columnName)` : return int，傳回搜尋結果欄位對應到哪個index。
-       >     * `getColumnName(int columnIndex)` : return String，傳回index對應到哪個搜尋結果欄位。
-       >     * `getString(int columnIndex)` : return String，傳回指定index欄位的字串資料。
-       >     
-       >  6. `close()`結束資料庫連線:<br>
-       >  注意!! `mySQLiteContract.mySQLiteDbHelper`, `SQLiteDatabase`和 `Cursor`物件都需要`close()`
-       >  以避免佔用太多資源。
+       >  > **如何連線`SQLite`資料庫取得會員資料 :** <br>
+       >  > 
+       >  >1. `mySQLiteContract.mySQLiteDbHelper`類別 <br><br>
+       >  >
+       >  > - 連接SQLite資料庫，無建立資料庫就會自動建立資料庫和資料表，如已存在資料庫，就會直接使用已存在的資料庫:<br>
+       >  >  `mySQLiteContract.mySQLiteDbHelper dbHelper`<br>
+       >  >  `= new mySQLiteContract.mySQLiteDbHelper(memberActivity.this);`<br>
+       >  > ----------------
+       >  >2. `mySQLiteContract.mySQLiteEntry`類別 <br>
+       >  > - 定義資料表名稱和欄位名稱避免打錯欄位或資料表名稱而產生的SQL語法錯誤:
+       >  >
+       >  >    例如 : 
+       >  >    `mySQLiteContract.mySQLiteEntry.TABLE_NAME` 為資料表名稱
+       >  >    `mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL` 為會員email資料欄位名稱      
+       >  > ----------------
+       >  >3. 資料庫設定為可寫入資料的狀態  
+       >  >  `SQLiteDatabase db = dbHelper.getWritableDatabase();`
+       >  >
+       >  >4. `SQLiteDatabase`類別即提供可直接執行SQL語法的方法:
+       >  >   * `execSQL(String SQL_command)` : 執行無傳回值的`SQL`語法(`CREATE`, `INSERT`, `UPDATE`, `DELETE`語法)。
+       >  >   * `rawQuery(String SQL_command,null)` : 執行有傳回值的`SQL`語法(`SELECT`語法)，傳回`Cursor`物件。 
+       >  > ----------------
+       >  >   
+       >  >5. `Cursor`類別提供取出搜尋結果資料的方法 :
+       >  >   * `getCount()` : return int，傳回有幾列搜尋結果。
+       >  >   * `getColumnCount()` : return int，傳回搜尋結果有幾個欄位。
+       >  >   
+       >  >   
+       >  >     (1) 控制 cursor 指向列數 <br>
+       >  >     * `moveToFirst()` : return boolean，true 代表將cursor移到第一個搜尋結果，false代表沒有搜尋結果。
+       >  >     * `moveToNext()` :  return boolean，true 代表將cursor移到下一個搜尋結果，false代表沒有下一個搜尋結果。
+       >  >   
+       >  >   
+       >  >     (2) 取出此列的指定欄位資料 <br>
+       >  >     * `getColumnIndex(String columnName)` : return int，傳回搜尋結果欄位對應到哪個index。
+       >  >     * `getColumnName(int columnIndex)` : return String，傳回index對應到哪個搜尋結果欄位。
+       >  >     * `getString(int columnIndex)` : return String，傳回指定index欄位的字串資料。
+       >  >   
+       >  >   ----------------
+       >  >6. `close()`結束資料庫連線:<br>
+       >  > 注意!! `mySQLiteContract.mySQLiteDbHelper`, `SQLiteDatabase`和 `Cursor`物件都需要`close()`
+       >  > 以避免佔用太多資源。
        >  
-       >  `onCreate`Activity進行會員資料顯示:
+       >  **`onCreate`Activity進行會員資料顯示 :**
        > 
        >  * `rawQuery(String SELECT_SQL_command,null)` 資料庫搜尋取得會員資料 <br>
        >     (SELECT SQL語法設定where條件為user='使用者帳號')
        >  
        >     &rarr; `EdiText.setText` 設定`editText`元件文字
        >     
-       >  `setOnClickListener`監聽刪除帳號Button :
+       >  **`setOnClickListener`監聽刪除帳號Button :**
        >  當使用者按下刪除帳號Button時
        >     
        >  * `execSQL(String DELETE_SQL_command)` : 刪除會員帳號。<br>
        >  (DELETE SQL語法設定where條件為user='使用者帳號')
        >  <br>
        >  
-       >   `setOnClickListener`監聽修改會員資料Button :
+       >  **`setOnClickListener`監聽修改會員資料Button :**
        >  當使用者按下修改會員資料Button時
+       >  * `editText.setEnabled(true)` : 設定editText為使用者可編輯狀態。<br><br>
        >  
-       >  * `EditText.getText()`取得使用者輸入到`editText`元件的文字 
-       >
-       >     &rarr;  `isEmpty()` : 確認使用者是否完整輸入所有會員資料
-       >
-       >     &rarr; `matches(passwordformat)` , `matches(phoneformat)` , `matches(emailformat)`:
-       >
-       >     確認使用者是否輸入6-12位數的密碼 , 完整的手機電話(ex: 0912345678, 0912-345-678) , 完整的email(abc@gmail.com)
-       >     ```
-       >        //To check the format of the password , phone number and email,
-       >         //set regular expression to match desirable input
-       >         String passwordformat = "^.{6,12}$";
-       >         String phoneformat = "^09\\d{2}-?\\d{3}-?\\d{3}$";
-       >         String emailformat = "^.+@\\w+\\..*$";
-       >     ```
-       >
-       >     &rarr; `rawQuery(String SELECT_SQL_command,null)` return 資料庫搜尋結果(Cursor 物件)
-       >
-       >     (分別SELECT SQL語法設定where條件為 useremail='會員輸入的email' , cellphone='會員輸入的手機電話')
-       >
-       >     &rarr; `Cursor.moveToFirst()` Cursor 物件指到搜尋結果的第一列資料
-       >
-       >     &rarr; `Cursor.getString(1)` 取出會員帳號名稱放到`userCheck`字串變數
-       >
-       >     &rarr; `cursor.getCount()>0 && userCheck.equals(user)==false` : 有一筆以上的搜尋結果且會員帳號名稱不是本人，
-       >     則無法修改手機電話或email，否則確認行動電話和email與其他會員不重複，而可修改會員本人資料。     
-       >
-       >     &rarr; `execSQL(String UPDATE_SQL_command)` 修改會員資料<br>
-       >     (UPDATE SQL語法設定where條件為user='使用者帳號')
+       >  **`setOnClickListener`監聽送出修改後的會員資料Button :**
+       >  當使用者按送出修改資料Button時
+       >  * `EditText.getText()`取得使用者輸入到`editText`元件的文字 <br><br>
+       >  
+       >  >**判斷會員送出的修改是否有缺項或格式錯誤**<br>
+       >  > 1. 會員送出的修改是否有缺項 :
+       >  >   &rarr;  `String.isEmpty()` : 傳回`ture`，代表使用者完整輸入所有會員資料，否則傳回`false`。
+       >  >
+       >  > ------------------
+       >  >  2. 會員送出的修改是否有格式錯誤 : <br>
+       >  >   &rarr; `String.matches(passwordformat)` : 傳回`ture`，代表使用者正確輸入6-12位數的密碼，否則傳回`false`。 <br>
+       >  >   &rarr; `String.matches(phoneformat)` : 傳回`ture`，代表使用者輸入完整的手機電話(ex: 0912345678, 0912-345-678)，否則傳回`false`。 <br>
+       >  >   &rarr; `String.matches(emailformat)` : 傳回`ture`，代表使用者輸入完整的email(ex: abc@gmail.com)，否則傳回`false`。
+       >  >
+       >  >   ```
+       >  >      //To check the format of the password , phone number and email,
+       >  >       //set regular expression to match desirable input
+       >  >       String passwordformat = "^.{6,12}$";
+       >  >       String phoneformat = "^09\\d{2}-?\\d{3}-?\\d{3}$";
+       >  >       String emailformat = "^.+@\\w+\\..*$";
+       >  >   ```
+       >  > -------------------
+       >  > 3. 會員送出的修改是否有重複到其他會員資料 : <br>
+       >  >  **由此會員送出的email和手機電話為條件搜尋資料庫**
+       >  >   &rarr; `SQLiteDatabase.rawQuery(String SELECT_SQL_command,null)` return Cursor 物件(資料庫搜尋結果)
+       >  >
+       >  >   (分別SELECT SQL語法設定where條件為 useremail='會員輸入的email' , cellphone='會員輸入的手機電話')
+       >  >
+       >  >  **取出搜尋結果** 
+       >  >   &rarr; `Cursor.moveToFirst()` Cursor 物件指到搜尋結果的第一列資料
+       >  >
+       >  >   &rarr; `Cursor.getString(1)` 取出會員帳號資料放到`userCheck`字串變數
+       >  >
+       >  >   &rarr; `Cursor.getCount()>0 && userCheck.equals("送出修改的會員帳號名稱")==false` : 有一筆以上的搜尋結果且會員帳號名稱不是本人，
+       >  >   則無法修改手機電話或email。   
+       >  >
+       >  >   * `Cursor.getCount()` : 取出Cursor 物件(搜尋結果)有幾列資料。
+       >  >   
+       >  >   * `userCheck.equals("送出修改的會員帳號名稱")` : `userCheck`字串變數與送出修改的會員帳號名稱相同時，傳回`true`，否則傳回`false`。
+       >  
+       >  **當會員送出的修改無缺項且格式正確時**
+       >  * `execSQL(String UPDATE_SQL_command)` : 資料庫更新會員資料<br>
+       >     (UPDATE SQL語法設定where條件為user='送出修改的會員帳號名稱')
 
 + 管理者登入 : 
   - layout_admin.xml : 
@@ -346,93 +457,7 @@
       > 2.
       >    
       > 123
- 
-+ 初始化資料庫類別頁面 :
-  - mySQLiteContract.java : 
-  
-    目的 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db，並於此資料庫建立 customer 資料表。
-    
-    以下為 customer 會員資料表欄位說明 :
-    
-    
-    |  customers 資料表欄位名稱      | 欄位說明 |
-    | ----------- | ----------- |
-    | userid      | id(主鍵)       |
-    | user   | 會員帳號   |
-    | password | 會員密碼 |
-    | username | 會員姓名 |
-    | userbirth | 會員生日 |
-    | cellphone | 會員手機 |
-    | useremail | 會員Email |
-    | useraddress | 會員住址 |
-    
-    + 宣告public final 類別 `mySQLiteContract`，`mySQLiteContract`類別包括兩個靜態類別屬性 `mySQLiteEntry` 和 `mySQLiteDbHelper`。
-    
-      + 靜態類別`mySQLiteEntry`繼承 `BaseColumns`類別，用來定義資料表與欄位名稱，並將這些名稱宣告為靜態常數屬性，寫SQL語法需要資料表與欄位名稱時，不需要實作為物件，只需呼叫此類別的靜態常數屬性即可，避免SQL語法定義資料表與欄位名稱時發生的名稱輸入錯誤，以及方便管理或替換新的資料表與欄位名稱。
-      
-      ```
-          public static class mySQLiteEntry implements BaseColumns {
-             public static final String TABLE_NAME = "customers";
-              public static final String COLUMN_NAME_ID = "userid";
-              public static final String COLUMN_NAME_USER = "user";
-              public static final String COLUMN_NAME_PWD = "password";
-              public static final String COLUMN_NAME_USERNAME = "username";
-              public static final String COLUMN_NAME_BIRTH = "userbirth";
-              public static final String COLUMN_NAME_PHONE = "cellphone";
-              public static final String COLUMN_NAME_EMAIL = "useremail";
-              public static final String COLUMN_NAME_ADDRESS = "useraddress";
-        }
-      ```
-      
-      + 靜態類別 `mySQLiteDbHelper` 繼承 `SQLiteOpenHelper`類別，此類別功能為初始化資料庫與新增資料表，
-      
-        + `mySQLiteDbHelper(Context context)` 方法 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db ，如資料庫已建立就不再重新建立 Demo.db 資料庫。
-        
-        + `onCreate(SQLiteDatabase db)` 方法 : 新增customer資料表。  
-        
-        透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `CREATE TABLE` `SQL` 語法(`SQL_CREATE_ENTRIES` 
-        靜態常數字串所定義的`CREATE TABLE`語法)，在建立 `CREATE TABLE` `SQL` 語法時，
-        所有資料表名稱和欄位名稱皆直接呼叫靜態類別`mySQLiteEntry`中定義的靜態常數屬性資料表與欄位名稱。
-        
-        
-        ```
-        
-        private static final String SQL_CREATE_ENTRIES =
-            "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
-                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
-                    mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_BIRTH + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_PHONE + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_EMAIL + " TEXT NOT NULL ," +
-                    mySQLiteEntry.COLUMN_NAME_ADDRESS + " TEXT NOT NULL );" ;
-        
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(SQL_CREATE_ENTRIES);
-        }
-        ```
-        
-        + `onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)` 方法 :
-        
-          當資料庫版本更新的時候，把customer資料表砍掉再重新建立。
-          
-           +  `db.execSQL(SQL_DELETE_ENTRIES)` : 透過 `SQLiteDatabase.execSQL`執行未有傳回值的 `SQL` 語法(`DROP TABLE IF EXISTS customer`)，把customer資料表砍掉。
-              
-           + `onCreate(db)` : 建立customer資料表。
-            
-           ```
-            private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
-         
-            public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-                // This database is only a cache for online data, so its upgrade policy is
-                // to simply to discard the data and start over
-                db.execSQL(SQL_DELETE_ENTRIES);
-                onCreate(db);
-             }
-          
-            ```
-    
+     
 
 ## 結果
 
