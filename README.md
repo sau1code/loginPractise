@@ -468,9 +468,32 @@
 
 ## 5. 結果
 
+此專案從2022年8月9日提出架構到2022年8月14日每個人完成指定功能，總共花了 6 天，大家都蠻認真努力的，自己 debug 的功力感覺都還不錯，不太有要對方幫忙debug的情況，主要於下課時間口頭討論，然後用課後時間做這個測試專案 loginPractise App 。
 
+------------------
+**以下為 loginPractise App實際執行頁面示意圖 :**
+
+| 1. 首頁 | 2. 會員註冊 |
+|--|--|
+| ![Screenshot_1661061064](https://user-images.githubusercontent.com/37395516/185780828-f079f1ee-93b3-4f57-ac85-d55e1f624dbe.png)| ![Screenshot_1661061305](https://user-images.githubusercontent.com/37395516/185781034-09c96b40-353e-4f56-b637-5eda59c22709.png)|
+
+| 3. 會員註冊送出 | 4. 會員登入 |
+|--|--|
+|![Screenshot_1661061460](https://user-images.githubusercontent.com/37395516/185781541-09999f20-71fd-4969-a8b1-28ebb22ef0ee.png) |![Screenshot_1661061497](https://user-images.githubusercontent.com/37395516/185781593-0141d19d-5949-455c-9a9d-74c6e4794cdc.png) |
+
+| 5. 會員資料檢視 | 6. 會員修改資料 | 7. 會員刪除帳號 | 
+|--|--|--|
+|![Screenshot_1661061509](https://user-images.githubusercontent.com/37395516/185781607-ad93a0df-9ce4-4dd1-9770-e13aa0380d3c.png) | ![Screenshot_1661061514](https://user-images.githubusercontent.com/37395516/185781614-84c12f82-026c-4fb1-8f79-42e25f31575f.png) | ![Screenshot_1661061684](https://user-images.githubusercontent.com/37395516/185781627-0d80dbcb-ae30-403e-8f02-045ddddcc4ac.png) | 
+
+| 8. 管理者登入 | 9. 管理者頁面 |
+|--|--|
+| ![Screenshot_1661062200](https://user-images.githubusercontent.com/37395516/185781643-ec71ff59-b8ef-4456-9a28-c20d6b3f3cbd.png) |![Screenshot_1661062216](https://user-images.githubusercontent.com/37395516/185781735-89c9f91e-9fba-47ab-85a2-5ec2ebccb5d0.png) |
 
 ## 6. 討論
+
+在寫專案的時候，感謝組員 sau1code 負責整體架構的設定(開好專案，決定多少個Activity,設定每個 Activity 要實現的功能和元件，再把工作分配給其他人)，透過 git 和 github ，將組員 sau1code 開好的專案複製到自己電腦(`git clone`)，並針對自己每次的code更新加上說明(`git commit`)，並上傳至 github (`git push`)，讓我們三個人的 project 可以直接在 Android Studio 執行 update project 即可以讓專案內容可以同步更新，列出每個人修改後的code差異，並看到此修改的說明，也能了解對方修改code的時間以掌握對方的進度，最後每個人將自己寫的部分寫成說明，讓每個人都知道對方寫的功能是怎麼寫的，用了什麼類別或方法，放到README.md文件的方法區塊，由組員 cloudfly111 列出大綱並統整整個README.md文件排版，記錄這次測試的背景，目的，結果和討論結果。
+
+雖然在初期8月9日到8月10日，因為在測試 git 指令，所以不太習慣 git，但後續 git 越用越熟悉就沒有太大問題，有一點需要特別注意的部分是 git 遇到衝突(conflict)，就是協作的人改到一樣的部分，但是改的結果不一樣，有其中一個人先把自己修改的結果 push 到 github 上，另一個比較慢把自己改的部分 push 到 github 上的人，因為專案版本差異造成無法執行 git push 上傳到 github ，我們的解決方法是先 update project，在更新專案時，因為已經把layout和Activity切開來給不同人寫了，通常遇到衝突的是一些App設定檔，而設定都是必須要加上去的，不然App執行結果會有問題，就會直接把全部修改結果 merge (合併)，然後才執行 git push 上傳到 github。
 
 ## 7. 補充資料
 ### 可使用原始SQL語法的方法
