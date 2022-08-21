@@ -1,37 +1,44 @@
 # Project loginPractise 說明
 
 >說明大綱 :
->1. [背景](https://github.com/sau1code/loginPractise#%E8%83%8C%E6%99%AF)
->2. [目的](https://github.com/sau1code/loginPractise#%E7%9B%AE%E7%9A%84)
->3. [平台與工具](https://github.com/sau1code/loginPractise#%E5%B9%B3%E5%8F%B0%E8%88%87%E5%B7%A5%E5%85%B7)
->4. [方法](https://github.com/sau1code/loginPractise#%E6%96%B9%E6%B3%95)
->5. [結果](https://github.com/sau1code/loginPractise#%E7%B5%90%E6%9E%9C)
->6. [討論](https://github.com/sau1code/loginPractise#%E8%A8%8E%E8%AB%96)
->7. [補充資料](https://github.com/sau1code/loginPractise#%E8%A3%9C%E5%85%85%E8%B3%87%E6%96%99)
+>1. [背景](https://github.com/sau1code/loginPractise#1-%E8%83%8C%E6%99%AF)
+>2. [目的](https://github.com/sau1code/loginPractise#2-%E7%9B%AE%E7%9A%84)
+>3. [平台與工具](https://github.com/sau1code/loginPractise#3-%E5%B9%B3%E5%8F%B0%E8%88%87%E5%B7%A5%E5%85%B7)
+>4. [方法](https://github.com/sau1code/loginPractise#4-%E6%96%B9%E6%B3%95)
+>      * 4.1 [初始化資料庫類別頁面 (負責人員 : cloudfly111)](https://github.com/sau1code/loginPractise#41-%E5%88%9D%E5%A7%8B%E5%8C%96%E8%B3%87%E6%96%99%E5%BA%AB%E9%A1%9E%E5%88%A5%E9%A0%81%E9%9D%A2-)
+>      * 4.2 [會員註冊 (負責人員 : yuhsin0930)](https://github.com/sau1code/loginPractise#42-%E6%9C%83%E5%93%A1%E8%A8%BB%E5%86%8A-)
+>      * 4.3 [會員登入 (負責人員 : sau1code)](https://github.com/sau1code/loginPractise#43-%E6%9C%83%E5%93%A1%E7%99%BB%E5%85%A5-)
+>      * 4.4 [會員資料檢視修改 (負責人員 : cloudfly111)](https://github.com/sau1code/loginPractise#44-%E6%9C%83%E5%93%A1%E8%B3%87%E6%96%99%E6%AA%A2%E8%A6%96%E4%BF%AE%E6%94%B9-)
+>      * 4.5 [管理者登入 (負責人員 : sau1code)](https://github.com/sau1code/loginPractise#45-%E7%AE%A1%E7%90%86%E8%80%85%E7%99%BB%E5%85%A5-)
+>
+>5. [結果](https://github.com/sau1code/loginPractise#5-%E7%B5%90%E6%9E%9C)
+>6. [討論](https://github.com/sau1code/loginPractise#6-%E8%A8%8E%E8%AB%96)
+>7. [補充資料](https://github.com/sau1code/loginPractise#7-%E8%A3%9C%E5%85%85%E8%B3%87%E6%96%99)
 
-## 背景
+## 1. 背景
 
 由於專題想用 Android 做購物商城App，一定會用到會員註冊，管理者登入和資料庫連線儲存資料的功能，因為App資料怎麼存到SQLite還是個謎團，很怕期末最後開天窗，所以提前先測試會員資料如何儲存至資料庫，以及如何根據App需求，針對資料庫進行更新刪除插入資料等功能。
 
-專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題，由人力徵才網站上，發現Android工程師的要求清單上，大部份都是用git實現多人協作，故需要寫一個小專案，先測試利用git合作寫程式會出現什麼狀況，進而熟悉此合作模式。
+專題為多人協作後的成果，而如何協作和同步程式碼會是個重要問題;由人力徵才網站上，發現 Android 工程師的要求清單上，大部份都是用git實現多人協作，故需要寫一個小專案，先測試利用git合作寫程式會出現什麼狀況，進而熟悉此合作模式。
 
-## 目的 
+## 2. 目的 
 1. 建立會員註冊，登入和修改會員資料的功能。
 2. 會員資料儲存於本機SQLite資料庫中。
 3. 提供管理者帳號登入，以管理和搜尋目前會員的清單。
 4. 以git和github平台實現多人協作專案。
 
-## 平台與工具
+## 3. 平台與工具
 
 + 平台 : Android 
   - Minimum SDK : API 26 Android 8.0
 + 程式語言 : Java
 + 資料庫 : SQLite 3.18.2
 
-## 方法 
+## 4. 方法 
 > 以不同主要功能分項說明 : 建立何種元件與如何處理使用者與元件互動的結果
 
-+ 初始化資料庫類別頁面 :
+#### 4.1. 初始化資料庫類別頁面 :
+
   - mySQLiteContract.java : 
   
     目的 : 初始化本機`SQLite`資料庫，資料庫名稱為 Demo.db，並於此資料庫建立 customer 資料表。
@@ -117,7 +124,7 @@
           
             ```
 
-+ 會員註冊 :
+#### 4.2. 會員註冊 :
   - layout_register.xml :
       - 建立`Linear Layout`並幫Layout製作圓角<br>
       - 帳號 : 建立`editText_register_account`讓使用者輸入帳號
@@ -173,7 +180,7 @@
         
         
  
-+ 會員登入 :
+#### 4.3. 會員登入 :
   - layout_main.xml :
     - `textview`: 顯示"登入"頁的大標題。
     - `edittext`: 用來讓使用者輸入帳號。
@@ -214,7 +221,7 @@
       > 這方法在`SQLiteHelper`類別中，<br>
       > 它會先執行`db.execSQL(SQL_DELETE_ENTRIES)`刪除當前table，<br>
       > 再執行`onCreate(db)`創一個新的table。<br>
-+ 會員資料檢視修改 : 
+#### 4.4. 會員資料檢視修改 : 
   - layout_member.xml : 
     - `textView-member-tempshow` : 顯示會員帳號名稱
     - `LinearLayout` : 會員資料顯示/輸入框進行排版。
@@ -343,7 +350,7 @@
        >  * `execSQL(String UPDATE_SQL_command)` : 資料庫更新會員資料<br>
        >     (UPDATE SQL語法設定where條件為user='送出修改的會員帳號名稱')
 
-+ 管理者登入 : 
+#### 4.5. 管理者登入 : 
   - layout_admin.xml : 
     - `textview`: 顯示符合的搜尋結果有幾筆。
     - `edittext`: **關鍵字搜尋**的輸入框。
@@ -459,13 +466,13 @@
       > 123
      
 
-## 結果
+## 5. 結果
 
 
 
-## 討論
+## 6. 討論
 
-## 補充資料
+## 7. 補充資料
 ### 可使用原始SQL語法的方法
 > 以下方法皆為`SQLiteDatabase`類別下的方法
  + `execSQL` : 只能執行不會return data的SQL語法
