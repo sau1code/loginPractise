@@ -453,7 +453,7 @@
       >       * `getItemCount()`: 就是get Item Count!<br>
       >     - `ViewHolder` 類別<br>
       >       (ViewHolder是把項目中所有的View物件包起來，之後在onCreateViewHolder()中使用。)<br>
-      >       * `ViewHolder()`: 在這使用itemView.findViewById將卡片上設計的元件宣告，注意前面要加`itemView`，<br>
+      >       * `ViewHolder()`: 在這使用`itemView.findViewById`將卡片上設計的元件宣告，注意前面要加`itemView`，<br>
       >         是一種元件中的元件的感覺。也在此方法內使用`itemView`的監聽方法，<br>
       >         有趣的是，丟進監聽的引數使用的就是已經實作的`View.ClickListener`並複寫`onClick()`的`ViewHolder`本人，<br>
       >         所以引數放的是this。<br>
