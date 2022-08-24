@@ -435,35 +435,31 @@
           
   - RecyclerViewAdapter.java :<br>
       > 1. 創好RecyclerViewAdapter.java檔後<br>
-      > 2. 手打將 `RecyclerViewAdapter` 繼承 `RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>`<br>
-      >    打完上面繼承，照IDE指示可以生成3個複寫方法<br>
-      >    `RecyclerViewAdapter`類別中還包含`ViewHolder`類別，也是照IDE指示生成<br>
-      >    泛型`<RecyclerViewAdapter.ViewHolder>`指的就是<`RecyclerViewAdapter`類中的`ViewHolder`類><br>
-      >    而`ViewHolder`類別中有自己的建構方法<br>
-      >    `RecyclerViewAdapter`也有自己的建構方法<br>
-      >    以上這些在加上List屬性就是全部的架構<br>
+      > 2. 手打將 `RecyclerViewAdapter` 繼承 `RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>`，<br>
+      >    打完上面繼承，照IDE指示可以生成3個複寫方法、1個建構方法，<br>
+      >    比較特別的是，`RecyclerViewAdapter`類別中還包含一個叫`ViewHolder`的類別，<br>
+      >    也是照IDE指示生成，<br>
+      >    泛型內`<RecyclerViewAdapter.ViewHolder>`指的就是<`RecyclerViewAdapter`類中的`ViewHolder`類>。<br>
+      >    而`ViewHolder`類別內除了建構方法，還加上實作`View.onclickListener`而得到的`onClick`方法，<br>
+      >    以上這些在加上`List`屬性就是`RecyclerViewAdapter`全部的架構。<br>
       >    
       >    - `RecyclerViewAdapter` 類別<br>
-      >       * `List<Map<String, String>> mapList`: 之前做的List會放進這裡<br>
+      >       * `List<Map<String, String>> mapList`: 之前做的List會放進這裡。<br>
       >       * `RecyclerViewAdapter()`: 建構式，功能只為了在外面new的時候可以把List當引數帶進來<br>
       >       * `onCreateViewHolder()`: Adapter類的super()會呼叫這個方法，<br>
-      >         我們要return new `ViewHolder`給它，Holder的建構式，引數View用來綁定layout<br>
+      >         我們要return new `ViewHolder`給它，用`new ViewHolder(view)`的引數`view`來綁定layout。<br>
       >       * `onBindViewHolder()`: 有點像LOOP 每張Card執行一次 可在這將List內容附給每張Card上的元件，
-      >         每張卡片除了position不同，其他就自由發揮<br>
+      >         每張卡片除了position不同，其他就自由發揮。<br>
       >       * `getItemCount()`: 就是get Item Count!<br>
-      >    
-      > (未完待續...)
-      >    
-      >   
-      >   
-      >   
-      >   
-      >   
-      >   
-      >   
-      > 2.
-      >    
-      > 123
+      >     - `ViewHolder` 類別<br>
+      >       (ViewHolder是把項目中所有的View物件包起來，之後在onCreateViewHolder()中使用。)<br>
+      >       * `ViewHolder()`: 在這使用itemView.findViewById將卡片上設計的元件宣告，注意前面要加itemView，<br>
+      >         是一種元件中的元件的感覺。也在此方法內使用itemView的監聽方法，<br>
+      >         有趣的是，丟進監聽的引數使用的就是已經實作的View.ClickListener並複寫onClick()的ViewHolder本人，<br>
+      >         所以引數放的是this。<br>
+      >       * `onClick()`: 卡片被按下時，需要有甚麼反應寫在這，
+      >         每張卡片的區別，可能來自RecyclerViewAdapter的onCreateViewHolder()方法內，
+      >         我們當初在這製作的`view`，當時我們藉由`new ViewHold(view)`將`view`傳入`ViewHold`類別中。
      
 
 ## 5. 結果
