@@ -31,6 +31,7 @@
 
 + 平台 : Android 
   - Minimum SDK : API 26 Android 8.0
+  - Emulator : Pixel 5 API 26
 + 程式語言 : Java
 + 資料庫 : SQLite 3.18.2
 
@@ -481,7 +482,7 @@
 |--|--|--|
 |![Screenshot_1661061509](https://user-images.githubusercontent.com/37395516/185781607-ad93a0df-9ce4-4dd1-9770-e13aa0380d3c.png) | ![Screenshot_1661061514](https://user-images.githubusercontent.com/37395516/185781614-84c12f82-026c-4fb1-8f79-42e25f31575f.png) | ![Screenshot_1661061684](https://user-images.githubusercontent.com/37395516/185781627-0d80dbcb-ae30-403e-8f02-045ddddcc4ac.png) | 
 
-| 8. 管理者登入 | 9. 管理者頁面 |
+| 8. 管理者登入 (預設帳號：admin1, 預設密碼：admin1) | 9. 管理者頁面 |
 |--|--|
 | ![Screenshot_1661062200](https://user-images.githubusercontent.com/37395516/185781643-ec71ff59-b8ef-4456-9a28-c20d6b3f3cbd.png) |![Screenshot_1661062216](https://user-images.githubusercontent.com/37395516/185781735-89c9f91e-9fba-47ab-85a2-5ec2ebccb5d0.png) |
 
