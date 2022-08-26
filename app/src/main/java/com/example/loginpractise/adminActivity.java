@@ -33,6 +33,7 @@ import java.util.Map;
 public class adminActivity extends AppCompatActivity {
 
     private final String tableSQL = mySQLiteContract.mySQLiteEntry.TABLE_NAME;
+//    2022-08-26 update : mySQLiteEntry.COLUMN_NAME_ID => _id
     private final String idSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ID;
     private final String userSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER;
     private final String pwdSQL = mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD;

@@ -280,7 +280,6 @@ public class memberActivity extends AppCompatActivity {
                             msg.add("此email已使用\n請重新輸入email");
                         }
                     }
-//
                     emailCheckQuery.close();
 //              -----------------------------------------------
                 }// the end of input check
@@ -317,6 +316,7 @@ public class memberActivity extends AppCompatActivity {
                             + "," + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ADDRESS + "='" + muserAddress + "'"
                             + "," + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL + "='" + muserEmail + "'"
                             + whereCondition);
+                    Toast.makeText(memberActivity.this,"會員資料修改成功!!",Toast.LENGTH_LONG).show();
                     finish();
                 }
 

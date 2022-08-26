@@ -182,7 +182,8 @@ public class registerActivity extends AppCompatActivity {
         output.close();
         int outputStr = output.getCount();
 
-        String userid = "A00".concat(String.valueOf(outputStr + 1));
+//        2022-08-26 update : replace userid with _id as primary key, the type of column _id is auto-increment.
+//        String userid = "A00".concat(String.valueOf(outputStr + 1));
         //-----------------------------以下是OK按鍵的監聽--------------------------------------//
         button_registerOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -264,16 +265,51 @@ public class registerActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             //----------------------------------以下是把資料傳進資料庫--------------------------------//
 
-                            db.execSQL("insert into " + table + " values ('" + userid + "','" +
-                                    editText_registerAccount.getText().toString()+ "','"+
-                                    editText_registerPassword.getText().toString()+"','"+
-                                    editText_registerName.getText().toString()+"','"+
-                                    textViewBirthday.getText().toString()+"','"+
-                                    editText_registerPhone.getText().toString()+"','"+
-                                    editText_registerEmail.getText().toString()+"','"+
-                                    cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+//                            db.execSQL("insert into " + table + " values ('" + userid + "','" +
+//                                    editText_registerAccount.getText().toString()+ "','"+
+//                                    editText_registerPassword.getText().toString()+"','"+
+//                                    editText_registerName.getText().toString()+"','"+
+//                                    textViewBirthday.getText().toString()+"','"+
+//                                    editText_registerPhone.getText().toString()+"','"+
+//                                    editText_registerEmail.getText().toString()+"','"+
+//                                    cityName+cityArea+editText_registerAddress.getText().toString()+"');");
 
-                            Log.d("main","insert ="+"insert into " + table + " values ('" + userid + "','" +
+//                            Log.d("main","insert ="+"insert into " + table + " values ('" + userid + "','" +
+//                                    editText_registerAccount.getText().toString()+ "','"+
+//                                    editText_registerPassword.getText().toString()+ "','"+
+//                                    editText_registerName.getText().toString()+"','"+
+//                                    textViewBirthday.getText().toString()+"','"+
+//                                    editText_registerPhone.getText().toString()+"','"+
+//                                    editText_registerEmail.getText().toString()+"','"+
+//                                    cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+
+//                          2022-08-26 update : replace userid with _id as primary key
+                            db.execSQL("insert into " + table + "("
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USERNAME + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_BIRTH + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PHONE + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL + ","
+                                            + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ADDRESS
+                                            + ")" + " values ('" +
+                                            editText_registerAccount.getText().toString()+ "','"+
+                                            editText_registerPassword.getText().toString()+ "','"+
+                                            editText_registerName.getText().toString()+"','"+
+                                            textViewBirthday.getText().toString()+"','"+
+                                            editText_registerPhone.getText().toString()+"','"+
+                                            editText_registerEmail.getText().toString()+"','"+
+                                            cityName+cityArea+editText_registerAddress.getText().toString()+"');");
+
+                            Log.d("main","insert ="+"insert into " + table + "("
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USER + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PWD + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_USERNAME + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_BIRTH + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_PHONE + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_EMAIL + ","
+                                    + mySQLiteContract.mySQLiteEntry.COLUMN_NAME_ADDRESS
+                                    + ") values ('" +
                                     editText_registerAccount.getText().toString()+ "','"+
                                     editText_registerPassword.getText().toString()+ "','"+
                                     editText_registerName.getText().toString()+"','"+

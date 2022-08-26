@@ -24,7 +24,8 @@ public final class mySQLiteContract {
 //    住址 	       useraddress
     public static class mySQLiteEntry implements BaseColumns {
         public static final String TABLE_NAME = "customers";
-        public static final String COLUMN_NAME_ID = "userid";
+//        2022-08-26 update : replace userid with _id as primary key
+        public static final String COLUMN_NAME_ID = "_id";
         public static final String COLUMN_NAME_USER = "user";
         public static final String COLUMN_NAME_PWD = "password";
         public static final String COLUMN_NAME_USERNAME = "username";
@@ -50,7 +51,8 @@ public final class mySQLiteContract {
         "DROP TABLE IF EXISTS " + mySQLiteEntry.TABLE_NAME;
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
-                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+//                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+                    mySQLiteEntry.COLUMN_NAME_ID +" INTEGER PRIMARY KEY," +
                     mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
                     mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
                     mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
