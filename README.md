@@ -49,7 +49,7 @@
     
     |  customers 資料表欄位名稱     | column type | 欄位說明 |
     | ----------- | ----------- | ----------- |
-    | userid     | TEXT | id(主鍵)       |
+    | _id     | INTEGER , AUTOINCREMENT | id(主鍵)       |
     | user   | TEXT | 會員帳號   |
     | password | TEXT | 會員密碼 |
     | username | TEXT | 會員姓名 |
@@ -65,7 +65,7 @@
       ```
           public static class mySQLiteEntry implements BaseColumns {
              public static final String TABLE_NAME = "customers";
-              public static final String COLUMN_NAME_ID = "userid";
+              public static final String COLUMN_NAME_ID = "_id";
               public static final String COLUMN_NAME_USER = "user";
               public static final String COLUMN_NAME_PWD = "password";
               public static final String COLUMN_NAME_USERNAME = "username";
@@ -91,7 +91,7 @@
         
         private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + mySQLiteEntry.TABLE_NAME + " (" +
-                    mySQLiteEntry.COLUMN_NAME_ID + " TEXT NOT NULL PRIMARY KEY," +
+                    mySQLiteEntry.COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
                     mySQLiteEntry.COLUMN_NAME_USER + " TEXT NOT NULL ," +
                     mySQLiteEntry.COLUMN_NAME_PWD + " TEXT NOT NULL ," +
                     mySQLiteEntry.COLUMN_NAME_USERNAME + " TEXT NOT NULL ," +
